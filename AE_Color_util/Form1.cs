@@ -21,7 +21,8 @@ namespace AE_Util_skelton
     {
         NavBar m_navBar = new NavBar();
 
-        List<ColorBox> m_ColorBoxs = new List<ColorBox>();
+        ColorBoxs m_ColorBoxs = new ColorBoxs(12,10);
+
         int m_SelectedIndex = -1;
         //-------------------------------------------------------------
         /// <summary>
@@ -32,34 +33,21 @@ namespace AE_Util_skelton
             InitializeComponent();
 
 
-            AddColorBox(colorBox1);
-            AddColorBox(colorBox2);
-            AddColorBox(colorBox3);
-            AddColorBox(colorBox4);
-            AddColorBox(colorBox5);
-            AddColorBox(colorBox6);
-            AddColorBox(colorBox7);
-            AddColorBox(colorBox8);
-            AddColorBox(colorBox9);
-            AddColorBox(colorBox10);
-            AddColorBox(colorBox11);
-            AddColorBox(colorBox12);
-            AddColorBox(colorBox13);
-            AddColorBox(colorBox14);
-            AddColorBox(colorBox15);
-
             m_SelectedIndex = 0;
-            colorBox1.Selected = true;
+
+            for (int i=0; i<m_ColorBoxs.Items.Count;i++)
+            {
+                this.Controls.Add(m_ColorBoxs.Items[i]);
+                m_ColorBoxs.Items[i].SelectedChanged += ColorBox_SelectedChanged;
+            }
+            m_ColorBoxs.SetLoc(15, 30, 34, 34);
+
+
 
             NavBarSetup();
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
-        //-------------------------------------------------------------
-        private void AddColorBox(ColorBox cb)
-        {
-            m_ColorBoxs.Add(cb);
-            m_ColorBoxs[m_ColorBoxs.Count - 1].Index = m_ColorBoxs.Count - 1;
-            m_ColorBoxs[m_ColorBoxs.Count - 1].SelectedChanged += ColorBox_SelectedChanged;
-        }
+        
         //-------------------------------------------------------------
         private void NavBarSetup()
         {
@@ -90,9 +78,13 @@ namespace AE_Util_skelton
             {
                 bool ok = false;
                 Size sz = pref.GetSize("Size", out ok);
-                //if (ok) this.Size = sz;
+                if (ok) this.Size = sz;
                 Point p = pref.GetPoint("Point", out ok);
                 if (ok) this.Location = p;
+                bool b = pref.GetBool("IsFront", out ok);
+                if (ok) m_navBar.IsFront = b;
+
+
             }
             this.Text = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
             m_navBar.Caption = this.Text;
@@ -109,8 +101,10 @@ namespace AE_Util_skelton
             JsonPref pref = new JsonPref();
             pref.SetSize("Size", this.Size);
             pref.SetPoint("Point", this.Location);
+            pref.SetBool("IsFront", m_navBar.IsFront);
             pref.Save();
 
+            m_ColorBoxs.Save();
         }
         //-------------------------------------------------------------
         /// <summary>
@@ -174,9 +168,9 @@ namespace AE_Util_skelton
         private void ColorBox_SelectedChanged(object sender, EventArgs e)
         {
             int idx = ((ColorBox)sender).Index;
-            if ((idx >= 0) && (idx < m_ColorBoxs.Count))
+            if ((idx >= 0) && (idx < m_ColorBoxs.Items.Count))
             {
-                if (m_ColorBoxs[idx].Selected == true)
+                if (m_ColorBoxs.Items[idx].Selected == true)
                 {
                     m_SelectedIndex = idx;
                 }
@@ -185,7 +179,7 @@ namespace AE_Util_skelton
                     m_SelectedIndex = -1;
                 }
             }
-            this.Text = String.Format("SelectedIndex{0}", m_SelectedIndex);
+            //this.Text = String.Format("SelectedIndex{0}", m_SelectedIndex);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -204,7 +198,7 @@ namespace AE_Util_skelton
                 {
                     if (m_SelectedIndex >= 0)
                     {
-                        m_ColorBoxs[m_SelectedIndex].Color = cols[0];
+                        m_ColorBoxs.Items[m_SelectedIndex].Color = cols[0];
                     }
                 }
                 else
@@ -214,8 +208,8 @@ namespace AE_Util_skelton
                         for (int i = 0; i < cols.Length; i++)
                         {
                             int idx = m_SelectedIndex + i;
-                            if (idx >= m_ColorBoxs.Count) break;
-                            m_ColorBoxs[idx].Color = cols[i];
+                            if (idx >= m_ColorBoxs.Items.Count) break;
+                            m_ColorBoxs.Items[idx].Color = cols[i];
 
                         }
                     }
@@ -230,7 +224,7 @@ namespace AE_Util_skelton
             if (m_SelectedIndex < 0) return;
             AE_ClipData clipData = new AE_ClipData();
 
-            clipData.ColorToClip(m_ColorBoxs[m_SelectedIndex].Color);
+            clipData.ColorToClip(m_ColorBoxs.Items[m_SelectedIndex].Color);
     
 
         }
@@ -248,6 +242,12 @@ namespace AE_Util_skelton
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorFromClip();
+        }
+
+        private void lockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lockToolStripMenuItem.Checked = ! lockToolStripMenuItem.Checked;
+            m_ColorBoxs.IsLocked = lockToolStripMenuItem.Checked;
         }
     }
 }

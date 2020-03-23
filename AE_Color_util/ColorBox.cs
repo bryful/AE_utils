@@ -12,6 +12,17 @@ namespace AE_Util_skelton
 {
     public class ColorBox : Control
     {
+        private bool m_IsLocked = false;
+        public bool IsLocked
+        {
+            get { return m_IsLocked; }
+            set
+            {
+                m_IsLocked = value;
+                this.Invalidate();
+            }
+        }
+
         // **************************************************************************
         // データを持たないイベントデリゲートの宣言
         public event EventHandler SelectedChanged;
@@ -46,8 +57,11 @@ namespace AE_Util_skelton
                                 if (c.Name != this.Name)
                                 {
                                     ColorBox cc = (ColorBox)c;
-                                    cc.m_Selected = false;
-                                    cc.Invalidate();
+                                    if (cc.m_Selected == true)
+                                    {
+                                        cc.m_Selected = false;
+                                        cc.Invalidate();
+                                    }
                                 }
                             }
 
@@ -98,7 +112,8 @@ namespace AE_Util_skelton
                     this.Invalidate();
                 }
             }
-        }// **************************************************************************
+        }
+        // **************************************************************************
         private NumericUpDown m_Blue = null;
         public NumericUpDown Blue
         {
@@ -117,7 +132,6 @@ namespace AE_Util_skelton
                 }
             }
         }
-
         // **************************************************************************
         private void M_Blue_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -154,7 +168,10 @@ namespace AE_Util_skelton
         {
             if (m_Color.B != b)
             {
-                m_Color = Color.FromArgb(m_Color.R, m_Color.G, b);
+                if (m_IsLocked == false)
+                {
+                    m_Color = Color.FromArgb(m_Color.R, m_Color.G, b);
+                }
             }
             this.Invalidate();
         }
@@ -163,7 +180,10 @@ namespace AE_Util_skelton
         {
             if (m_Color.G != g)
             {
-                m_Color = Color.FromArgb(m_Color.R, g, m_Color.B);
+                if (m_IsLocked == false)
+                {
+                    m_Color = Color.FromArgb(m_Color.R, g, m_Color.B);
+                }
             }
             this.Invalidate();
         }
@@ -172,7 +192,10 @@ namespace AE_Util_skelton
         {
             if (m_Color.R != r)
             {
-                m_Color = Color.FromArgb(r, m_Color.G, m_Color.B);
+                if (m_IsLocked == false)
+                {
+                    m_Color = Color.FromArgb(r, m_Color.G, m_Color.B);
+                }
             }
             this.Invalidate();
         }
@@ -180,7 +203,11 @@ namespace AE_Util_skelton
         public void SetColor(int r, int g, int b)
         {
             if ((m_Color.R == r) && (m_Color.G == g) && (m_Color.B == b)) return;
-            m_Color = Color.FromArgb(r, g, b);
+            if (m_IsLocked == false)
+            {
+
+                m_Color = Color.FromArgb(r, g, b);
+            }
             this.Invalidate();
         }
         // **************************************************************************
@@ -196,12 +223,14 @@ namespace AE_Util_skelton
             int r, g, b;
             r = c.R;g = c.G;b = c.B;
             if ((m_Color.R == r) && (m_Color.G == g) && (m_Color.B == b)) return;
-            m_Color = c;
+            if (m_IsLocked == false)
+            {
+                m_Color = c;
 
-            if (m_Red != null) m_Red.Value = r;
-            if (m_Green != null) m_Green.Value = g;
-            if (m_Blue != null) m_Blue.Value = b;
-
+                if (m_Red != null) m_Red.Value = r;
+                if (m_Green != null) m_Green.Value = g;
+                if (m_Blue != null) m_Blue.Value = b;
+            }
             this.Invalidate();
 
         }
@@ -220,6 +249,8 @@ namespace AE_Util_skelton
             this.BackColor = Color.Transparent;
 
             this.Click += ColorBox_Click;
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+
         }
 
         // **************************************************************************

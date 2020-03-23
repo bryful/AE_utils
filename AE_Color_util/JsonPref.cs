@@ -246,6 +246,39 @@ namespace BRY
             return ret;
         }
         //-********************************************************************************
+        public void SetColorArray(string key, Color[] value)
+        {
+            int[] v = new int[value.Length];
+            for ( int i=0; i< value.Length; i++)
+            {
+                v[i] = value[i].ToArgb();
+            }
+            json[key] = v;
+        }
+        public Color [] GetColorArray(string key, out bool ok)
+        {
+            Color[] ret = new Color[0];
+            ok = false;
+            if (json.IsDefined(key) == true)
+            {
+                if (json[key].IsArray)
+                {
+                    int[] a = (int[])json[key];
+                    if(a.Length>0)
+                    {
+                        ret = new Color[a.Length];
+                        for (int i=0; i< a.Length;i++)
+                        {
+                            ret[i] = Color.FromArgb(a[i]);
+                        }
+                    }
+
+                    ok = true;
+                }
+            }
+            return ret;
+        }
+        //-********************************************************************************
         public void SetDoubleArray(string key, double[] value)
         {
             json[key] = value;

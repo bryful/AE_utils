@@ -112,7 +112,8 @@ namespace AE_Util_skelton
         {
             if (m_IsFront == b) return;
             m_IsFront = b;
-            if(m_IsFront==true)
+            if (checkBox1.Checked != b) checkBox1.Checked = b;
+            if (m_IsFront==true)
             {
                 formActive();
             }
