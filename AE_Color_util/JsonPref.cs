@@ -297,20 +297,29 @@ namespace BRY
             return ret;
         }
         //-********************************************************************************
-        public void SetDoubleArray2(string key, double[] value)
+        public void SetObject(string key, object value)
         {
             json[key] = value;
         }
-        public double[][] GetDoubleArray2(string key, out bool ok)
+        public object GetObject(string key, out bool ok)
         {
-            double[] ret = new double[0];
+            var ret = new object();
+            ok = false;
+            if (json.IsDefined(key) == true) { 
+                ret = json[key];
+                ok = true;
+            }
+            return ret;
+        }
+        public object[] GetObjectArray(string key, out bool ok)
+        {
+            var ret = new object[0];
             ok = false;
             if (json.IsDefined(key) == true)
             {
                 if (json[key].IsArray)
                 {
-                    var v = json[key];
-                    for ()
+                    ret = json[key];
                     ok = true;
                 }
             }

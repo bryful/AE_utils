@@ -119,12 +119,12 @@ namespace AE_Util_skelton
                 pref.SetInt("Rows", m_Rows);
                 pref.SetInt("Cols", m_Cols);
 
-                double[][] colors = new double[Count][3];
+                var colors = new object[Count];
                 for (int i = 0; i < Count; i++)
                 {
-                    colors[i] = Items[i].AE_Color.ToArray();
+                    colors[i] = Items[i].AE_Color.ToJson();
                 }
-                pref.SetDoubleArray2("Colors",colors);
+                pref.SetObject("Colors",colors);
 
 
                 if(p=="") p = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
@@ -155,18 +155,18 @@ namespace AE_Util_skelton
                 bool ok = false;
                 int r = pref.GetInt("Rows", out ok);
                 int c = 0;
-                double[][] cols = new double[0][3];
+                var  cols = new object[0];
                 if (ok) c = pref.GetInt("Cols", out ok);
-                if (ok) cols = pref.GetDoubleArray2("Colors", out ok);
+                if (ok) cols = pref.GetObjectArray("Colors", out ok);
                 if (ok)
                 {
                     InitColors(r, c);
                     for (int i = 0; i < Count; i++)
                     {
-                        Items[i].AE_Color.FromArry(cols[i]);
+                        Items[i].AE_Color.FromJson(cols[i]);
                     }
                     ret = true;
-                }
+            }
             }
             catch
             {

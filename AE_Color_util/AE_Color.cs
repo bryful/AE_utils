@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Codeplex.Data;
+using System.Collections;
+
 namespace AE_Util_skelton
 {
     public class AE_Color
@@ -58,25 +61,41 @@ namespace AE_Util_skelton
             G = (double)c.G;
             B = (double)c.B;
         }
-        public string ToJson()
+        public object ToJson()
         {
-            return String.Format("[{0},{1},{2},{3}]", A, R, G, B);
+            var ret = new double[4];
+            ret[0] = A;
+            ret[1] = R;
+            ret[2] = G;
+            ret[3] = B;
+            return ret;
         }
-        public void FromJson(string s)
+        public void FromJson(object v)
         {
-            s = s.Trim();
-            if (s == "") return;
-            if (s.IndexOf('[') == 0) s = s.Substring(1);
-            if (s.LastIndexOf(']') == s.Length - 1) s = s.Substring(0, s.Length - 1);
-            string[] sa = s.Split(',');
-            if (sa.Length >= 4)
+            try
             {
-                double v = -1;
-                if( double.TryParse(sa[0],out v)) A = v;
-                if (double.TryParse(sa[1], out v)) R = v;
-                if (double.TryParse(sa[2], out v)) G = v;
-                if (double.TryParse(sa[3], out v)) B = v;
+                if (((DynamicJson)v).IsArray)
+                {
+                    double[] v2 = ((DynamicJson)v).Deserialize<double[]>(); ;
+
+                    if (v2.Length >= 4)
+                    {
+                        A = v2[0];
+                        R = v2[1];
+                        G = v2[2];
+                        B = v2[3];
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            catch
+            {
+
             }
         }
+        
     }
 }
