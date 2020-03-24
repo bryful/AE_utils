@@ -15,7 +15,7 @@ namespace AE_Util_skelton
 {
     public class AE_Color
     {
-        public double A = 1;
+        public double A = 255;
         public double R = 10;
         public double G = 10;
         public double B = 10;
