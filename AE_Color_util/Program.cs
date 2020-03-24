@@ -22,8 +22,8 @@ namespace AE_Util_skelton
         {
             //ここに二重起動されたときの処理を書く
             //e.CommandLineでコマンドライン引数を取得出来る
-            Form1 f = (Form1)this.MainForm;
-            f.GetCommand(e.CommandLine.ToArray<string>());
+            //Form1 f = (Form1)this.MainForm;
+            //f.GetCommand(e.CommandLine.ToArray<string>());
         }
     }
     static class Program

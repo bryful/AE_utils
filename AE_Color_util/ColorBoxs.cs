@@ -16,6 +16,7 @@ namespace AE_Util_skelton
 {
     public class ColorBoxs
     {
+        public string path = "";
         // *******************************************************
         public List<ColorBox> Items = new List<ColorBox>();
         public int Count { get { return Items.Count; } }
@@ -56,10 +57,37 @@ namespace AE_Util_skelton
                     ColorBox cb = new ColorBox();
                     cb.Name = String.Format("Colorbox{0}", idx);
                     cb.SelectColor = Color.Gray;
-                    cb.Color = Color.FromArgb(10, 10, 10); ;
+                    cb.AE_Color = AE_Color.FromArgb(10, 10, 10); ;
                     cb.Index = idx;
                     Items.Add(cb);
                     idx++;
+                }
+            }
+        }
+        private void InitColors(int r, int c)
+        {
+            if ((m_Cols == c) && (m_Rows == r)) return;
+            int cnt = r * c;
+            if (Count > cnt)
+            {
+                int st = Count - 1;
+                for ( int i= st; i>=cnt;i--)
+                {
+                    Items[i].Dispose();
+                    Items.RemoveAt(i);
+                }
+            }
+            else
+            {
+                int st = Count ;
+                for ( int i = st; i<cnt; i++)
+                {
+                    ColorBox cb = new ColorBox();
+                    cb.Name = String.Format("Colorbox{0}", i);
+                    cb.SelectColor = Color.Gray;
+                    cb.AE_Color = AE_Color.FromArgb(10, 10, 10); ;
+                    cb.Index = i;
+                    Items.Add(cb);
                 }
             }
         }
@@ -91,18 +119,19 @@ namespace AE_Util_skelton
                 pref.SetInt("Rows", m_Rows);
                 pref.SetInt("Cols", m_Cols);
 
-                Color[] colors = new Color[Count];
+                double[][] colors = new double[Count][3];
                 for (int i = 0; i < Count; i++)
                 {
-                    colors[i] = Items[i].Color;
+                    colors[i] = Items[i].AE_Color.ToArray();
                 }
-                pref.SetColorArray("Colors",colors);
+                pref.SetDoubleArray2("Colors",colors);
 
 
                 if(p=="") p = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
                 p = Path.Combine(Application.UserAppDataPath,p + "_color.json");
 
                 ret = pref.Save(p);
+                path = p;
             }
             catch
             {
@@ -121,15 +150,22 @@ namespace AE_Util_skelton
                 if (p == "") p = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
                 p = Path.Combine(Application.UserAppDataPath, p + "_color.json");
                 ret = pref.Load(p);
+                path = p;
                 if (ret == false) return ret;
                 bool ok = false;
                 int r = pref.GetInt("Rows", out ok);
-                if (ok) m_Rows = r;
-                int c = pref.GetInt("Cols", out ok);
-                if (ok) m_Cols = c;
-                Color[] cols = pref.GetColorArray("Colors", out ok);
-                if(ok)
+                int c = 0;
+                double[][] cols = new double[0][3];
+                if (ok) c = pref.GetInt("Cols", out ok);
+                if (ok) cols = pref.GetDoubleArray2("Colors", out ok);
+                if (ok)
                 {
+                    InitColors(r, c);
+                    for (int i = 0; i < Count; i++)
+                    {
+                        Items[i].AE_Color.FromArry(cols[i]);
+                    }
+                    ret = true;
                 }
             }
             catch

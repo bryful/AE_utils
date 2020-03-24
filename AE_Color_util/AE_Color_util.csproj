@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AE_ClipData.cs" />
+    <Compile Include="AE_Color.cs" />
     <Compile Include="AppInfoDialog.cs">
       <SubType>Form</SubType>
     </Compile>

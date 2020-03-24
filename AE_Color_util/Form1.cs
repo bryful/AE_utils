@@ -21,7 +21,7 @@ namespace AE_Util_skelton
     {
         NavBar m_navBar = new NavBar();
 
-        ColorBoxs m_ColorBoxs = new ColorBoxs(12,10);
+        ColorBoxs m_ColorBoxs = new ColorBoxs(12,6);
 
         int m_SelectedIndex = -1;
         //-------------------------------------------------------------
@@ -86,6 +86,9 @@ namespace AE_Util_skelton
 
 
             }
+            m_ColorBoxs.Load();
+            //this.Text = m_ColorBoxs.path;
+
             this.Text = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
             m_navBar.Caption = this.Text;
         }
@@ -106,54 +109,6 @@ namespace AE_Util_skelton
 
             m_ColorBoxs.Save();
         }
-        //-------------------------------------------------------------
-        /// <summary>
-        /// ドラッグ＆ドロップの準備
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Form1_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.All;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
-            }
-        }
-        /// <summary>
-        /// ドラッグ＆ドロップの本体
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Form1_DragDrop(object sender, DragEventArgs e)
-        {
-            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            //ここでは単純にファイルをリストアップするだけ
-            GetCommand(files);
-        }
-        //-------------------------------------------------------------
-        /// <summary>
-        /// ダミー関数
-        /// </summary>
-        /// <param name="cmd"></param>
-        public void GetCommand(string[] cmd)
-        {
-            if (cmd.Length > 0)
-            {
-                foreach (string s in cmd)
-                {
-                   // listBox1.Items.Add(s);
-                }
-            }
-        }
-        /// <summary>
-        /// メニューの終了
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         //-------------------------------------------------------------
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -191,14 +146,14 @@ namespace AE_Util_skelton
         {
             AE_ClipData clipData = new AE_ClipData();
 
-            Color[] cols = clipData.ColorFromClip();
+            AE_Color[] cols = clipData.ColorFromClip();
             if (cols.Length > 0)
             {
                 if (cols.Length == 1)
                 {
                     if (m_SelectedIndex >= 0)
                     {
-                        m_ColorBoxs.Items[m_SelectedIndex].Color = cols[0];
+                        m_ColorBoxs.Items[m_SelectedIndex].AE_Color = cols[0];
                     }
                 }
                 else
@@ -209,7 +164,7 @@ namespace AE_Util_skelton
                         {
                             int idx = m_SelectedIndex + i;
                             if (idx >= m_ColorBoxs.Items.Count) break;
-                            m_ColorBoxs.Items[idx].Color = cols[i];
+                            m_ColorBoxs.Items[idx].AE_Color = cols[i];
 
                         }
                     }
@@ -224,7 +179,7 @@ namespace AE_Util_skelton
             if (m_SelectedIndex < 0) return;
             AE_ClipData clipData = new AE_ClipData();
 
-            clipData.ColorToClip(m_ColorBoxs.Items[m_SelectedIndex].Color);
+            clipData.ColorToClip(m_ColorBoxs.Items[m_SelectedIndex].AE_Color);
     
 
         }

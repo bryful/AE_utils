@@ -78,9 +78,9 @@ namespace AE_Util_skelton
             return ret;
         }
         // ****************************************************************************************
-        private Color [] AnalysisColors(string [] sa)
+        private AE_Color [] AnalysisColors(string [] sa)
         {
-            List<Color> ret = new List<Color>();
+            List<AE_Color> ret = new List<AE_Color>();
 
 
             int idx = 0;
@@ -92,25 +92,32 @@ namespace AE_Util_skelton
                 string[] c = sa[idx].Split('\t');
                 if (c.Length>6)
                 {
-                    int r = -1;
-                    int g = -1;
-                    int b = -1;
-                    int v= -1;
-                    if (int.TryParse(c[3], out v) == true)
+                    double a = 255;
+                    double r = -1;
+                    double g = -1;
+                    double b = -1;
+                    double v = -1;
+                    if (double.TryParse(c[2], out v) == true)
+                    {
+                        a = v;
+                    }
+                    if (double.TryParse(c[3], out v) == true)
                     {
                         r = v;
                     }
-                    if (int.TryParse(c[4], out v) == true)
+                    if (double.TryParse(c[4], out v) == true)
                     {
                         g = v;
                     }
-                    if (int.TryParse(c[5], out v) == true)
+                    if (double.TryParse(c[5], out v) == true)
                     {
                         b = v;
                     }
-                    if((r>=0)&& (g >= 0)&& (b >= 0))
+                    if((a>=0)&&(r>=0)&& (g >= 0)&& (b >= 0))
                     {
-                        ret.Add(Color.FromArgb(r, g, b));
+                        AE_Color cc = new AE_Color();
+                        cc.A = a; cc.R = r; cc.G = g; cc.B = b;
+                        ret.Add(cc);
                     }
                 }
                 idx += 1;
@@ -120,9 +127,9 @@ namespace AE_Util_skelton
 
         }
         // ****************************************************************************************
-        public Color[] ColorFromClip()
+        public AE_Color[] ColorFromClip()
         {
-            Color[] ret = new Color[0];
+            AE_Color[] ret = new AE_Color[0];
 
             string[] sa = GetClip();
             if (sa.Length < 8) return ret.ToArray();
@@ -130,7 +137,7 @@ namespace AE_Util_skelton
             return ret;
         }
         // ****************************************************************************************
-        public void ColorToClip(Color col)
+        public void ColorToClip(AE_Color col)
         {
             string str =
             "Adobe After Effects 8.0 Keyframe Data\r\n"
@@ -143,12 +150,13 @@ namespace AE_Util_skelton
             + "\r\n"
             + "Effects	カラー制御 #2	カラー #2\r\n"
             + "	Frame	alpha 	red 	green 	blue 	\r\n"
-            + "		255	$R	$G	$B	\r\n"
+            + "		$A	$R	$G	$B	\r\n"
             + "\r\n"
             + "\r\n"
             + "End of Keyframe Data\r\n";
 
 
+            str = str.Replace("$A", col.A.ToString());
             str = str.Replace("$R", col.R.ToString());
             str = str.Replace("$G", col.G.ToString());
             str = str.Replace("$B", col.B.ToString());

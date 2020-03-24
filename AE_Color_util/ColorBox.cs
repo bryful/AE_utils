@@ -75,167 +75,41 @@ namespace AE_Util_skelton
 
         }
         // **************************************************************************
-        private NumericUpDown m_Red = null;
-        public NumericUpDown Red
-        {
-            get { return m_Red; }
-            set
-            {
-                m_Red = value;
-                if(m_Red != null)
-                {
-                    m_Red.Maximum = 255;
-                    m_Red.Minimum = 0;
-                    m_Red.Value = m_Color.R;
-                    m_Red.ValueChanged += M_Red_ValueChanged;
-                    m_Red.KeyPress += M_Blue_KeyPress;
-
-                    this.Invalidate();
-                }
-            }
-        }
         // **************************************************************************
-        private NumericUpDown m_Green = null;
-        public NumericUpDown Green
-        {
-            get { return m_Green; }
-            set
-            {
-                m_Green = value;
-                if (m_Green != null)
-                {
-                    m_Green.Maximum = 255;
-                    m_Green.Minimum = 0;
-                    m_Green.Value = m_Color.G;
-                    m_Green.ValueChanged += M_Green_ValueChanged;
-                    m_Green.KeyPress += M_Blue_KeyPress;
-                    this.Invalidate();
-                }
-            }
-        }
-        // **************************************************************************
-        private NumericUpDown m_Blue = null;
-        public NumericUpDown Blue
-        {
-            get { return m_Blue; }
-            set
-            {
-                m_Blue = value;
-                if (m_Blue != null)
-                {
-                    m_Blue.Maximum = 255;
-                    m_Blue.Minimum = 0;
-                    m_Blue.Value = m_Color.B;
-                    m_Blue.ValueChanged += M_Blue_ValueChanged;
-                    m_Blue.KeyPress += M_Blue_KeyPress;
-                    this.Invalidate();
-                }
-            }
-        }
-        // **************************************************************************
-        private void M_Blue_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            this.Invalidate();
-        }
-
-        // **************************************************************************
-        private void M_Blue_ValueChanged(object sender, EventArgs e)
-        {
-            if (m_Blue != null)
-            {
-                SetBlue((int)m_Blue.Value);
-            }
-        }
-        // **************************************************************************
-        private void M_Green_ValueChanged(object sender, EventArgs e)
-        {
-            if (m_Green != null)
-            {
-                SetGreen((int)m_Green.Value);
-            }
-        }
-        // **************************************************************************
-        private void M_Red_ValueChanged(object sender, EventArgs e)
-        {
-            if (m_Red != null)
-            {
-                SetRed((int)m_Red.Value);
-            }
-        }
-
-        // **************************************************************************
-        public void SetBlue(int b)
-        {
-            if (m_Color.B != b)
-            {
-                if (m_IsLocked == false)
-                {
-                    m_Color = Color.FromArgb(m_Color.R, m_Color.G, b);
-                }
-            }
-            this.Invalidate();
-        }
-        // **************************************************************************
-        public void SetGreen(int g)
-        {
-            if (m_Color.G != g)
-            {
-                if (m_IsLocked == false)
-                {
-                    m_Color = Color.FromArgb(m_Color.R, g, m_Color.B);
-                }
-            }
-            this.Invalidate();
-        }
-        // **************************************************************************
-        public void SetRed(int r)
-        {
-            if (m_Color.R != r)
-            {
-                if (m_IsLocked == false)
-                {
-                    m_Color = Color.FromArgb(r, m_Color.G, m_Color.B);
-                }
-            }
-            this.Invalidate();
-        }
-        // **************************************************************************
-        public void SetColor(int r, int g, int b)
+        public void SetColor(double r, double g, double b)
         {
             if ((m_Color.R == r) && (m_Color.G == g) && (m_Color.B == b)) return;
             if (m_IsLocked == false)
             {
 
-                m_Color = Color.FromArgb(r, g, b);
+                m_Color = AE_Color.FromArgb(r, g, b);
             }
             this.Invalidate();
         }
         // **************************************************************************
-        private Color m_Color = Color.Gray;
-        public Color Color
+        private AE_Color m_Color = new AE_Color();
+
+        public AE_Color AE_Color
         {
             get { return m_Color; }
             set { SetColor(value); }
         }
         // **************************************************************************
-        public void SetColor(Color c)
+        public void SetColor(AE_Color c)
         {
-            int r, g, b;
+            double r, g, b;
             r = c.R;g = c.G;b = c.B;
+
             if ((m_Color.R == r) && (m_Color.G == g) && (m_Color.B == b)) return;
             if (m_IsLocked == false)
             {
                 m_Color = c;
-
-                if (m_Red != null) m_Red.Value = r;
-                if (m_Green != null) m_Green.Value = g;
-                if (m_Blue != null) m_Blue.Value = b;
             }
             this.Invalidate();
 
         }
         // **************************************************************************
-        private Color m_SelectColor = Color.Black;
+        private Color m_SelectColor = Color.Red;
         public Color SelectColor
         {
             get { return m_SelectColor; }
@@ -277,7 +151,7 @@ namespace AE_Util_skelton
                 rct.Width -= 7;
                 rct.Height -= 7;
                 rct.Location = new Point(rct.Left + 3, rct.Top + 3);
-                sb.Color = m_Color;
+                sb.Color = m_Color.ToColor();
                 g.FillRectangle(sb, rct);
 
                 if (m_Selected == true)

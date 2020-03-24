@@ -30,7 +30,6 @@ using System.Collections;
 
 namespace BRY
 {
-
     public class JsonPref
     {
         private string _filePath = "";
@@ -292,6 +291,26 @@ namespace BRY
                 if (json[key].IsArray)
                 {
                     ret = (double[])json[key];
+                    ok = true;
+                }
+            }
+            return ret;
+        }
+        //-********************************************************************************
+        public void SetDoubleArray2(string key, double[] value)
+        {
+            json[key] = value;
+        }
+        public double[][] GetDoubleArray2(string key, out bool ok)
+        {
+            double[] ret = new double[0];
+            ok = false;
+            if (json.IsDefined(key) == true)
+            {
+                if (json[key].IsArray)
+                {
+                    var v = json[key];
+                    for ()
                     ok = true;
                 }
             }
