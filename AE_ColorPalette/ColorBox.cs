@@ -12,6 +12,9 @@ namespace AE_Util_skelton
 {
     public class ColorBox : Control
     {
+        static public readonly int BoxWidth = 27;
+        static public readonly int BoxLength = 29;
+
         private bool m_IsLocked = false;
         public bool IsLocked
         {
@@ -41,6 +44,12 @@ namespace AE_Util_skelton
         {
             get { return m_Selected; }
             set { SetSelected(value); }
+        }
+        public void SetSelected2(bool b,bool ev=true)
+        {
+            m_Selected = b;
+            Invalidate();
+            if(ev) OnSelectedChanged(new EventArgs());
         }
         public void SetSelected(bool b)
         {
@@ -75,32 +84,32 @@ namespace AE_Util_skelton
 
         }
         // **************************************************************************
-        // **************************************************************************
         public void SetColor(double r, double g, double b)
         {
             if ((m_Color.R == r) && (m_Color.G == g) && (m_Color.B == b)) return;
+
             if (m_IsLocked == false)
             {
 
-                m_Color = AE_Color.FromArgb(r, g, b);
+                m_Color = AEColor.FromArgb(r, g, b);
             }
             this.Invalidate();
         }
         // **************************************************************************
-        private AE_Color m_Color = new AE_Color();
+        private AEColor m_Color = new AEColor();
 
-        public AE_Color AE_Color
+        public AEColor AE_Color
         {
             get { return m_Color; }
             set { SetColor(value); }
         }
         // **************************************************************************
-        public void SetColor(AE_Color c)
+        public void SetColor(AEColor c)
         {
             double r, g, b;
-            r = c.R;g = c.G;b = c.B;
+            r = c.R; g = c.G;b = c.B;
 
-            if ((m_Color.R == r) && (m_Color.G == g) && (m_Color.B == b)) return;
+            if (m_Color.Equals(c) == true) return;
             if (m_IsLocked == false)
             {
                 m_Color = c;
@@ -118,11 +127,11 @@ namespace AE_Util_skelton
         // **************************************************************************
         public ColorBox()
         {
-            this.Size = new Size(32, 32);
+            this.Size = new Size(BoxWidth, BoxWidth);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.BackColor = Color.Transparent;
 
-            this.Click += ColorBox_Click;
+            this.MouseDown += ColorBox_Click;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
 
         }
@@ -130,7 +139,7 @@ namespace AE_Util_skelton
         // **************************************************************************
         private void ColorBox_Click(object sender, EventArgs e)
         {
-            SetSelected(!m_Selected);
+            SetSelected(true);
         }
 
         // **************************************************************************
@@ -140,7 +149,7 @@ namespace AE_Util_skelton
             Graphics g = e.Graphics;
             SolidBrush sb = new SolidBrush(Color.Transparent);
             Pen p = new Pen(Color.Black);
-            p.Width = 2;
+            p.Width = 1;
             try
             {
                 Rectangle rct = this.ClientRectangle; ;
@@ -148,8 +157,8 @@ namespace AE_Util_skelton
                 sb.Color = Color.Transparent;
                 g.FillRectangle(sb, rct);
 
-                rct.Width -= 7;
-                rct.Height -= 7;
+                rct.Width -= 5;
+                rct.Height -= 5;
                 rct.Location = new Point(rct.Left + 3, rct.Top + 3);
                 sb.Color = m_Color.ToColor();
                 g.FillRectangle(sb, rct);
@@ -157,8 +166,8 @@ namespace AE_Util_skelton
                 if (m_Selected == true)
                 {
                     rct = this.ClientRectangle;
-                    rct.Width -= 3;
-                    rct.Height -= 3;
+                    rct.Width -= 2;
+                    rct.Height -= 2;
                     rct.Location = new Point(rct.Left + 1, rct.Top + 1);
                     p.Color = SelectColor;
                     g.DrawRectangle(p, rct);

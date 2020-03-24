@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("AE_Color_util")]
+[assembly: AssemblyTitle("AE_ColorPalette")]
 [assembly: AssemblyDescription("AE用のカーラーパレット")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("bry-ful")]
-[assembly: AssemblyProduct("AE_Color_util")]
+[assembly: AssemblyProduct("AE_ColorPalette")]
 [assembly: AssemblyCopyright("Copyright © bry-ful 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

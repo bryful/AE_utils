@@ -19,11 +19,16 @@ namespace AE_Util_skelton
 {
     public partial class Form1 : Form
     {
+        static public readonly int Yoko = 6;
+        static public readonly int Tate = 12;
+
+        private string PalettePath = "AE_ColorPalette.json";
+
         NavBar m_navBar = new NavBar();
 
-        ColorBoxs m_ColorBoxs = new ColorBoxs(12,6);
+        ColorBoxs m_ColorBoxs = new ColorBoxs(Tate,Yoko);
 
-        int m_SelectedIndex = -1;
+        //int m_SelectedIndex = -1;
         //-------------------------------------------------------------
         /// <summary>
         /// コンストラクタ
@@ -33,15 +38,13 @@ namespace AE_Util_skelton
             InitializeComponent();
 
 
-            m_SelectedIndex = 0;
-
             for (int i=0; i<m_ColorBoxs.Items.Count;i++)
             {
                 this.Controls.Add(m_ColorBoxs.Items[i]);
                 m_ColorBoxs.Items[i].SelectedChanged += ColorBox_SelectedChanged;
             }
-            m_ColorBoxs.SetLoc(15, 30, 34, 34);
-
+            m_ColorBoxs.SetLoc(10, 30, ColorBox.BoxLength, ColorBox.BoxLength);
+            this.ClientSize = new Size(ColorBox.BoxLength * 6 + 20, ColorBox.BoxLength * 12 + 35);
 
 
             NavBarSetup();
@@ -77,14 +80,15 @@ namespace AE_Util_skelton
             if (pref.Load())
             {
                 bool ok = false;
-                Size sz = pref.GetSize("Size", out ok);
-                if (ok) this.Size = sz;
+                //Size sz = pref.GetSize("Size", out ok);
+                //if (ok) this.Size = sz;
                 Point p = pref.GetPoint("Point", out ok);
                 if (ok) this.Location = p;
                 bool b = pref.GetBool("IsFront", out ok);
                 if (ok) m_navBar.IsFront = b;
 
-
+                string path = pref.GetString("PalettePath",out ok);
+                if (ok) PalettePath = path;
             }
             m_ColorBoxs.Load();
             //this.Text = m_ColorBoxs.path;
@@ -105,8 +109,8 @@ namespace AE_Util_skelton
             pref.SetSize("Size", this.Size);
             pref.SetPoint("Point", this.Location);
             pref.SetBool("IsFront", m_navBar.IsFront);
+            pref.SetString("PalettePath", PalettePath);
             pref.Save();
-
             m_ColorBoxs.Save();
         }
         //-------------------------------------------------------------
@@ -122,19 +126,22 @@ namespace AE_Util_skelton
 
         private void ColorBox_SelectedChanged(object sender, EventArgs e)
         {
+            
             int idx = ((ColorBox)sender).Index;
-            if ((idx >= 0) && (idx < m_ColorBoxs.Items.Count))
+           // m_ColorBoxs.SelectedIndex = idx;
+            /*if ((idx >= 0) && (idx < m_ColorBoxs.Items.Count))
             {
                 if (m_ColorBoxs.Items[idx].Selected == true)
                 {
-                    m_SelectedIndex = idx;
+                    m_ColorBoxs.SelectedIndex = idx;
                 }
                 else
                 {
-                    m_SelectedIndex = -1;
+                    m_ColorBoxs.SelectedIndex = -1;
                 }
-            }
-            //this.Text = String.Format("SelectedIndex{0}", m_SelectedIndex);
+            }*/
+            
+            this.Text = String.Format("SelectedIndex{0}", m_ColorBoxs.SelectedIndex);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -146,23 +153,23 @@ namespace AE_Util_skelton
         {
             AE_ClipData clipData = new AE_ClipData();
 
-            AE_Color[] cols = clipData.ColorFromClip();
+            AEColor[] cols = clipData.ColorFromClip();
             if (cols.Length > 0)
             {
                 if (cols.Length == 1)
                 {
-                    if (m_SelectedIndex >= 0)
+                    if (m_ColorBoxs.SelectedIndex >= 0)
                     {
-                        m_ColorBoxs.Items[m_SelectedIndex].AE_Color = cols[0];
+                        m_ColorBoxs.Items[m_ColorBoxs.SelectedIndex].AE_Color = cols[0];
                     }
                 }
                 else
                 {
-                    if (m_SelectedIndex >= 0)
+                    if (m_ColorBoxs.SelectedIndex >= 0)
                     {
                         for (int i = 0; i < cols.Length; i++)
                         {
-                            int idx = m_SelectedIndex + i;
+                            int idx = m_ColorBoxs.SelectedIndex + i;
                             if (idx >= m_ColorBoxs.Items.Count) break;
                             m_ColorBoxs.Items[idx].AE_Color = cols[i];
 
@@ -176,10 +183,10 @@ namespace AE_Util_skelton
         // *******************************************************
         public void ColorToClip()
         {
-            if (m_SelectedIndex < 0) return;
+            if (m_ColorBoxs.SelectedIndex < 0) return;
             AE_ClipData clipData = new AE_ClipData();
 
-            clipData.ColorToClip(m_ColorBoxs.Items[m_SelectedIndex].AE_Color);
+            clipData.ColorToClip(m_ColorBoxs.Items[m_ColorBoxs.SelectedIndex].AE_Color);
     
 
         }
@@ -203,6 +210,60 @@ namespace AE_Util_skelton
         {
             lockToolStripMenuItem.Checked = ! lockToolStripMenuItem.Checked;
             m_ColorBoxs.IsLocked = lockToolStripMenuItem.Checked;
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.FileName = Path.GetFileName(PalettePath);
+            sfd.InitialDirectory = Path.GetDirectoryName(PalettePath);
+            if (sfd.InitialDirectory == "")
+            {
+                sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            }
+
+            sfd.Filter = "Jsonファイル(*.json)|*.json|すべてのファイル(*.*)|*.*";
+            sfd.FilterIndex = 1;
+            sfd.Title = "保存先のファイルを選択してください";
+            sfd.RestoreDirectory = true;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                m_ColorBoxs.Save(sfd.FileName);
+                PalettePath = sfd.FileName;
+            }
+        }
+
+        private void laodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.FileName = Path.GetFileName(PalettePath);
+            ofd.InitialDirectory = Path.GetDirectoryName(PalettePath);
+            if (ofd.InitialDirectory == "")
+            {
+                ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            }
+            ofd.Filter = "Jsonファイル(*.json)|*.json|すべてのファイル(*.*)|*.*";
+            ofd.FilterIndex = 1;
+            ofd.Title = "開くファイルを選択してください";
+            ofd.RestoreDirectory = true;
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                m_ColorBoxs.Load(ofd.FileName);
+                PalettePath = ofd.FileName;
+            }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            Keys k = e.KeyCode;
+            if (k == Keys.Right)
+            {
+
+            }
         }
     }
 }

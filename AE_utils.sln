@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_Util_skelton", "AE_Util_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_Expression_CopyPaste", "AE_Expression_CopyPaste\AE_Expression_CopyPaste.csproj", "{34038CC6-6FFA-4D72-BA30-8A63D6511F33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_Color_util", "AE_Color_util\AE_Color_util.csproj", "{79D3754E-9534-4F40-8516-30CD9215289D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_ColorPalette", "AE_ColorPalette\AE_ColorPalette.csproj", "{79D3754E-9534-4F40-8516-30CD9215289D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_Calc", "AE_Calc\AE_Calc.csproj", "{79B6551D-46F6-4779-89F3-1474484F7B76}"
 EndProject

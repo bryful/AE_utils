@@ -78,9 +78,9 @@ namespace AE_Util_skelton
             return ret;
         }
         // ****************************************************************************************
-        private AE_Color [] AnalysisColors(string [] sa)
+        private AEColor [] AnalysisColors(string [] sa)
         {
-            List<AE_Color> ret = new List<AE_Color>();
+            List<AEColor> ret = new List<AEColor>();
 
 
             int idx = 0;
@@ -115,9 +115,7 @@ namespace AE_Util_skelton
                     }
                     if((a>=0)&&(r>=0)&& (g >= 0)&& (b >= 0))
                     {
-                        AE_Color cc = new AE_Color();
-                        cc.A = a; cc.R = r; cc.G = g; cc.B = b;
-                        ret.Add(cc);
+                        ret.Add(new AEColor(a, r, g, b));
                     }
                 }
                 idx += 1;
@@ -127,9 +125,9 @@ namespace AE_Util_skelton
 
         }
         // ****************************************************************************************
-        public AE_Color[] ColorFromClip()
+        public AEColor[] ColorFromClip()
         {
-            AE_Color[] ret = new AE_Color[0];
+            AEColor[] ret = new AEColor[0];
 
             string[] sa = GetClip();
             if (sa.Length < 8) return ret.ToArray();
@@ -137,7 +135,7 @@ namespace AE_Util_skelton
             return ret;
         }
         // ****************************************************************************************
-        public void ColorToClip(AE_Color col)
+        public void ColorToClip(AEColor col)
         {
             string str =
             "Adobe After Effects 8.0 Keyframe Data\r\n"

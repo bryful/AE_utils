@@ -25,6 +25,41 @@ namespace AE_Util_skelton
         public int Rows {  get { return m_Rows; } }
         private int m_Cols = 5;
         public int Cols { get { return m_Cols; } }
+        private int m_SelectedIndex = -1;
+        public int SelectedIndex
+        {
+            get { return m_SelectedIndex; }
+            set
+            {
+                SetSelectedIndex(value,true);
+            }
+        }
+        // *******************************************************
+        public void SetSelectedIndex(int idx,bool b)
+        {
+            if((idx>=0)&&(idx<Count))
+            {
+                if (b == true)
+                {
+                    if (m_SelectedIndex >= 0)
+                    {
+                        Items[m_SelectedIndex].SetSelected2(false, false);
+                    }
+  
+                }
+                m_SelectedIndex = idx;
+                Items[m_SelectedIndex].SetSelected2(true, true);
+            }
+            else
+            {
+                if (m_SelectedIndex >= 0)
+                {
+                    Items[m_SelectedIndex].SetSelected2(false, true);
+                    m_SelectedIndex = -1;
+                }
+
+            }
+        }
         // *******************************************************
         public bool IsLocked
         {
@@ -57,13 +92,20 @@ namespace AE_Util_skelton
                     ColorBox cb = new ColorBox();
                     cb.Name = String.Format("Colorbox{0}", idx);
                     cb.SelectColor = Color.Gray;
-                    cb.AE_Color = AE_Color.FromArgb(10, 10, 10); ;
+                    cb.AE_Color = AEColor.FromArgb(10, 10, 10); ;
                     cb.Index = idx;
+                    cb.MouseDown += Cb_MouseDown;
                     Items.Add(cb);
                     idx++;
                 }
             }
         }
+
+        private void Cb_MouseDown(object sender, MouseEventArgs e)
+        {
+            SetSelectedIndex(((ColorBox)sender).Index,true);
+        }
+
         private void InitColors(int r, int c)
         {
             if ((m_Cols == c) && (m_Rows == r)) return;
@@ -85,8 +127,9 @@ namespace AE_Util_skelton
                     ColorBox cb = new ColorBox();
                     cb.Name = String.Format("Colorbox{0}", i);
                     cb.SelectColor = Color.Gray;
-                    cb.AE_Color = AE_Color.FromArgb(10, 10, 10); ;
+                    cb.AE_Color = AEColor.FromArgb(10, 10, 10); ;
                     cb.Index = i;
+                    cb.MouseDown += Cb_MouseDown;
                     Items.Add(cb);
                 }
             }
@@ -127,8 +170,11 @@ namespace AE_Util_skelton
                 pref.SetObject("Colors",colors);
 
 
-                if(p=="") p = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
-                p = Path.Combine(Application.UserAppDataPath,p + "_color.json");
+                if (p == "")
+                {
+                    p = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
+                    p = Path.Combine(Application.UserAppDataPath, p + "_color.json");
+                }
 
                 ret = pref.Save(p);
                 path = p;
@@ -147,8 +193,11 @@ namespace AE_Util_skelton
 
             try
             {
-                if (p == "") p = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
-                p = Path.Combine(Application.UserAppDataPath, p + "_color.json");
+                if (p == "")
+                {
+                    p = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
+                    p = Path.Combine(Application.UserAppDataPath, p + "_color.json");
+                }
                 ret = pref.Load(p);
                 path = p;
                 if (ret == false) return ret;

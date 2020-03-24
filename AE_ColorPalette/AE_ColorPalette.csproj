@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{79D3754E-9534-4F40-8516-30CD9215289D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>AE_Color_util</RootNamespace>
-    <AssemblyName>AE_Color_util</AssemblyName>
+    <RootNamespace>AE_Util_skelton</RootNamespace>
+    <AssemblyName>AE_ColorPalette</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AE_ClipData.cs" />
-    <Compile Include="AE_Color.cs" />
+    <Compile Include="AEColor.cs" />
     <Compile Include="AppInfoDialog.cs">
       <SubType>Form</SubType>
     </Compile>
