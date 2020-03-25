@@ -172,9 +172,9 @@ namespace AE_Util_skelton
 
             if (listBox1.Items.Count<=0)
             {
-                AddExp("effect(\"open\")(1)");
-                AddExp("p = effect(\"open\")/100; \r\n if (p<0) {p=0;} else if (p>1){p=1;}\r\n");
-                AddExp("value * effect(\"open\") / 100");
+                AddExp("p = effect(\"open\")(1);\r\np = effect(\"open\")(1)/100; \r\n if (p<0) {p=0;} else if (p>1){p=1;}\r\n");
+                AddExp("p = effect(\"open\")(1)/100; \r\n if (p<0) {p=0;} else if (p>1){p=1;}\r\n");
+                AddExp("value * effect(\"open\")(1) / 100");
                 AddExp("if (effect(\"open\")(1) <0){\r\n0;\r\n}else{\r\nvalue;\r\n}\r\n");
                 AddExp("v = value;\r\nv[0] *= p;\r\nv;\r\n");
                 AddExp("* Math.PI/180");
