@@ -260,8 +260,11 @@ namespace AE_Util_skelton
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                this.SuspendLayout();
                 m_ColorBoxs.Load(ofd.FileName);
                 PalettePath = ofd.FileName;
+                this.InitLayout();
+                this.ResumeLayout();
             }
         }
 

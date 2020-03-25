@@ -213,6 +213,7 @@ namespace AE_Util_skelton
                     for (int i = 0; i < Count; i++)
                     {
                         Items[i].AE_Color.FromJson(cols[i]);
+                        Items[i].Invalidate();
                     }
                     ret = true;
             }
