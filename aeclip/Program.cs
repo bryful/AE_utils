@@ -17,6 +17,7 @@ namespace aeclip
             PASTE,
             OUTPUT,
             HELP
+
         }
         static void Usage()
         {

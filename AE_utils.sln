@@ -15,6 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_Triangle", "AE_Triangle\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aeclip", "aeclip\aeclip.csproj", "{7DC50DB8-0AD4-4DD2-8190-607CA6C98FC1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{35BE8040-CBA6-4CB8-8E7D-E84EBAE191F1}"
+	ProjectSection(SolutionItems) = preProject
+		配布用アーカイブ\AE_Util_01.zip = 配布用アーカイブ\AE_Util_01.zip
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
