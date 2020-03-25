@@ -86,9 +86,27 @@ namespace AE_Util_skelton
                 if (ok) this.Location = p;
                 bool b = pref.GetBool("IsFront", out ok);
                 if (ok) m_navBar.IsFront = b;
+                b = pref.GetBool("IsLocked", out ok);
+                if (ok)
+                {
+                    m_ColorBoxs.IsLocked = b;
+                    lockToolStripMenuItem.Checked = b;
+                }
+                b = pref.GetBool("IsLocked2", out ok);
+                if (ok)
+                {
+                    if (b == true)
+                    {
+                        m_ColorBoxs.IsLocked = true;
+                        lockToolStripMenuItem.Checked = true;
+                    }
+                    lock2ToolStripMenuItem.Checked = b;
+                }
 
                 string path = pref.GetString("PalettePath",out ok);
                 if (ok) PalettePath = path;
+
+
             }
             m_ColorBoxs.Load();
             //this.Text = m_ColorBoxs.path;
@@ -110,6 +128,8 @@ namespace AE_Util_skelton
             pref.SetPoint("Point", this.Location);
             pref.SetBool("IsFront", m_navBar.IsFront);
             pref.SetString("PalettePath", PalettePath);
+            pref.SetBool("IsLocked", m_ColorBoxs.IsLocked);
+            pref.SetBool("IsLocked2", lock2ToolStripMenuItem.Checked);
             pref.Save();
             m_ColorBoxs.Save();
         }
@@ -126,22 +146,7 @@ namespace AE_Util_skelton
 
         private void ColorBox_SelectedChanged(object sender, EventArgs e)
         {
-            
-            int idx = ((ColorBox)sender).Index;
-           // m_ColorBoxs.SelectedIndex = idx;
-            /*if ((idx >= 0) && (idx < m_ColorBoxs.Items.Count))
-            {
-                if (m_ColorBoxs.Items[idx].Selected == true)
-                {
-                    m_ColorBoxs.SelectedIndex = idx;
-                }
-                else
-                {
-                    m_ColorBoxs.SelectedIndex = -1;
-                }
-            }*/
-            
-            this.Text = String.Format("SelectedIndex{0}", m_ColorBoxs.SelectedIndex);
+            //this.Text = String.Format("SelectedIndex{0}", m_ColorBoxs.SelectedIndex);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -208,10 +213,13 @@ namespace AE_Util_skelton
 
         private void lockToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lockToolStripMenuItem.Checked = ! lockToolStripMenuItem.Checked;
+            lockToolStripMenuItem.Checked = !lockToolStripMenuItem.Checked;
             m_ColorBoxs.IsLocked = lockToolStripMenuItem.Checked;
         }
-
+        private void lock2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lock2ToolStripMenuItem.Checked = !lock2ToolStripMenuItem.Checked;
+        }
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
@@ -265,5 +273,7 @@ namespace AE_Util_skelton
 
             }
         }
+
+      
     }
 }
