@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AE_Calc
+namespace AE_Util_skelton
 {
     public partial class NavBar : Form
     {

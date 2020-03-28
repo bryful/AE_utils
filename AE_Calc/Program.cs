@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 using Microsoft.VisualBasic.ApplicationServices;
 
-namespace AE_Calc
+namespace AE_Util_skelton
 {
     public class MyApp : WindowsFormsApplicationBase
     {

@@ -1,4 +1,4 @@
-﻿namespace AE_Calc
+﻿namespace AE_Util_skelton
 {
     partial class NavBar
     {

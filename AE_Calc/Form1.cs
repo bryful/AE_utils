@@ -9,14 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
+using System.CodeDom.Compiler;
+using System.Reflection;
 using BRY;
 
 using Codeplex.Data;
 /// <summary>
 /// 基本となるアプリのスケルトン
 /// </summary>
-namespace AE_Calc
+namespace AE_Util_skelton
 {
+
+ 
+
+
     public partial class Form1 : Form
     {
         NavBar m_navBar = new NavBar();
@@ -63,6 +69,8 @@ namespace AE_Calc
                 if (ok) this.Size = sz;
                 Point p = pref.GetPoint("Point", out ok);
                 if (ok) this.Location = p;
+                string[] sa = pref.GetStringArray("Undo", out ok);
+                if (ok) UndoList = sa.ToList<string>();
             }
             this.Text = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
             m_navBar.Caption = this.Text;
@@ -79,6 +87,7 @@ namespace AE_Calc
             JsonPref pref = new JsonPref();
             pref.SetSize("Size", this.Size);
             pref.SetPoint("Point", this.Location);
+            pref.SetStringArray("Undo", UndoList.ToArray());
             pref.Save();
 
         }
@@ -140,44 +149,118 @@ namespace AE_Calc
         {
             AppInfoDialog.ShowAppInfoDialog();
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
-
-            JsonPref j = new JsonPref();
-
-            int[] aaa = new int[] { 78, 9, 12 };
-            double[] bbb = new double[] { 0.7, 0.01, 0.12 };
-            string[] ccc = new string[] { "eee", "sfskjbF", "13" };
-            j.SetIntArray("aa", aaa);
-            j.SetDoubleArray("bb", bbb);
-            j.SetStringArray("cc", ccc);
-
-            MessageBox.Show(j.ToJson());
-
+            CalcExec();
         }
 
+        private List<string> UndoList = new List<string>();
+        private int UndoIndex = 0;
+        public void CalcExec()
+        {
+            string changeStr(string str,string[][] sa)
+            {
+                if (sa.Length > 0)
+                {
+                    for ( int i=0; i< sa.Length; i++)
+                    {
+                        str = str.Replace(sa[i][0],sa[i][1]);
+                    }
+                }
+                return str;
+            }
+            string[][] tbl = new string[][]
+            {
+                new string[]{ "（","(" },
+                new string[]{ "）", "(" },
+                new string[]{ "＋", "+" },
+                new string[]{ "ー", "-" },
+                new string[]{ "－", "-" },
+                new string[]{ "×", "*" },
+                new string[]{ "÷", "/" },
+                new string[]{ "＊", "*" },
+                new string[]{ "／", "/" },
+                new string[]{ "１", "1" },
+                new string[]{ "２", "2" },
+                new string[]{ "３", "3" },
+                new string[]{ "４", "4" },
+                new string[]{ "５", "5" },
+                new string[]{ "６", "6" },
+                new string[]{ "７", "7" },
+                new string[]{ "８", "8" },
+                new string[]{ "９", "9" },
+                new string[]{ "０", "0" }
+            };
+            string exp = tbLine.Text.Trim();
+            if (exp != "")
+            {
+                string exp2 = changeStr(exp, tbl);
 
-        /*
-private void button1_Click(object sender, EventArgs e)
-{
-	dynamic a = new DynamicJson();
-	a.fff = new string[] { "a", "B" };
-	a.fff = "12";
-	//a.fff = new { aaa=12, ccc="www" };
+                string result = "";
+                try
+                {
+                    JScriptEvaluator jscript = new JScriptEvaluator();
+                    result = jscript.Eval(exp2);
+                }
+                catch
+                {
+                    result = "errer!";
+                }
+                UndoList.Add(exp);
+                UndoIndex = 0;
+                if (UndoList.Count > 40) UndoList.RemoveAt(0);
+                tbLine.Text = result;
+                tbLine.Select(tbLine.Text.Length, 0);
 
-	MessageBox.Show(a.fff.GetType().ToString());
+            }
 
-	JsonPref s = new JsonPref();
-	s.AddInt("aaa", 99);
-	string ss = s.ToJson();
-	MessageBox.Show(ss);
-	s.Parse(ss);
-	string sss = s.ToJson();
-	MessageBox.Show(sss);
+        }
+        public void UndoExec()
+        {
+            if(UndoList.Count>0)
+            {
+                int idx = UndoList.Count - 1 - (UndoIndex % UndoList.Count);
+                if (idx < 0) idx = UndoList.Count + idx; 
+                UndoIndex++;
+                string str = UndoList[idx];
+                tbLine.Text = str;
+                tbLine.Select(tbLine.Text.Length, 0);
+            }
+        }
+        private void tbLine_KeyDown(object sender, KeyEventArgs e)
+        {
+            Keys k = e.KeyCode;
+            if((k==Keys.Return)|| (k == Keys.Enter))
+            {
+                CalcExec();
+            }
+        }
 
-	int i = s.GetInt("aaa");
-	MessageBox.Show(String.Format("{0}", i));
-}
-*/
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UndoExec();
+        }
+
+        private void calcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CalcExec();
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string str = tbLine.Text.Trim();
+            if (str != "")
+            {
+                Clipboard.SetText(str);
+            }
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.ContainsText())
+            {
+                tbLine.Text = Clipboard.GetText();
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AE_Calc.Properties
+namespace AE_Util_skelton.Properties
 {
 
 

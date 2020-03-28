@@ -26,6 +26,7 @@ namespace aeclip
                 + "\t aeclip [/p] (from clipboard to STD default)\r\n"
                 + "\t aeclip [/o] filename (from clipboard to file)\r\n"
                 + "\t aeclip  /h or /? (help)\r\n";
+
             Console.Write(mes);
         }
         static CLIP OptionArgs(string[] args)
