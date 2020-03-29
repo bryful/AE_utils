@@ -233,6 +233,7 @@ namespace AE_Util_skelton
             if((k==Keys.Return)|| (k == Keys.Enter))
             {
                 CalcExec();
+                e.Handled = true;
             }
         }
 
