@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		配布用アーカイブ\AE_Util_01.zip = 配布用アーカイブ\AE_Util_01.zip
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_FootageBrowser", "AE_FootageBrowser\AE_FootageBrowser.csproj", "{30EF7062-DE6F-495F-AE3A-925240CC168F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +104,18 @@ Global
 		{7DC50DB8-0AD4-4DD2-8190-607CA6C98FC1}.Release|x64.Build.0 = Release|Any CPU
 		{7DC50DB8-0AD4-4DD2-8190-607CA6C98FC1}.Release|x86.ActiveCfg = Release|Any CPU
 		{7DC50DB8-0AD4-4DD2-8190-607CA6C98FC1}.Release|x86.Build.0 = Release|Any CPU
+		{30EF7062-DE6F-495F-AE3A-925240CC168F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30EF7062-DE6F-495F-AE3A-925240CC168F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30EF7062-DE6F-495F-AE3A-925240CC168F}.Debug|x64.ActiveCfg = Debug|x64
+		{30EF7062-DE6F-495F-AE3A-925240CC168F}.Debug|x64.Build.0 = Debug|x64
+		{30EF7062-DE6F-495F-AE3A-925240CC168F}.Debug|x86.ActiveCfg = Debug|x86
+		{30EF7062-DE6F-495F-AE3A-925240CC168F}.Debug|x86.Build.0 = Debug|x86
+		{30EF7062-DE6F-495F-AE3A-925240CC168F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30EF7062-DE6F-495F-AE3A-925240CC168F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30EF7062-DE6F-495F-AE3A-925240CC168F}.Release|x64.ActiveCfg = Release|x64
+		{30EF7062-DE6F-495F-AE3A-925240CC168F}.Release|x64.Build.0 = Release|x64
+		{30EF7062-DE6F-495F-AE3A-925240CC168F}.Release|x86.ActiveCfg = Release|x86
+		{30EF7062-DE6F-495F-AE3A-925240CC168F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
