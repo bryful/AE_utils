@@ -196,6 +196,50 @@ namespace AE_Util_skelton
 
         }
         // *******************************************************
+        public void ColorHexToClip()
+        {
+            if (m_ColorBoxs.SelectedIndex < 0) return;
+  
+            Clipboard.SetText(m_ColorBoxs.Items[m_ColorBoxs.SelectedIndex].HexColor);
+
+        }
+        // *******************************************************
+        public void ColorFromToClip()
+        {
+            if (m_ColorBoxs.SelectedIndex < 0) return;
+
+            if (Clipboard.ContainsText())
+            {
+                string s = Clipboard.GetText().Trim();
+                if (s == "") return;
+                s = s.ToUpper();
+                for ( int i = 0; i < s.Length; i++)
+                {
+                    char c = s[i];
+                    if ( ((c>='0')&&(c<='9')) || ((c >= 'A') && (c <= 'Z')))
+                    {
+                        //ok
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                m_ColorBoxs.Items[m_ColorBoxs.SelectedIndex].HexColor = s;
+            }
+
+            Clipboard.SetText(m_ColorBoxs.Items[m_ColorBoxs.SelectedIndex].HexColor);
+
+        }
+        private void pasteHexToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorFromToClip();
+        }
+        private void copyHexToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorHexToClip();
+        }       
+        // *******************************************************
         private void button2_Click(object sender, EventArgs e)
         {
             ColorToClip();
@@ -277,6 +321,5 @@ namespace AE_Util_skelton
             }
         }
 
-      
     }
 }

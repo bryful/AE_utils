@@ -103,6 +103,11 @@ namespace AE_Util_skelton
             get { return m_Color; }
             set { SetColor(value); }
         }
+        public string HexColor
+        {
+            get { return m_Color.Hex; }
+            set { m_Color.Hex = value; }
+        }
         // **************************************************************************
         public void SetColor(AEColor c)
         {

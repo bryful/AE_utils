@@ -30,6 +30,28 @@ namespace AE_Util_skelton
         public double G { get { return m_G; } set { m_G = RoundD(value); } }
         public double B { get { return m_B; } set { m_B = RoundD(value); } }
 
+        public string Hex
+        {
+            get
+            {
+                return String.Format("{0:X2}{1:X2}{2:X2}", (int)(m_R+0.5), (int)(m_G + 0.5), (int)(m_B + 0.5));
+            }
+            set
+            {
+                int v = 0;
+                if (int.TryParse(value,out v))
+                {
+                    m_A = 0xFF;
+                    m_B = (v & 0xFF);
+                    m_G = ((v >> 8) & 0xFF);
+                    m_R = ((v >> 16) & 0xFF);
+                }
+
+
+            }
+            
+        }
+
         // **********************************************************************
         public AEColor()
         {
