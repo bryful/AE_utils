@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{79B6551D-46F6-4779-89F3-1474484F7B76}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>AE_Calc</RootNamespace>
+    <RootNamespace>AE_Util_skelton</RootNamespace>
     <AssemblyName>AE_Calc</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -107,6 +107,9 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InputBtn.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="JScriptEvaluator.cs" />
     <Compile Include="JsonPref.cs" />
