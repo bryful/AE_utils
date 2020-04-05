@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{30EF7062-DE6F-495F-AE3A-925240CC168F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>AE_FootageBrowser</RootNamespace>
+    <RootNamespace>AE_Util_skelton</RootNamespace>
     <AssemblyName>AE_FootageBrowser</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -79,6 +79,7 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -98,6 +99,15 @@
       <DependentUpon>AppInfoDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="DynamicJson.cs" />
+    <Compile Include="FolderBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FolderBrowser.Designer.cs">
+      <DependentUpon>FolderBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FolderList.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FootageList.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -120,6 +130,9 @@
     <Compile Include="WindowsShellAPI.cs" />
     <EmbeddedResource Include="AppInfoDialog.resx">
       <DependentUpon>AppInfoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FolderBrowser.resx">
+      <DependentUpon>FolderBrowser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

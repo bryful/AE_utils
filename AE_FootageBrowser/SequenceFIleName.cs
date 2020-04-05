@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace AE_FootageBrowser
+namespace AE_Util_skelton
 {
     public class SequenceFileName
     {
