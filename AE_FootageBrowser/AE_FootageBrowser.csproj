@@ -98,6 +98,9 @@
     <Compile Include="AppInfoDialog.Designer.cs">
       <DependentUpon>AppInfoDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="DriveBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DynamicJson.cs" />
     <Compile Include="FolderBrowser.cs">
       <SubType>UserControl</SubType>

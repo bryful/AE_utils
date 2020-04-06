@@ -40,6 +40,7 @@
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.folderList1 = new AE_Util_skelton.FolderList();
+			this.driveBrowser1 = new AE_Util_skelton.DriveBrowser();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -180,11 +181,80 @@
             "x64",
             "Xml",
             "zh-Hans",
+            "zh-Hant",
+            "..",
+            "1041",
+            "Assets",
+            "Automation",
+            "BlendExtensions",
+            "CommonExtensions",
+            "de",
+            "en",
+            "es",
+            "Extensions",
+            "fr",
+            "ImportProjects",
+            "it",
+            "ItemTemplates",
+            "ja",
+            "ja-JP",
+            "ko",
+            "NewFileItems",
+            "NewScriptItems",
+            "PrivateAssemblies",
+            "Profiles",
+            "ProjectTemplates",
+            "PublicAssemblies",
+            "ReferenceAssemblies",
+            "Remote Debugger",
+            "ru",
+            "Script Diagnostics",
+            "ShellExtensions",
+            "SolutionTemplates",
+            "StartPages",
+            "SurfaceProcess",
+            "TestTools",
+            "ToolboxCaches",
+            "VC",
+            "VS SCC",
+            "VsGraphics",
+            "VSGraphicsExtensions",
+            "VWDExpress",
+            "WDExpress",
+            "x64",
+            "Xml",
+            "zh-Hans",
             "zh-Hant"});
 			this.folderList1.Location = new System.Drawing.Point(12, 51);
 			this.folderList1.Name = "folderList1";
 			this.folderList1.Size = new System.Drawing.Size(149, 364);
 			this.folderList1.TabIndex = 4;
+			// 
+			// driveBrowser1
+			// 
+			this.driveBrowser1.FormattingEnabled = true;
+			this.driveBrowser1.Items.AddRange(new object[] {
+            "C:\\",
+            "D:\\",
+            "E:\\",
+            "F:\\",
+            "J:\\",
+            "K:\\",
+            "L:\\",
+            "M:\\",
+            "N:\\",
+            "P:\\",
+            "Q:\\",
+            "S:\\",
+            "T:\\",
+            "W:\\",
+            "X:\\",
+            "Y:\\",
+            "Z:\\"});
+			this.driveBrowser1.Location = new System.Drawing.Point(12, 27);
+			this.driveBrowser1.Name = "driveBrowser1";
+			this.driveBrowser1.Size = new System.Drawing.Size(149, 20);
+			this.driveBrowser1.TabIndex = 5;
 			// 
 			// Form1
 			// 
@@ -192,6 +262,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(642, 444);
+			this.Controls.Add(this.driveBrowser1);
 			this.Controls.Add(this.folderList1);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.listBox1);
@@ -224,6 +295,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ListBox listBox1;
 		private FolderList folderList1;
+		private DriveBrowser driveBrowser1;
 	}
 }
 
