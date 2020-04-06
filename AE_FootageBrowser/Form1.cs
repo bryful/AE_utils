@@ -156,8 +156,23 @@ namespace AE_Util_skelton
 
         }
 
+		private void driveBrowser1_SelectFolder(object sender, SelectFolderEventArgs e)
+		{
+			this.Text = e.FullPath;
+		}
 
-        /*
+		private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
+		{
+
+		}
+
+		private void button1_Click_1(object sender, EventArgs e)
+		{
+			folderBrowserDialog1.ShowDialog();
+		}
+
+
+		/*
 private void button1_Click(object sender, EventArgs e)
 {
 	dynamic a = new DynamicJson();
@@ -179,5 +194,5 @@ private void button1_Click(object sender, EventArgs e)
 	MessageBox.Show(String.Format("{0}", i));
 }
 */
-    }
+	}
 }
