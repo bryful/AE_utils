@@ -119,22 +119,7 @@ namespace AE_Util_skelton
 		{
 			string[] fileNames = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
-            if (fileNames.Length > 0)
-            {
-                for (int i = 0; i < fileNames.Length; i++)
-                {
-                    string ext = System.IO.Path.GetExtension(fileNames[i]);
-                    if ((string.Compare(ext, ".tga") == 0) || (string.Compare(ext, ".jpg") == 0) || (string.Compare(ext, ".png") == 0) || (string.Compare(ext, ".tif") == 0))
-                    {
-                        m_Plist.Path = fileNames[i];
-                        if (m_Plist.Count > 0)
-                        {
-                            DispPicture();
-                            return;
-                        }
-                    }
-                }
-            }
+			GetCommand(fileNames);
 		}
 		//-------------------------------------------------------------
 		/// <summary>
@@ -145,9 +130,19 @@ namespace AE_Util_skelton
 		{
 			if (cmd.Length > 0)
 			{
-				foreach (string s in cmd)
-				{
-				}
+				for (int i = 0; i < cmd.Length; i++)
+                {
+                    string ext = System.IO.Path.GetExtension(cmd[i]);
+                    if ((string.Compare(ext, ".tga") == 0) || (string.Compare(ext, ".jpg") == 0) || (string.Compare(ext, ".png") == 0) || (string.Compare(ext, ".tif") == 0))
+                    {
+                        m_Plist.Path = cmd[i];
+                        if (m_Plist.Count > 0)
+                        {
+                            DispPicture();
+                            return;
+                        }
+                    }
+                }
 			}
 		}
 		/// <summary>

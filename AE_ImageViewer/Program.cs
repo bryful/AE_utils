@@ -35,12 +35,12 @@ namespace AE_Util_skelton
 		static void Main(string[] args)
 		{
 			//下の3行を復活させれば多重起動ができる
-			//Application.EnableVisualStyles();
-			//Application.SetCompatibleTextRenderingDefault(false);
-			//Application.Run(new Form1());
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
+			Application.Run(new Form1());
 
-			MyApp winAppBase = new MyApp();
-			winAppBase.Run(args);
+			//MyApp winAppBase = new MyApp();
+			//winAppBase.Run(args);
 		}
 	}
 
