@@ -5,7 +5,8 @@ Adobe After Effectsで作業を少し楽にするための小物ツール類です。
 ソース見ればわかるように少しづつ増やしていきます。  
 
 windows用のバイナリはここからDLできます。  
-  [AE_Util_01.zip](https://bit.ly/2JeInJU)  
+* [AE_Util_02.zip](https://bit.ly/3bGHHcG)
+* [AE_Util_01.zip](https://bit.ly/2JeInJU)  
  
 ## 共通の使い方
 普通のアプリですので、適当なところにインストールして実行してください。
