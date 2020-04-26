@@ -79,11 +79,25 @@ namespace AE_Util_skelton
             JsonPref pref = new JsonPref();
             if (pref.Load())
             {
+
+
+
                 bool ok = false;
                 //Size sz = pref.GetSize("Size", out ok);
                 //if (ok) this.Size = sz;
                 Point p = pref.GetPoint("Point", out ok);
-                if (ok) this.Location = p;
+				if (ok)
+				{
+					Screen s = Screen.FromControl(this);
+					int h = s.Bounds.Height;
+					int w = s.Bounds.Width;
+					if (p.X < 0) p.X = 0;
+					if (p.Y < 0) p.Y = 0;
+					if (p.X > w - this.Width) p.X = w - this.Width;
+					if (p.Y > h - this.Height) p.Y = h - this.Height;
+					this.Location = p;
+				}
+
                 bool b = pref.GetBool("IsFront", out ok);
                 if (ok) m_navBar.IsFront = b;
                 b = pref.GetBool("IsLocked", out ok);
