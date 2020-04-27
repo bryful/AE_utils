@@ -190,6 +190,7 @@
 			this.ClientSize = new System.Drawing.Size(484, 553);
 			this.Controls.Add(this.toolStrip1);
 			this.Controls.Add(this.pictureView1);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "Form1";
 			this.Text = "]ImageViwer";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
