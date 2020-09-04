@@ -65,7 +65,7 @@ namespace AE_Util_skelton
             int ret = -1;
             for (int i= st; i<sa.Length-2; i++)
             {
-                if (sa[i].IndexOf("Effects")==0)
+                if ((sa[i].IndexOf("Effects")==0)||(sa[i].IndexOf("Contents")==0))
                 {
                     if (sa[i+1] == m_ClipData_ColH2)
                     {

@@ -106,8 +106,11 @@
 
 	//----------------------------------
 	var scriptName = File.decode($.fileName.getName().changeExt(""));
-	//var saveName = File.decode($.fileName.getName().changeExt(".json"));	
-	var saveName =  Folder.myDocuments.fullName +  "/AE_ColorPalette_color.json";	// ********************************************************************************
+	//var saveName = File.decode($.fileName.getName().changeExt(".json"));
+	
+
+	var saveName =  Folder.myDocuments.fullName +  "/AE_ColorPalette_color.json";
+	// ********************************************************************************
 	/*
 		アクティブなコンポジションを獲得
 	*/
@@ -133,18 +136,90 @@
 
 	var btn_xx = 15;
 	var btn_yy = 15;
-		var btnToJson = winObj.add("button", [ btn_xx, btn_yy, btn_xx + 320, btn_yy + 25], "toJson" );
+	
+	var btnToJson = winObj.add("button", [ btn_xx, btn_yy, btn_xx + 320, btn_yy + 25], "toJson" );
 	btn_yy += 30;
-	var YOKO = 6;	var TATE = 12;	var MAX_COUNT = YOKO*TATE;;	// ********************************************************************************
-	var layerFromColor = function(lyr,ary)	{		var sa = lyr.name.split("_");		if (sa.length<3) return;		var idx = -1;		try{			idx = sa[1]*1 + sa[2]*YOKO;		}catch(e){			alert(lyr.name +"\r\n"+ e.toSource());			return;		}				var eg = lyr.property("ADBE Effect Parade");		var col = null;		if (eg.numProperties >0)		{			for (var i=1; i<=eg.numProperties;i++)			{				if (eg.property(i).matchName=="ADBE Color Control")				{					col = eg.property(i);					break;				}			}		}		if (col==null) return;		var p = col.property(1).value;		if (p instanceof Array){			if (p.length>=4){				var p2 = [];				p2.push(p[3]*255);				p2.push(p[0]*255);				p2.push(p[1]*255);				p2.push(p[2]*255);				ary[idx] = p2;			}		}	}
+
+	var YOKO = 6;
+	var TATE = 13;
+	var MAX_COUNT = YOKO*TATE;;
 	// ********************************************************************************
-	var exec = function()	{		var ac = getActiveComp();		if (ac==null) return;		if (ac.numLayers<=0) {			return;		}		var obj = {};		obj.Rows = TATE;		obj.Cols = YOKO;		obj.Colors = [];		for (var i=1; i<=MAX_COUNT;i++) {			var a =[255,10,10,10];			obj.Colors.push(a);		}				for (var i=1; i<=ac.numLayers;i++)		{			layerFromColor(ac.layer(i),obj.Colors);		}		var js = toJSON(obj);				var f = new File(saveName);		if (f.open("w")){
+	var layerFromColor = function(lyr,ary)
+	{
+		var sa = lyr.name.split("_");
+		if (sa.length<3) return;
+		var idx = -1;
+		try{
+			idx = sa[1]*1 + sa[2]*YOKO;
+		}catch(e){
+			alert(lyr.name +"\r\n"+ e.toSource());
+			return;
+		}
+
+		
+
+
+		var eg = lyr.property("ADBE Effect Parade");
+		var col = null;
+		if (eg.numProperties >0)
+		{
+			for (var i=1; i<=eg.numProperties;i++)
+			{
+				if (eg.property(i).matchName=="ADBE Color Control")
+				{
+					col = eg.property(i);
+					break;
+				}
+			}
+		}
+		if (col==null) return;
+		var p = col.property(1).value;
+		if (p instanceof Array){
+			if (p.length>=4){
+				var p2 = [];
+				p2.push(p[3]*255);
+				p2.push(p[0]*255);
+				p2.push(p[1]*255);
+				p2.push(p[2]*255);
+				ary[idx] = p2;
+			}
+		}
+	}
+	// ********************************************************************************
+	var exec = function()
+	{
+		var ac = getActiveComp();
+		if (ac==null) return;
+		if (ac.numLayers<=0) {
+			return;
+		}
+		var obj = {};
+		obj.Rows = TATE;
+		obj.Cols = YOKO;
+		obj.Colors = [];
+		for (var i=1; i<=MAX_COUNT;i++) {
+			var a =[255,10,10,10];
+			obj.Colors.push(a);
+		}
+		
+		for (var i=1; i<=ac.numLayers;i++)
+		{
+			layerFromColor(ac.layer(i),obj.Colors);
+		}
+		var js = toJSON(obj);
+		
+		var f = new File(saveName);
+		if (f.open("w")){
 			try{
 				f.write(js);
 			}catch(e){
 			}finally{
 				f.close();
-			}		}		alert(f.fsName);	}	btnToJson.onClick = exec;
+			}
+		}
+		alert(f.fsName);
+	}
+	btnToJson.onClick = exec;
 	// ********************************************************************************
 	var resizeWin = function()
 	{
@@ -152,7 +227,8 @@
 		var w = b[2] - b[0];
 		var h = b[3] - b[1];
 		
-		var bb = btnToJson.bounds;		bb[2] = bb[0]  + w - 30;
+		var bb = btnToJson.bounds;
+		bb[2] = bb[0]  + w - 30;
 	}
 	resizeWin();
 	winObj.onResize = resizeWin;

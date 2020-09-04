@@ -33,6 +33,13 @@
 			this.lockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.lock2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+			this.paletteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.palette1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.palette2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.palette3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.palette4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.palette5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
@@ -64,6 +71,8 @@
             this.lockToolStripMenuItem,
             this.lock2ToolStripMenuItem,
             this.toolStripMenuItem1,
+            this.paletteToolStripMenuItem,
+            this.toolStripMenuItem2,
             this.saveToolStripMenuItem,
             this.loadToolStripMenuItem,
             this.toolStripMenuItem3,
@@ -90,6 +99,53 @@
 			// 
 			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
 			this.toolStripMenuItem1.Size = new System.Drawing.Size(205, 6);
+			// 
+			// paletteToolStripMenuItem
+			// 
+			this.paletteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.palette1ToolStripMenuItem,
+            this.palette2ToolStripMenuItem,
+            this.palette3ToolStripMenuItem,
+            this.palette4ToolStripMenuItem,
+            this.palette5ToolStripMenuItem});
+			this.paletteToolStripMenuItem.Name = "paletteToolStripMenuItem";
+			this.paletteToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.paletteToolStripMenuItem.Text = "Palette";
+			// 
+			// palette1ToolStripMenuItem
+			// 
+			this.palette1ToolStripMenuItem.Name = "palette1ToolStripMenuItem";
+			this.palette1ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+			this.palette1ToolStripMenuItem.Text = "Palette1";
+			// 
+			// palette2ToolStripMenuItem
+			// 
+			this.palette2ToolStripMenuItem.Name = "palette2ToolStripMenuItem";
+			this.palette2ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+			this.palette2ToolStripMenuItem.Text = "Palette2";
+			// 
+			// palette3ToolStripMenuItem
+			// 
+			this.palette3ToolStripMenuItem.Name = "palette3ToolStripMenuItem";
+			this.palette3ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+			this.palette3ToolStripMenuItem.Text = "Palette3";
+			// 
+			// palette4ToolStripMenuItem
+			// 
+			this.palette4ToolStripMenuItem.Name = "palette4ToolStripMenuItem";
+			this.palette4ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+			this.palette4ToolStripMenuItem.Text = "Palette4";
+			// 
+			// palette5ToolStripMenuItem
+			// 
+			this.palette5ToolStripMenuItem.Name = "palette5ToolStripMenuItem";
+			this.palette5ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+			this.palette5ToolStripMenuItem.Text = "Palette5";
+			// 
+			// toolStripMenuItem2
+			// 
+			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(205, 6);
 			// 
 			// saveToolStripMenuItem
 			// 
@@ -164,7 +220,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.Black;
-			this.ClientSize = new System.Drawing.Size(223, 438);
+			this.ClientSize = new System.Drawing.Size(223, 487);
 			this.Controls.Add(this.menuStrip1);
 			this.Cursor = System.Windows.Forms.Cursors.Default;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -195,6 +251,13 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyHexToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteHexToolStripMenuItem;
-    }
+		private System.Windows.Forms.ToolStripMenuItem paletteToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem palette1ToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem palette2ToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem palette3ToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem palette4ToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem palette5ToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+	}
 }
 

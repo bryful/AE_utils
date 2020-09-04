@@ -20,7 +20,7 @@ namespace AE_Util_skelton
     public partial class Form1 : Form
     {
         static public readonly int Yoko = 6;
-        static public readonly int Tate = 12;
+        static public readonly int Tate = 13;
 
         private string PalettePath = "AE_ColorPalette.json";
 
@@ -44,7 +44,7 @@ namespace AE_Util_skelton
                 m_ColorBoxs.Items[i].SelectedChanged += ColorBox_SelectedChanged;
             }
             m_ColorBoxs.SetLoc(10, 30, ColorBox.BoxLength, ColorBox.BoxLength);
-            this.ClientSize = new Size(ColorBox.BoxLength * 6 + 20, ColorBox.BoxLength * 12 + 35);
+            this.ClientSize = new Size(ColorBox.BoxLength * 6 + 20, ColorBox.BoxLength * 13 + 35);
 
 
             NavBarSetup();
