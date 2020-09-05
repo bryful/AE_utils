@@ -38,10 +38,11 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-			this.listBox1 = new System.Windows.Forms.ListBox();
-			this.button1 = new System.Windows.Forms.Button();
-			this.combKeys1 = new AE_ScriptShortCut.CombKeys();
-			this.combAEVersion1 = new AE_ScriptShortCut.CombAEVersion();
+			this.cmbInstailedAE = new System.Windows.Forms.ComboBox();
+			this.comboBox2 = new System.Windows.Forms.ComboBox();
+			this.scriptShortCutPanel1 = new AE_ScriptShortCut.ScriptShortCutPanel();
+			this.aeInfo1 = new BRY.AEInfo();
+			this.label1 = new System.Windows.Forms.Label();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -53,7 +54,7 @@
             this.helpToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(597, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(644, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -116,260 +117,68 @@
 			// 
 			// statusStrip1
 			// 
-			this.statusStrip1.Location = new System.Drawing.Point(0, 367);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 511);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(597, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(644, 22);
 			this.statusStrip1.TabIndex = 1;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
-			// listBox1
+			// cmbInstailedAE
 			// 
-			this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.cmbInstailedAE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cmbInstailedAE.FormattingEnabled = true;
+			this.cmbInstailedAE.Items.AddRange(new object[] {
+            "CS6",
+            "2020"});
+			this.cmbInstailedAE.Location = new System.Drawing.Point(86, 43);
+			this.cmbInstailedAE.Name = "cmbInstailedAE";
+			this.cmbInstailedAE.Size = new System.Drawing.Size(133, 20);
+			this.cmbInstailedAE.TabIndex = 2;
+			// 
+			// comboBox2
+			// 
+			this.comboBox2.FormattingEnabled = true;
+			this.comboBox2.Location = new System.Drawing.Point(279, 38);
+			this.comboBox2.Name = "comboBox2";
+			this.comboBox2.Size = new System.Drawing.Size(133, 20);
+			this.comboBox2.TabIndex = 3;
+			// 
+			// scriptShortCutPanel1
+			// 
+			this.scriptShortCutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.listBox1.FormattingEnabled = true;
-			this.listBox1.ItemHeight = 12;
-			this.listBox1.Location = new System.Drawing.Point(0, 48);
-			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(577, 316);
-			this.listBox1.TabIndex = 2;
+			this.scriptShortCutPanel1.AutoScroll = true;
+			this.scriptShortCutPanel1.Location = new System.Drawing.Point(12, 64);
+			this.scriptShortCutPanel1.Name = "scriptShortCutPanel1";
+			this.scriptShortCutPanel1.Size = new System.Drawing.Size(570, 444);
+			this.scriptShortCutPanel1.TabIndex = 4;
 			// 
-			// button1
+			// aeInfo1
 			// 
-			this.button1.Location = new System.Drawing.Point(305, 164);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 3;
-			this.button1.Text = "button1";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.aeInfo1.CombInstailedAE = this.cmbInstailedAE;
+			this.aeInfo1.SelectedIndex = -1;
 			// 
-			// combKeys1
+			// label1
 			// 
-			this.combKeys1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.combKeys1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.combKeys1.FormattingEnabled = true;
-			this.combKeys1.Items.AddRange(new object[] {
-            " Enter",
-            " Delete",
-            " Backspace",
-            " Tab",
-            " Return",
-            " Esc",
-            " LeftArrow",
-            " RightArrow",
-            " UpArrow",
-            " DownArrow",
-            " Space",
-            " !",
-            " DoubleQuote",
-            " #",
-            " $",
-            " %",
-            " &",
-            " SingleQuote",
-            " LParen",
-            " RParen",
-            " *",
-            " Plus",
-            " Comma",
-            " -",
-            " .",
-            " /",
-            " 0",
-            " 1",
-            " 2",
-            " 3",
-            " 4",
-            " 5",
-            " 6",
-            " 7",
-            " 8",
-            " 9",
-            " :",
-            " ;",
-            " <",
-            " =",
-            " >",
-            " ?",
-            " @",
-            " A",
-            " B",
-            " C",
-            " D",
-            " E",
-            " F",
-            " G",
-            " H",
-            " I",
-            " J",
-            " K",
-            " L",
-            " M",
-            " N",
-            " O",
-            " P",
-            " Q",
-            " R",
-            " S",
-            " T",
-            " U",
-            " V",
-            " W",
-            " X",
-            " Y",
-            " Z",
-            " [",
-            " Backslash",
-            " ]",
-            " ^",
-            " _",
-            " `",
-            " {",
-            " |",
-            " }",
-            " ~",
-            " Umlaut_A",
-            " Ring_A",
-            " Cedilla_C",
-            " Acute_E",
-            " Tilde_N",
-            " Umlaut_O",
-            " Umlaut_U",
-            " Acute_a",
-            " Grave_a",
-            " Circumflex_a",
-            " Umlaut_a",
-            " Tilde_a",
-            " Ring_a",
-            " Cedilla_c",
-            " Acute_e",
-            " Grave_e",
-            " Circumflex_e",
-            " Umlaut_e",
-            " Acute_i",
-            " Grave_i",
-            " Circumflex_i",
-            " Umlaut_i",
-            " Tilde_n",
-            " Acute_o",
-            " Grave_o",
-            " Circumflex_o",
-            " Umlaut_o",
-            " Tilde_o",
-            " Acute_u",
-            " Grave_u",
-            " Circumflex_u",
-            " Umlaut_u",
-            " Section",
-            " German_dbl_s",
-            " Acute",
-            " Yen",
-            " Grave_A",
-            " Tilde_A",
-            " Tilde_O",
-            " Umlaut_y",
-            " Umlaut_Y",
-            " Circumflex_A",
-            " Circumflex_E",
-            " Acute_A",
-            " Umlaut_E",
-            " Grave_E",
-            " Acute_I",
-            " Circumflex_I",
-            " Umlaut_I",
-            " Grave_I",
-            " Acute_O",
-            " Circumflex_O",
-            " Grave_O",
-            " Acute_U",
-            " Circumflex_U",
-            " Grave_U",
-            " PadDecimal",
-            " PadComma",
-            " PadMultiply",
-            " PadPlus",
-            " PadClear",
-            " PadSlash",
-            " PadMinus",
-            " PadEqual",
-            " PadInsert",
-            " PadDelete",
-            " PadHome",
-            " PadEnd",
-            " PadPageUp",
-            " PadPageDown",
-            " Pad0",
-            " Pad1",
-            " Pad2",
-            " Pad3",
-            " Pad4",
-            " Pad5",
-            " Pad6",
-            " Pad7",
-            " Pad8",
-            " Pad9",
-            " F1",
-            " F2",
-            " F3",
-            " F4",
-            " F5",
-            " F6",
-            " F7",
-            " F8",
-            " F9",
-            " F10",
-            " F11",
-            " F12",
-            " F13",
-            " F14",
-            " F15",
-            " F16",
-            " F17",
-            " F18",
-            " F19",
-            " F20",
-            " F21",
-            " F22",
-            " F23",
-            " F24",
-            " HELP",
-            " HOME",
-            " PageUP",
-            " FwdDel",
-            " END",
-            " PageDOWN",
-            " NumLock",
-            " Insert",
-            " Pause",
-            " CapsLock"});
-			this.combKeys1.Location = new System.Drawing.Point(314, 80);
-			this.combKeys1.MinimumSize = new System.Drawing.Size(110, 0);
-			this.combKeys1.Name = "combKeys1";
-			this.combKeys1.Size = new System.Drawing.Size(133, 24);
-			this.combKeys1.TabIndex = 4;
-			// 
-			// combAEVersion1
-			// 
-			this.combAEVersion1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.combAEVersion1.FormattingEnabled = true;
-			this.combAEVersion1.Location = new System.Drawing.Point(28, 228);
-			this.combAEVersion1.MinimumSize = new System.Drawing.Size(100, 0);
-			this.combAEVersion1.Name = "combAEVersion1";
-			this.combAEVersion1.Size = new System.Drawing.Size(557, 20);
-			this.combAEVersion1.TabIndex = 5;
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(13, 46);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(67, 12);
+			this.label1.TabIndex = 5;
+			this.label1.Text = "Instailed AE";
 			// 
 			// Form1
 			// 
 			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(597, 389);
-			this.Controls.Add(this.combAEVersion1);
-			this.Controls.Add(this.combKeys1);
+			this.ClientSize = new System.Drawing.Size(644, 533);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.scriptShortCutPanel1);
+			this.Controls.Add(this.comboBox2);
+			this.Controls.Add(this.cmbInstailedAE);
 			this.Controls.Add(this.statusStrip1);
-			this.Controls.Add(this.button1);
-			this.Controls.Add(this.listBox1);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Form1";
@@ -397,10 +206,11 @@
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.StatusStrip statusStrip1;
-		private System.Windows.Forms.ListBox listBox1;
-		private System.Windows.Forms.Button button1;
-		private CombKeys combKeys1;
-		private CombAEVersion combAEVersion1;
+		private BRY.AEInfo aeInfo1;
+		private System.Windows.Forms.ComboBox cmbInstailedAE;
+		private System.Windows.Forms.ComboBox comboBox2;
+		private ScriptShortCutPanel scriptShortCutPanel1;
+		private System.Windows.Forms.Label label1;
 	}
 }
 

@@ -26,7 +26,8 @@ namespace AE_ScriptShortCut
 		public Form1()
 		{
 			InitializeComponent();
-			combKeys1.Text = "F10";
+			this.SetStyle(ControlStyles.DoubleBuffer, true);
+
 		}
 		/// <summary>
 		/// コントロールの初期化はこっちでやる
@@ -111,7 +112,7 @@ namespace AE_ScriptShortCut
 			{
 				foreach (string s in cmd)
 				{
-					listBox1.Items.Add(s);
+					//listBox1.Items.Add(s);
 				}
 			}
 		}
