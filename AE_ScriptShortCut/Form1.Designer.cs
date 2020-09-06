@@ -128,7 +128,6 @@
 			this.cmbInstailedAE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbInstailedAE.FormattingEnabled = true;
 			this.cmbInstailedAE.Items.AddRange(new object[] {
-            "CS6",
             "2020"});
 			this.cmbInstailedAE.Location = new System.Drawing.Point(86, 43);
 			this.cmbInstailedAE.Name = "cmbInstailedAE";
