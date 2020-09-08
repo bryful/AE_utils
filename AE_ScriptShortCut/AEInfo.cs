@@ -30,6 +30,7 @@ namespace BRY
 			{
 				m_InstailFolder = p;
 				m_Caption = p.Replace(@"C:\Program Files\Adobe\Adobe After Effects ", "");
+				if (m_Caption[0] != 'C') m_Caption = "CC " + m_Caption;
 			}
 			else
 			{
@@ -202,19 +203,15 @@ namespace BRY
 
 		private List<AEInfoItem> m_AEInfoItems = new List<AEInfoItem>();
 
-		private int m_SelectedIndex = -1;
-		public int SelectedIndex
+		private string m_SelectedAE = "";
+		public string SelectedAE
 		{
-			get { return m_SelectedIndex; }
+			get { return m_SelectedAE; }
 			set
 			{
-				if(m_AEInfoItems.Count>=value)
+				if (m_SelectedAE != value)
 				{
-					m_SelectedIndex = -1;
-				}
-				else
-				{
-					m_SelectedIndex = value;
+					m_SelectedAE = value;
 				}
 			}
 		}
@@ -323,6 +320,11 @@ namespace BRY
 					m_AEInfoItems.Add(ai);
 				}
 			}
+			if (m_CombInstailedAE != null)
+			{
+				m_CombInstailedAE.Items.Clear();
+				m_CombInstailedAE.Items.AddRange(Captions);
+			}
 		}
 		// ********************************************************************
 		private ComboBox m_CombInstailedAE = null;
@@ -343,7 +345,7 @@ namespace BRY
 		}
 		private void M_CombInstailedAE_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			this.SelectedIndex = m_CombInstailedAE.SelectedIndex;
+			m_SelectedAE = 
 		}
 		// ********************************************************************
 	}
