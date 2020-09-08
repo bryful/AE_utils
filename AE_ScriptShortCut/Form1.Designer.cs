@@ -54,7 +54,7 @@
             this.helpToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(644, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(665, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -117,9 +117,9 @@
 			// 
 			// statusStrip1
 			// 
-			this.statusStrip1.Location = new System.Drawing.Point(0, 511);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 522);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(644, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(665, 22);
 			this.statusStrip1.TabIndex = 1;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
@@ -151,7 +151,7 @@
 			this.scriptShortCutPanel1.AutoScroll = true;
 			this.scriptShortCutPanel1.Location = new System.Drawing.Point(12, 64);
 			this.scriptShortCutPanel1.Name = "scriptShortCutPanel1";
-			this.scriptShortCutPanel1.Size = new System.Drawing.Size(570, 444);
+			this.scriptShortCutPanel1.Size = new System.Drawing.Size(591, 455);
 			this.scriptShortCutPanel1.TabIndex = 4;
 			// 
 			// aeInfo1
@@ -173,7 +173,7 @@
 			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(644, 533);
+			this.ClientSize = new System.Drawing.Size(665, 544);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.scriptShortCutPanel1);
 			this.Controls.Add(this.comboBox2);

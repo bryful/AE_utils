@@ -1,0 +1,148 @@
+    //*************************
+    //パーティキュラーに使えるマスクに変換する
+    var parMaskExec = function(cameraLayer,charPosLayer,targetColLayer)
+    {
+        //*************************
+        var removeAllKey = function(p)
+        {
+            if (p.numKeys<=0) return;
+            do
+            {
+                p.removeKey(1);
+            }while(p.numKeys>0);
+        }
+        if ( (cameraLayer==null)||(charPosLayer==null)||(targetColLayer == null)) {
+            return;
+        }
+        //まずカメラとの距離を求める
+        //var camPos = cameraLayer.transform.position;
+        //var charPos = charPosLayer.transform.position;
+        var cmp = cameraLayer.containingComp;
+        var fr = cmp.frameRate;
+        var frames = Math.floor(cmp.duration * cmp.frameRate);
+
+        var times = [];
+        var camLen = [];
+        for ( var i=0; i<frames; i++)
+        {
+            var tm = i / fr;
+            var p0 = cameraLayer.property("ADBE Transform Group").property("ADBE Position").valueAtTime(tm,false);
+            var p1 = charPosLayer.property("ADBE Transform Group").property("ADBE Position").valueAtTime(tm,false);
+            times.push(tm);
+            var p = [];
+            p.push(0);
+            p.push(0);
+            p.push(Math.sqrt(Math.pow(p0[0] - p1[0],2)+Math.pow(p0[1] - p1[1],2)+Math.pow(p0[2] - p1[2],2)));
+            camLen.push(p);
+        }	
+        app.beginUndoGroup("中西あすか2");
+        //まずキーフレームの初期か
+        removeAllKey(targetColLayer.transform.anchorPoint);
+        removeAllKey(targetColLayer.transform.position);
+        removeAllKey(targetColLayer.transform.scale);
+        removeAllKey(targetColLayer.transform.orientation);
+        if (targetColLayer.threeDLayer == true){
+            removeAllKey(targetColLayer.transform.xRotation);
+            removeAllKey(targetColLayer.transform.yRotation);
+            removeAllKey(targetColLayer.transform.zRotation);
+        }else{
+            removeAllKey(targetColLayer.transform.rotation);
+        }
+
+        //null作成
+        var targetNull = cameraLayer.containingComp.layers.addNull();
+        targetNull.name = "スケールあわせ";
+        targetNull.source.name = targetNull.name;
+        targetNull.threeDLayer = true;
+        var pos2D = targetNull.property("ADBE Effect Parade").addProperty("ADBE Point Control");
+        pos2D.name = "pos2D";
+        var pos2Dp = pos2D.property("ADBE Point Control-0001");
+        if (pos2Dp.canSetExpression == true){
+            pos2Dp.expression = "thisLayer.toComp([0,0,0]);";
+        }
+
+        var rotNull = cameraLayer.containingComp.layers.addNull();
+        rotNull.name = "回転位置あわせ";
+        rotNull.source.name = rotNull.name;
+        rotNull.threeDLayer = true;
+
+        targetNull.parent = targetColLayer;
+        targetNull.transform.position.setValue([0,0,0]);
+
+        rotNull.parent = targetColLayer;
+        rotNull.transform.position.setValue([targetColLayer.width/2,targetColLayer.height/2,0]);
+        rotNull.transform.orientation.setValue([0,0,0]);
+        var pos3D = rotNull.property("ADBE Effect Parade").addProperty("ADBE Point3D Control");
+        pos3D.name = "pos3D";
+        var pos3Dp = pos3D.property("ADBE Point3D Control-0001");
+        if (pos3Dp.canSetExpression == true){
+            pos3Dp.expression = "thisLayer.toWorld([0,0,0]);";
+        }
+
+
+
+        //カメラにリンクして位置設定
+        targetColLayer.threeDLayer = true;
+        targetColLayer.parent = cameraLayer;
+        targetColLayer.transform.anchorPoint.setValue([targetColLayer.width/2,targetColLayer.height/2,0]);
+        targetColLayer.transform.orientation.setValue([0,0,0]);
+        targetColLayer.transform.xRotation.setValue(0);
+        targetColLayer.transform.yRotation.setValue(0);
+        targetColLayer.transform.zRotation.setValue(0);
+        targetColLayer.transform.scale.setValue([100,100,100]);
+
+
+        //位置を合わせる
+        targetColLayer.transform.position.setValuesAtTimes(times,camLen);
+
+        //スケールを計算
+        var times = [];
+        var scales = [];
+        for ( var i=0; i<frames; i++)
+        {
+            var tm = i / fr;
+            var p = targetNull.property("ADBE Effect Parade").property("pos2D").property("ADBE Point Control-0001").valueAtTime(tm,false);
+            var sz = ((cmp.width/2) - p[0])*2;
+            var sl = [];
+            sl.push( cmp.width*100/sz);
+            sl.push(sl[0]);
+            sl.push(sl[0]);
+
+            times.push(tm);
+            scales.push(sl);
+        }
+        targetColLayer.transform.scale.setValuesAtTimes(times,scales);
+        var times = [];
+        var positions = [];
+        var rots = [];
+        for ( var i=0; i<frames; i++)
+        {
+            var tm = i / fr;
+            var p = rotNull.property("ADBE Effect Parade").property("pos3D").property("ADBE Point3D Control-0001").valueAtTime(tm,false);
+            times.push(tm);
+            positions.push(p);
+        }
+        var tmBak = cmp.time;
+        for ( var i=0; i<frames; i++)
+        {
+            var tm = i / fr;
+            rotNull.parent = null;
+            cmp.time = tm;
+            rotNull.parent = targetColLayer;
+            rotNull.transform.position.setValue([targetColLayer.width/2,targetColLayer.height/2,0]);
+            rotNull.transform.orientation.setValue([0,0,0]);
+            rotNull.transform.xRotation.setValue(0);
+            rotNull.transform.yRotation.setValue(0);
+            rotNull.transform.zRotation.setValue(0);
+            rotNull.parent = null;
+            rots.push(rotNull.transform.orientation.value);
+        }
+        cmp.time = tmBak;
+        targetColLayer.parent = null;
+        targetColLayer.transform.position.setValuesAtTimes(times,positions);
+        targetColLayer.transform.orientation.setValuesAtTimes(times,rots);
+
+        targetNull.source.remove();
+        rotNull.source.remove();
+        app.endUndoGroup();
+    }

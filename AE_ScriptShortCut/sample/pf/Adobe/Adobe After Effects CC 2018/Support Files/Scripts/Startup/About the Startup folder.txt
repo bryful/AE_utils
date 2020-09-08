@@ -1,0 +1,7 @@
+Scripts in the Startup folder are executed when the application starts. They are executed after the application is initialized, but before all of the AEGPs and GPs are initialized.
+
+You can add more scripts to the Startup folder.
+
+Scripting shares a global environment. Therefore, any script that you execute at startup can define functions and properties that are available to all scripts. Defining a function in a startup script will make it available to all other scripts.
+
+You can also embed properties in existing object (like the app object) to extend the application for other scripts.

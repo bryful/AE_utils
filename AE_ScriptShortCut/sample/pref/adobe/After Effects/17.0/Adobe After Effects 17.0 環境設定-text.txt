@@ -1,0 +1,51 @@
+# Text File Version 1.1
+# After Effects Preferences
+
+["Text Paragraph Sheet"]
+	"End Indent" = "0.000000"
+	"Every-line Composer" = 00
+	"First Line Indent" = "0.000000"
+	"Justification" = "Center"
+	"Leading Type" = "Top-to-Top Leading"
+	"Paragraph Direction" = 00
+	"Roman Hanging Punctuation" = 00
+	"Space After" = "0.000000"
+	"Space Before" = "0.000000"
+	"Start Indent" = "0.000000"
+
+["Text Style Sheet"]
+	"Auto Kerning Type" = "Metric Auto Kerning"
+	"Auto Leading" = 00
+	"Baseline Direction" = "Normal"
+	"Baseline Option" = "Normal"
+	"Baseline Shift" = "0.000000"
+	"Caps Option" = "Normal"
+	"Fill Blue" = "0.000000"
+	"Fill Green" = "0.000000"
+	"Fill Red" = "0.000000"
+	"Font Family Name" = "FTT-RodinHimawari UB"
+	"Font PostScript Name" = "TT_RodinHimawari-UB"
+	"Font Script" = "1"
+	"Font Style Name" = "Regular"
+	"Font Technology" = "1"
+	"Hindi Digits" = "0"
+	"Horizontal Scale" = "100"
+	"Leading" = "100.000000"
+	"Ligatures" = 00
+	"Render Fill" = 01
+	"Render Stroke" = 01
+	"Size" = "64.000000"
+	"Stroke Blue" = "1.000000"
+	"Stroke Green" = "1.000000"
+	"Stroke Over Fill" = 00
+	"Stroke Red" = "1.000000"
+	"Stroke Width" = "8.000000"
+	"Synthetic Bold" = 00
+	"Synthetic Italic" = 00
+	"Tracking" = "93"
+	"Tsume" = "0.000000"
+	"Vertical Scale" = "100"
+
+["Text and Fonts"]
+	"Smart Quotes" = 01
+

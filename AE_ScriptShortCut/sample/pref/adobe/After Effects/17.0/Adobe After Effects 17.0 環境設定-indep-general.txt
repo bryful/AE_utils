@@ -1,0 +1,283 @@
+# Text File Version 1.1
+# After Effects Preferences
+
+["After Effects Sticky Prefs"]
+	"AE Last Project Settings" = "<?xml version="22"1.0"22" encoding="22"UTF-8"22"?>"0A"<AfterEffectsProject xmlns"\
+		"="22"http://www.adobe.com/products/aftereffects"22" majorVersion="22"1"22" min"\
+		"orVersion="22"0"22">"0A09"<svap bdata="22"0b082e10"22"/>"0A09"<head bdata="22"0"\
+		"05d000d0b082e10800000000000000000000000"22"/>"0A09"<nhed bdata="22"00000000000"\
+		"00005010100001e100100000003a4000000000000000000000000"22"/>"0A09"<nnhd bdata="22\
+		"0000000000000005010100000000001e0000001001000000000003a40000000000000000000000"\
+		"00"22"/>"0A09"<adfr bdata="22"40e7700000000000"22"/>"0A09"<qtlg bdata="22"00"22\
+		"/>"0A09"<acer bdata="22"01"22"/>"0A09"<CPPl>"0A09"</CPPl>"0A09"<cpid bdata="22\
+		"ffffffffffffffffffffffffffffffff"22"/>"0A09"<dwga bdata="22"00000000"22"/>"0A09\
+		"<sfnm>"0A0909"<string>solid</string>"0A09"</sfnm>"0A09"<gpuG>"0A0909"<string>f"\
+		"33089e2-1ede-47c1-8a9e-b232bb1cc1a4</string>"0A09"</gpuG>"0A09"<ExEn>"0A0909"<"\
+		"string>extendscript</string>"0A09"</ExEn>"0A"</AfterEffectsProject>"0A
+
+["Audio Settings Preference Section"]
+	"Audio Device Channel Map" = FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+	"Audio Device Class ID" = "1835885856"
+	"Audio Hardware IO Settings" = "{"22"abe.io.audio.classes"22":[{"22"abe.io.audio.asio.inputdevicename"22":"2222","\
+		""22"abe.io.audio.asio.inputdeviceuid"22":"2222","22"abe.io.audio.asio.ioblocks"\
+		"ize"22":512,"22"abe.io.audio.asio.masterdevice"22":false,"22"abe.io.audio.asio"\
+		".max.ioblocksize"22":0,"22"abe.io.audio.asio.min.ioblocksize"22":0,"22"abe.io."\
+		"audio.asio.outputdevicename"22":"2222","22"abe.io.audio.asio.outputdeviceuid"22\
+		":"2222","22"abe.io.audio.asio.samplerate"22":44100,"22"abe.io.audio.asio.srval"\
+		"ue"22":[],"22"abe.io.audio.class.default"22":false,"22"abe.io.audio.class.id"22\
+		":1634953583},{"22"abe.io.audio.class.default"22":true,"22"abe.io.audio.class.i"\
+		"d"22":1835885856,"22"abe.io.audio.mme.inputdevicename"22":"22E382B9E38394E383BC\
+		E382ABE383BC" (Realtek High Definition Audio)"22","22"abe.io.audio.mme.inputdev"\
+		"iceuid"22":"22"11540622-DD0E-4BD5-AA09-4F2B9C602454"22","22"abe.io.audio.mme.l"\
+		"atency"22":200,"22"abe.io.audio.mme.masterdevice"22":false,"22"abe.io.audio.mm"\
+		"e.outputdevicename"22":"22E382B9E38394E383BCE382ABE383BC" (Realtek High Defini"\
+		"tion Audio)"22","22"abe.io.audio.mme.outputdeviceuid"22":"22"11540622-DD0E-4BD"\
+		"5-AA09-4F2B9C602454"22","22"abe.io.audio.mme.samplerate"22":48000}],"22"abe.io"\
+		".audio.outputonly"22":true,"22"abe.io.audio.userdata"22":{"22"abe.io.audio.Def"\
+		"aultDeviceClassID"22":{"22"type"22":"22"std::uint32_t"22","22"value"22":183588"\
+		"5856},"22"abe.io.audio.UseDocumentSamplerate"22":{"22"type"22":"22"bool"22","22\
+		"value"22":false}}}"
+	"Link Blend and Blur of Layers and Composition" = 01
+	"Mute Audio When Preview Not Realtime v2" = 00
+	"unused_variable" = 00
+
+["Auto Reload Footage On Application Focus"]
+	"Audio Only Footage" = 01
+	"Enabled" = 01
+	"Image Sequence Footage" = 01
+	"Still Footage" = 01
+
+["Auto Save"]
+	"Auto Save Folder" = "C:\Users\did-furuhashi\Documents\Adobe\After Effects"
+	"Auto Save Interval" = "20"
+	"Auto Save Max Project Vers" = "5"
+	"Enable Auto Save RQ2" = "1"
+	"Enable Auto Save3" = "1"
+	"Save To Custom Location" = "0"
+
+["Bounding Box"]
+	"Show Sub Layers v2" = 01
+
+["Caches"]
+	"post expression cache max size" = "100000"
+	"reject names cache max" = "100000"
+
+["General Section"]
+	"Create New Layers At Time Zero" = 01
+	"Experimental Fast Project Loading" = 00
+	"Expression Timeout Time (seconds)" = "20"
+	"Hide Missing Font Dialog" = 00
+	"Levels of Undo v2" = "99"
+	"Path Point and Handle Radius (pixels)" = "5"
+	"Pref_SHOW_POST_EXPRESSION_GRAPH_BY_DEFAULT_v2" = 00
+	"Rectified Waveforms" = 01
+	"Shape Layer Center Anchor Point" = 01
+	"Show separate expression error dialog for each missing item" = 01
+	"Synchronize Time" = 01
+
+["Grids And Guides v2"]
+	"4:3 Action Safe Margin % (0-100)" = "32.500000"
+	"4:3 Title Safe Margin % (0-100)" = "40.000000"
+	"Action Safe Margin % (0-100)" = "10.000000"
+	"Title Safe Margin % (0-100)" = "20.000000"
+
+["Hardware Accelerated Viewer"]
+	"DebugShowHWAccelMarkers" = 00
+
+["Hardware Accelerated Viewer 2"]
+	"Enabled" = "1"
+
+["Import Options Preference Section"]
+	"Import Options CineWare Memory Auto" = 00
+	"Import Options CineWare Memory Reserve (in K)" = "0"
+	"Import Options Default Import Type" = "2"
+	"Import Options Default NTSC Dropframe" = 00
+	"Import Options Default Sequence FPS" = "24.000000"
+	"Import Options Default Unlabeled Alpha" = "3"
+	"Import Options Verify Individual Sequence Files" = 00
+	"Report Missing Frames From Sequences" = 01
+
+["Item Window Settings"]
+	"Use Label Color For Paths and Handles" = 01
+	"Use Label Color to colorize Tabs" = 01
+	"Viewer Odd Color Management Quality (0=low, 1=high except for cached preview, 2="\
+		"high)" = "2"
+	"Viewer Odd Zoom Quality v2 ( 0=low, 1=high except for cached preview, 2=high )" = "1"
+
+["Label Preference Color Section 5"]
+	"Label Color ID 2 # 1" = FFB5"88"
+	"Label Color ID 2 # 10" = FF8E","9A
+	"Label Color ID 2 # 11" = FFE8920D
+	"Label Color ID 2 # 12" = FF7F"E*"
+	"Label Color ID 2 # 13" = FFF4"m"D6
+	"Label Color ID 2 # 14" = FF"="A2A5
+	"Label Color ID 2 # 15" = FFA896"w"
+	"Label Color ID 2 # 16" = FF1E"@"1E
+	"Label Color ID 2 # 2" = FFE4D8"L"
+	"Label Color ID 2 # 3" = FFA9CBC7
+	"Label Color ID 2 # 4" = FFE5BCC9
+	"Label Color ID 2 # 5" = FFA9A9CA
+	"Label Color ID 2 # 6" = FFE7C19E
+	"Label Color ID 2 # 7" = FFB3C7B3
+	"Label Color ID 2 # 8" = FF"g}"E0
+	"Label Color ID 2 # 9" = FF"J"A4"L"
+
+["Label Preference Indices Section 5"]
+	"Adjustment Label Index 2" = "5"
+	"Audio Label Index 2" = "7"
+	"Camera Label Index 2" = "4"
+	"Comp Label Index 2" = "15"
+	"Folder Label Index 2" = "2"
+	"Light Label Index 2" = "6"
+	"Null Label Index" = "1"
+	"Shape Label Index 2" = "8"
+	"Solid Label Index 2" = "1"
+	"Still Label Index 2" = "5"
+	"Text Label Index" = "1"
+	"Video Label Index 2" = "3"
+
+["Label Preference Text Section 5"]
+	"Label Text ID 2 # 1" = 838C83"b"83"h"
+	"Label Text ID 2 # 10" = 83"p"81"["83"v"838B
+	"Label Text ID 2 # 11" = 83"I"838C839383"W"
+	"Label Text ID 2 # 12" = 83"u"838983"E"8393
+	"Label Text ID 2 # 13" = 83"t"83"N"83"V"83"A"83"s"839383"N"
+	"Label Text ID 2 # 14" = 83"V"83"A"8393
+	"Label Text ID 2 # 15" = 83"T"839383"h"83"X"83"g"81"["8393
+	"Label Text ID 2 # 16" = 83"_"81"["83"N"83"O"838A81"["8393
+	"Label Text ID 2 # 2" = 83"C"83"G"838D81"["
+	"Label Text ID 2 # 3" = 83"A"83"N"83"A"
+	"Label Text ID 2 # 4" = 83"s"839383"N"
+	"Label Text ID 2 # 5" = 838983"x"839383"_"81"["
+	"Label Text ID 2 # 6" = 83"s"81"["83"`"
+	"Label Text ID 2 # 7" = 83"V"81"["83"t"83"H"81"["8380
+	"Label Text ID 2 # 8" = 83"u"838B81"["
+	"Label Text ID 2 # 9" = 83"O"838A81"["8393
+
+["Label Preference Text Section 7"]
+	"Label Text ID 2 # 1" = E383ACE38383E38389
+	"Label Text ID 2 # 10" = E38391E383BCE38397E383AB
+	"Label Text ID 2 # 11" = E382AAE383ACE383B3E382B8
+	"Label Text ID 2 # 12" = E38396E383A9E382A6E383B3
+	"Label Text ID 2 # 13" = E38395E382AFE382B7E382A2E38394E383B3E382AF
+	"Label Text ID 2 # 14" = E382B7E382A2E383B3
+	"Label Text ID 2 # 15" = E382B5E383B3E38389E382B9E38388E383BCE383B3
+	"Label Text ID 2 # 16" = E38380E383BCE382AFE382B0E383AAE383BCE383B3
+	"Label Text ID 2 # 2" = E382A4E382A8E383ADE383BC
+	"Label Text ID 2 # 3" = E382A2E382AFE382A2
+	"Label Text ID 2 # 4" = E38394E383B3E382AF
+	"Label Text ID 2 # 5" = E383A9E38399E383B3E38380E383BC
+	"Label Text ID 2 # 6" = E38394E383BCE38381
+	"Label Text ID 2 # 7" = E382B7E383BCE38395E382A9E383BCE383A0
+	"Label Text ID 2 # 8" = E38396E383ABE383BC
+	"Label Text ID 2 # 9" = E382B0E383AAE383BCE383B3
+
+["Main Pref Section v2"]
+	"Adapt layer-opening behavor to tool" = "1"
+	"Clear Disk Caches Across Versions" = 01
+	"Comp layers open layer panel" = "0"
+	"DynamicLink Server Follows Project Versions" = "0"
+	"Enable Gradients" = 01
+	"Footage layers open layer panel" = "1"
+	"Pref_DEFAULT_SP_INTERP_LIN" = 01
+	"Pref_DEFAULT_STILL_OUT_POINT v2" = "0/0"
+	"Pref_GRID_COLOR" = "0xff008000"
+	"Pref_GRID_PIX_PER_DIV" = "80.000000"
+	"Pref_GRID_STYLE" = "0"
+	"Pref_GRID_SUB_PER_DIV" = "4.000000"
+	"Pref_GUIDE_COLOR" = "0xff8080ff"
+	"Pref_GUIDE_STYLE" = "0"
+	"Pref_JAVASCRIPT_DEBUGGER" = "0"
+	"Pref_SET_QUAL_RECURSIVELY" = 01
+	"Pref_SET_RES_RECURSIVELY" = 01
+	"Pref_TOOL_TIPS" = 01
+	"Pref_USE_COMPACT_EXPRS" = 01
+	"Pref_USE_SMART_MASK" = 01
+	"Use Adobe Color Picker" = "1"
+	"User Interface Brightness (4) [0.0..1.0]" = "0.500000"
+
+["Mask Colors"]
+	"Cycle Mask Label Colors" = 01
+	"Use Contrasting Color For Mask Path Color Choices (2 - 15)" = "5"
+	"Use Contrasting Color For Mask Path Comparison In LAB Color (false uses RGB)" = 00
+	"Use Contrasting Color For Mask Path Enabled" = 01
+	"Use Contrasting Color For Mask Path EyeDropper Sample Size" = "4"
+
+["Max FPS"]
+	"Max FPS Framerate" = "999"
+
+["Metadata"]
+	"CreateLayerMarkersFromFootageXMP" = 01
+
+["Misc Section"]
+	"Allow writing straight alpha into EXR" = 00
+	"Expression Error Warning Banner Collapsed" = "1"
+	"Import Dialog: Create Comp" = 00
+	"Play sound when render finishes" = "1"
+	"Show Expression Error Warning Banner" = "1"
+	"Show Shy Lines" = 01
+	"Trim nested GUID request to Comp Duration" = 01
+	"UI Brightness Slider Affects Labels" = 00
+
+["Pref_SUI_PANEL_USES_LEGACY_SKIN"]
+	"Adobe Scripting-AE_RemapExceed.jsx" = 00
+	"Adobe Scripting-Calc.jsx" = 00
+	"Adobe Scripting-DEBUG.jsx" = 00
+	"Adobe Scripting-ShapeAssist.jsx" = 00
+	"Adobe Scripting-Shape"E4BF9DE5AD98".jsx" = 00
+	"Adobe Scripting-_"E38395E38383E38386E383BCE382B8E38292E5A489E68F9B".jsx" = 00
+	"Adobe Scripting-_"E38395E38383E38386E383BCE382B8E7AEA1E79086".jsx" = 00
+	"Adobe Scripting-_"E383ACE382A4E383A4E5908DE38292E7BDAEE68F9B".jsx" = 00
+	"Adobe Scripting-_"E383ACE382A4E383A4E7AEA1E79086".jsx" = 00
+	"Adobe Scripting-addShape.jsx" = 00
+	"Adobe Scripting-getMask.jsx" = 00
+	"Adobe Scripting-pname.jsx" = 00
+	"Adobe Scripting-shapeExpression.jsx" = 00
+	"Adobe Scripting-vectorRectResize.jsx" = 00
+	"Adobe Scripting-vectorResize.jsx" = 00
+	"Adobe Scripting-"E38184E381A3E381B1E38184E9858DE7BDAE".jsx" = 00
+	"Adobe Scripting-"E382A2E382A4E382ABE38384"Root"E3839EE383BCE382ABE383BCE38292E5BA\
+		8AE381ABE59BBAE5AE9A".jsx" = 00
+	"Adobe Scripting-"E382A2E382A4E382ABE38384"_"E4BD9CE6A5AD".jsx" = 00
+	"Adobe Scripting-"E382A2E382A4E382ABE38384E382ABE383A1E383A9E381AEE382B9E382B1E383\
+		BCE383ABE38292E8AABFE695B4".jsx" = 00
+	"Adobe Scripting-"E382A2E382A4E382ABE38384E382ABE383A1E383A9E382A8E382AFE382B9E383\
+		97E383ACE38383E382B7E383A7E383B3E383AAE383B3E382AF".jsx" = 00
+	"Adobe Scripting-"E382A2E382A4E382ABE38384E382ABE383A1E383A9E7B5B1E59088".jsx" = 00
+	"Adobe Scripting-"E382A2E382A4E382ABE38384E3839DE382B8E382B7E383A7E383B3E588B6E5BE\
+		A1".jsx" = 00
+	"Adobe Scripting-"E382A2E382A4E382ABE38384E3839EE382B9E382AFE383ACE382A4E383A4E383\
+		BCE4BD9CE68890"(Particuler)2.jsx" = 00
+	"Adobe Scripting-"E382A2E382A4E382ABE38384E3839EE383BCE382ABE383BCE38292E5BA8AE381\
+		ABE59BBAE5AE9A".jsx" = 00
+	"Adobe Scripting-"E382A2E382A4E382ABE38384E3839EE383BCE382ABE383BCE5BA8AE381ABE59B\
+		BAE5AE9A".jsx" = 00
+	"Adobe Scripting-"E382A2E382A4E382ABE38384E4BD9CE6A5AD".jsx" = 00
+	"Adobe Scripting-"E382B7E382A7E382A4E38397E381ABE38197E3819FE38386E382ADE382B9E383\
+		88E381AEE587A6E79086".jsx" = 00
+	"Adobe Scripting-"E382B7E382A7E382A4E38397E38391E382B9E381AEE7B7A8E99B86".jsx" = 00
+	"Adobe Scripting-"E382B9E382AFE383AAE38397E38388E4BD9CE68890E382A2E382B7E382B9E382\
+		BFE383B3E38388".jsx" = 00
+	"Adobe Scripting-"E7B0A1E58D98E383A1E3838BE383A5E383BC".jsx" = 00
+
+["Split Layer"]
+	"Grow Layer Stack Upwards" = 01
+
+["Spring-Loaded Project Panel Folders"]
+	"Allow Closing Folders During Drag" = 00
+	"Close Opened Folders After Successful Drop" = 00
+	"Delay before springing (seconds)" = "0.700000"
+	"Enabled" = 01
+
+["Template Project"]
+	"Enabled" = 00
+	"Location" = ""
+	"New Project Fills Folder" = E5A197E3828AE381AEE382B9E382BFE382A4E383AB
+	"New Project Solids Folder" = "solid"
+
+["Tool Palette Settings v4"]
+	"Pen Shortcut Cycles All Tools" = "0"
+
+["Win32 Video Preview Pref Section"]
+	"Transmit Drop Frames Above" = "1"
+

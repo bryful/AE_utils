@@ -1,0 +1,35 @@
+ //*************************
+    var floorExec = function(lyr)
+    {
+        //新しいレイヤを作る
+        var newLayer = lyr.containingComp.layers.addNull();
+        var nameOrg = lyr.name;
+        var name = lyr.name.replace("root","floor");
+        if (name == nameOrg) name + "_floor"; 
+        newLayer.name = name;
+        newLayer.threeDLayer = true;
+        newLayer.moveBefore(lyr);
+
+        //制御エフェクト追加
+        var eg = newLayer.property("ADBE Effect Parade");
+        var fx = eg.addProperty("ADBE Slider Control");
+        fx.name = "posY";
+        fx.enabled = false;
+
+        var times = [];
+        var values = [];
+        
+        var pos = lyr.transform.position;
+        for ( var i=1;i<=pos.numKeys;i++)
+        {
+            times.push(pos.keyTime(i));
+            var p = pos.keyValue(i);
+            p[1] = 0;
+            values.push(p);
+        }
+        var npos = newLayer.transform.position;
+        npos.setValuesAtTimes(times,values);
+        npos.expression = "value + [0,effect(\"posY\")(1),0]";
+        npos.expressionEnabled = false;
+        
+    }

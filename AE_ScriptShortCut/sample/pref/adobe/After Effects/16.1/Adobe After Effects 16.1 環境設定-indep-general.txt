@@ -1,0 +1,76 @@
+# Text File Version 1.1
+# After Effects Preferences
+
+["After Effects Sticky Prefs"]
+	"AE Last Project Settings" = ""
+
+["Audio Settings Preference Section"]
+	"Audio Hardware IO Settings" = ""
+	"unused_variable" = 00
+
+["Bounding Box"]
+	"Show Sub Layers v2" = 01
+
+["Caches"]
+	"post expression cache max size" = "100000"
+
+["General Section"]
+	"Levels of Undo v2" = "99"
+	"Synchronize Time" = 01
+
+["Hardware Accelerated Viewer 2"]
+	"Enabled" = "1"
+
+["Import Options Preference Section"]
+	"Import Options Default NTSC Dropframe" = 01
+	"Import Options Default Sequence FPS" = "30.000000"
+
+["Item Window Settings"]
+	"Use Label Color to colorize Tabs" = 01
+
+["Label Preference Color Section 5"]
+	"Label Color ID 2 # 15" = FFA896"w"
+
+["Label Preference Indices Section 5"]
+	"Adjustment Label Index 2" = "5"
+	"Audio Label Index 2" = "7"
+	"Camera Label Index 2" = "4"
+	"Comp Label Index 2" = "15"
+	"Folder Label Index 2" = "2"
+	"Light Label Index 2" = "6"
+	"Null Label Index" = "1"
+	"Shape Label Index 2" = "8"
+	"Solid Label Index 2" = "1"
+	"Still Label Index 2" = "5"
+	"Text Label Index" = "1"
+	"Video Label Index 2" = "3"
+
+["Main Pref Section v2"]
+	"Enable Gradients" = 01
+	"Pref_DEFAULT_SP_INTERP_LIN" = 00
+	"Pref_DEFAULT_STILL_OUT_POINT v2" = "0/0"
+	"Pref_GRID_COLOR" = "0xff008000"
+	"Pref_GRID_PIX_PER_DIV" = "80.000000"
+	"Pref_GRID_STYLE" = "0"
+	"Pref_GRID_SUB_PER_DIV" = "4.000000"
+	"Pref_GUIDE_COLOR" = "0xff8080ff"
+	"Pref_GUIDE_STYLE" = "0"
+	"Pref_JAVASCRIPT_DEBUGGER" = "0"
+	"Pref_TOOL_TIPS" = 01
+	"Pref_USE_SMART_MASK" = 01
+	"User Interface Brightness (4) [0.0..1.0]" = "0.000000"
+
+["Max FPS"]
+	"Max FPS Framerate" = "999"
+
+["Misc Section"]
+	"UI Brightness Slider Affects Labels" = 00
+
+["Template Project"]
+	"Enabled" = 00
+	"New Project Fills Folder" = E5A197E3828AE381AEE382B9E382BFE382A4E383AB
+	"New Project Solids Folder" = E5B9B3E99DA2
+
+["Tool Palette Settings v4"]
+	"Pen Shortcut Cycles All Tools" = "0"
+

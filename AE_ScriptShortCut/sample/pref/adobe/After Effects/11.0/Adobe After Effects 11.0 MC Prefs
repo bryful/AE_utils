@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PremiereData Version="3">
+	<Preferences ObjectRef="1"/>
+	<Preferences ObjectID="1" ClassID="f06902ec-e637-4744-a586-c26202143e36" Version="30">
+		<Properties Version="1">
+			<ML.Audio.ChannelMap.Output.Stereo.e67f91fa_45_8e4a_45_2df7_45_0a78_45_735b00000056>1</ML.Audio.ChannelMap.Output.Stereo.e67f91fa_45_8e4a_45_2df7_45_0a78_45_735b00000056>
+			<ML.Audio.ChannelMap.Output.Stereo.b0d1bbd2_45_1e81_45_8919_45_6d7f_45_083400000056>0</ML.Audio.ChannelMap.Output.Stereo.b0d1bbd2_45_1e81_45_8919_45_6d7f_45_083400000056>
+			<ML.Audio.ASIOHost.DriverName>After Effects WDM Sound</ML.Audio.ASIOHost.DriverName>
+			<BE.Prefs.DefaultSourceChannelMapping>3</BE.Prefs.DefaultSourceChannelMapping>
+			<BE.Prefs.Audio.MixdownType>3</BE.Prefs.Audio.MixdownType>
+			<BE.Prefs.ScratchDisks.FirstDVDEncodingFolder>SameAsProject</BE.Prefs.ScratchDisks.FirstDVDEncodingFolder>
+			<BE.Prefs.ScratchDisks.FirstProxyFolder>SameAsProject</BE.Prefs.ScratchDisks.FirstProxyFolder>
+			<BE.Prefs.ScratchDisks.FirstAudioPreviewFolder>SameAsProject</BE.Prefs.ScratchDisks.FirstAudioPreviewFolder>
+			<BE.Prefs.ScratchDisks.FirstVideoPreviewFolder>SameAsProject</BE.Prefs.ScratchDisks.FirstVideoPreviewFolder>
+			<BE.Prefs.ScratchDisks.FirstAudioCaptureFolder>SameAsProject</BE.Prefs.ScratchDisks.FirstAudioCaptureFolder>
+			<BE.Prefs.ScratchDisks.FirstVideoCaptureFolder>SameAsProject</BE.Prefs.ScratchDisks.FirstVideoCaptureFolder>
+		</Properties>
+	</Preferences>
+</PremiereData>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PremiereData Version="3">
+	<Preferences ObjectRef="1"/>
+	<Preferences ObjectID="1" ClassID="f06902ec-e637-4744-a586-c26202143e36" Version="30">
+		<Properties Version="1">
+			<ATE.Shape.MiterLimit>2.5</ATE.Shape.MiterLimit>
+			<ATE.Shape.LineCap>0</ATE.Shape.LineCap>
+			<ATE.Shape.LineJoin>0</ATE.Shape.LineJoin>
+			<ATE.Text.MiterLimit>2.5</ATE.Text.MiterLimit>
+			<ATE.Text.LineCap>0</ATE.Text.LineCap>
+			<ATE.Text.LineJoin>0</ATE.Text.LineJoin>
+			<BE.Prefs.Multicam.TransmitGridView>false</BE.Prefs.Multicam.TransmitGridView>
+			<Project.Prefs.Enableh264Acceleration>true</Project.Prefs.Enableh264Acceleration>
+			<BE.Prefs.DefaultSourceChannelMapping>3</BE.Prefs.DefaultSourceChannelMapping>
+			<BE.Prefs.Audio.MixdownType>3</BE.Prefs.Audio.MixdownType>
+			<BE.Prefs.ScratchDisks.FirstDVDEncodingFolder>SameAsProject</BE.Prefs.ScratchDisks.FirstDVDEncodingFolder>
+			<BE.Prefs.ScratchDisks.FirstAudioPreviewFolder>SameAsProject</BE.Prefs.ScratchDisks.FirstAudioPreviewFolder>
+			<BE.Prefs.ScratchDisks.FirstVideoPreviewFolder>SameAsProject</BE.Prefs.ScratchDisks.FirstVideoPreviewFolder>
+			<BE.Prefs.ScratchDisks.FirstAudioCaptureFolder>SameAsProject</BE.Prefs.ScratchDisks.FirstAudioCaptureFolder>
+			<BE.Prefs.ScratchDisks.FirstVideoCaptureFolder>SameAsProject</BE.Prefs.ScratchDisks.FirstVideoCaptureFolder>
+			<TransmitEnabledKey>true</TransmitEnabledKey>
+			<TransmitSerializedDataC_58__92_Program_32_Files_92_Adobe_92_Adobe_32_After_32_Effects_32_2020_92_Support_32_Files_92__40_Media_32_Core_32_plug_45_ins_41__92_Common_92_TransmitFullScreen.prm0EnabledVideo>true</TransmitSerializedDataC_58__92_Program_32_Files_92_Adobe_92_Adobe_32_After_32_Effects_32_2020_92_Support_32_Files_92__40_Media_32_Core_32_plug_45_ins_41__92_Common_92_TransmitFullScreen.prm0EnabledVideo>
+			<TransmitSerializedDataC_58__92_Program_32_Files_92_Adobe_92_Adobe_32_After_32_Effects_32_2020_92_Support_32_Files_92__40_Media_32_Core_32_plug_45_ins_41__92_Common_92_TransmitScopes.prm0 Encoding="base64" Checksum="3486502671">AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEBAQUAAAAAAAAAAA==</TransmitSerializedDataC_58__92_Program_32_Files_92_Adobe_92_Adobe_32_After_32_Effects_32_2020_92_Support_32_Files_92__40_Media_32_Core_32_plug_45_ins_41__92_Common_92_TransmitScopes.prm0>
+		</Properties>
+	</Preferences>
+</PremiereData>

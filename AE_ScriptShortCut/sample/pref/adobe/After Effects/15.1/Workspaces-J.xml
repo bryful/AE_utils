@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<prop.map version='4'>
+<prop.list>
+<prop.pair>
+<key>BuiltIns</key>
+<array>
+<array.type><ustring/></array.type>
+<ustring>デフォルト</ustring>
+<ustring>標準</ustring>
+<ustring>小さい画面</ustring>
+<ustring>ライブラリ</ustring>
+<ustring>すべてのパネル</ustring>
+<ustring>アニメーション</ustring>
+<ustring>エッセンシャルグラフィックス</ustring>
+<ustring>カラー</ustring>
+<ustring>エフェクト</ustring>
+<ustring>最小構成</ustring>
+<ustring>ペイント</ustring>
+<ustring>テキスト</ustring>
+<ustring>モーショントラッキング</ustring>
+<ustring>ドッキングなし</ustring>
+</array>
+</prop.pair>
+</prop.list>
+</prop.map>
