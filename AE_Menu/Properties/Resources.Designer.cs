@@ -59,5 +59,35 @@ namespace AE_Menu.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   (function(me){
+        ///	//----------------------------------
+        ///	// メニューに表示されるタイトル
+        ///	var scriptName = &quot;$Title&quot;;
+        ///	//----------------------------------
+        ///	//読み込むフォルダ
+        ///	var cmdItemsPathBase = &quot;$BaseFolder&quot;;
+        ///	//読み込むスクリプト等
+        ///	var cmdItemsPath =[
+        ///$Items
+        ///	];
+        ///	// アイコンサイズ
+        ///	var iconWidth = $IconWidth; 
+        ///	var iconHeight = $IconHeight; 
+        ///
+        ///	//----------------------------------
+        ///	//prototype登録
+        ///	String.prototype.trim = function(){
+        ///		if (this==&quot;&quot; ) return &quot;&quot;
+        ///		else return this.replace(/[\r\n]+$|^\s+|\s+$/g, &quot;&quot;);
+        ///	}
+        ///	Strin [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string JSX {
+            get {
+                return ResourceManager.GetString("JSX", resourceCulture);
+            }
+        }
     }
 }

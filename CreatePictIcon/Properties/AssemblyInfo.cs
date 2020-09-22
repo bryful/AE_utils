@@ -3,31 +3,31 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
-// アセンブリに関連付けられている情報を変更するには、
-// これらの属性値を変更してください。
-[assembly: AssemblyTitle("AE_Menu")]
-[assembly: AssemblyDescription("アプリのスケルトン")]
+// 制御されます。アセンブリに関連付けられている情報を変更するには、
+// これらの属性値を変更します。
+[assembly: AssemblyTitle("CreatePictIcon")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("bry-ful")]
-[assembly: AssemblyProduct("AE_Menu")]
-[assembly: AssemblyCopyright("Copyright © bry-ful 2019")]
+[assembly: AssemblyCompany("HP Inc.")]
+[assembly: AssemblyProduct("CreatePictIcon")]
+[assembly: AssemblyCopyright("Copyright © HP Inc. 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // ComVisible を false に設定すると、このアセンブリ内の型は COM コンポーネントから
 // 参照できなくなります。COM からこのアセンブリ内の型にアクセスする必要がある場合は、
-// その型の ComVisible 属性を true に設定してください。
+// その型の ComVisible 属性を true に設定します。
 [assembly: ComVisible(false)]
 
 // このプロジェクトが COM に公開される場合、次の GUID が typelib の ID になります
-[assembly: Guid("7c50a9e5-657a-49c0-adef-0596ca2dac1b")]
+[assembly: Guid("3af1bead-600d-4aea-a83e-f0953042e6e9")]
 
 // アセンブリのバージョン情報は次の 4 つの値で構成されています:
 //
 //      メジャー バージョン
 //      マイナー バージョン
 //      ビルド番号
-//      Revision
+//      リビジョン
 //
 // すべての値を指定するか、次を使用してビルド番号とリビジョン番号を既定に設定できます
 // 既定値にすることができます:

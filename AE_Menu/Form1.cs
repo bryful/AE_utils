@@ -19,6 +19,7 @@ namespace AE_Menu
 {
 	public partial class Form1 : Form
 	{
+		private EditPalette m_EditPalette = null;
 		//-------------------------------------------------------------
 		/// <summary>
 		/// コンストラクタ
@@ -27,6 +28,8 @@ namespace AE_Menu
 		{
 			InitializeComponent();
 
+			this.Text = iconButtonList1.MenuName;
+
 		}
 		/// <summary>
 		/// コントロールの初期化はこっちでやる
@@ -34,7 +37,9 @@ namespace AE_Menu
 		protected override void InitLayout()
 		{
 			base.InitLayout();
+
 		}
+
 		//-------------------------------------------------------------
 		/// <summary>
 		/// フォーム作成時に呼ばれる
@@ -52,6 +57,36 @@ namespace AE_Menu
 				//if (ok) this.Size = sz;
 				Point p = pref.GetPoint("Point", out ok);
 				if (ok) this.Location = p;
+
+				Size sz = pref.GetSize("ButtonSize", out ok);
+				if (ok) iconButtonList1.ButtonSize = sz;
+
+				int[] cols = pref.GetIntArray("Color", out ok);
+				if(ok)
+				{
+					if (cols.Length >= 3)
+					{
+						iconButtonList1.BackJSX = Color.FromArgb(cols[0]);
+						iconButtonList1.BackJSXBIN = Color.FromArgb(cols[1]);
+						iconButtonList1.BackFFX = Color.FromArgb(cols[2]);
+					}
+				}
+				bool b = pref.GetBool("RelativePath", out ok);
+				if (ok)
+				{
+					iconButtonList1.RelativePath = b;
+				}
+
+
+				string ss = pref.GetString("TargetDir", out ok);
+				if (ok)
+				{
+					if(Directory.Exists(ss)==true)
+					{
+						iconButtonList1.TargetDir = ss;
+						this.Text = iconButtonList1.MenuName;
+					}
+				}
 			}
 			this.Text = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
 		}
@@ -65,11 +100,23 @@ namespace AE_Menu
 		{
 			//設定ファイルの保存
 			JsonPref pref = new JsonPref();
-			//pref.SetSize("Size", this.Size);
 			pref.SetPoint("Point", this.Location);
 
-			//pref.SetIntArray("IntArray", new int[] { 8, 9, 7 });
+			pref.SetString("TargetDir", iconButtonList1.TargetDir);
+			pref.SetSize("ButtonSize", iconButtonList1.ButtonSize);
+
+			int[] cols = new int[3];
+			cols[0] = iconButtonList1.BackJSX.ToArgb();
+			cols[1] = iconButtonList1.BackJSXBIN.ToArgb();
+			cols[2] = iconButtonList1.BackFFX.ToArgb();
+
+			pref.SetIntArray("Color", cols);
+
+			pref.SetBool("RelativePath", iconButtonList1.RelativePath);
+
 			pref.Save();
+
+			iconButtonList1.BackupStore();
 
 		}
 		//-------------------------------------------------------------
@@ -111,7 +158,13 @@ namespace AE_Menu
 			{
 				foreach (string s in cmd)
 				{
-					//listBox1.Items.Add(s);
+					if(Directory.Exists(s)==true)
+					{
+						if(iconButtonList1.Listup(s) == true)
+						{
+							break;
+						}
+					}
 				}
 			}
 		}
@@ -130,21 +183,7 @@ namespace AE_Menu
 		{
 			AppInfoDialog.ShowAppInfoDialog();
 		}
-		private void button1_Click(object sender, EventArgs e)
-		{
-
-			JsonPref j = new JsonPref();
-
-			int[] aaa = new int[] { 78, 9, 12 };
-			double[] bbb = new double[] { 0.7, 0.01, 0.12 };
-			string[] ccc = new string[] { "eee", "sfskjbF", "13" };
-			j.SetIntArray("aa", aaa);
-			j.SetDoubleArray("bb", bbb);
-			j.SetStringArray("cc", ccc);
-
-			MessageBox.Show(j.ToJson());
-
-		}
+		
 
 		private void addToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -161,7 +200,89 @@ namespace AE_Menu
 
 		}
 
+		public void ShowEditPalette()
+		{
+			if(m_EditPalette==null)
+			{
+				m_EditPalette = new EditPalette();
+				m_EditPalette.IconButonList = iconButtonList1;
 
+			}
+			m_EditPalette.Location = Cursor.Position;
+			m_EditPalette.Show();
+		}
 
+		private void buttonSizeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ShowEditPalette();
+		}
+
+		private void sizeSettingToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SizeDialog dlg = new SizeDialog();
+			dlg.Exec(iconButtonList1);
+		}
+
+		private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			iconButtonList1.ShowFontDialog();
+		}
+
+		private void exportIconToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			iconButtonList1.ExportPict();
+		}
+
+		private void editCaptionToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			iconButtonList1.ShowCaptionDialog();
+
+		}
+
+		private void exportToolStripMenuItem_Click_1(object sender, EventArgs e)
+		{
+			iconButtonList1.ExportPict();
+			iconButtonList1.ExportJSX();
+		}
+
+		private void editMenuTitleToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			iconButtonList1.ShowTitleDialog();
+		}
+
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Application.Exit();
+		}
+
+		private void allColorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			iconButtonList1.AllColorDialog();
+		}
+
+		private void RelativePathToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+		{
+
+		}
+
+		private void cellColorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			iconButtonList1.CellColorDialog();
+		}
+
+		private void copyColorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			iconButtonList1.CopyColor();
+		}
+
+		private void peasteColorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			iconButtonList1.PeasteColor();
+		}
 	}
 }
