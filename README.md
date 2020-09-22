@@ -13,6 +13,11 @@ windows用のバイナリはここからDLできます。
 
 ## 個別の解説
 
+### AE_Menu
+スクリプトメニューを簡単に作るアプリ。  
+スクリプトを複数入れたフォルダをD&Dするとメニューを作ります。右クリックでいろいろ編集します。  
+ExportScriptでメニュースクリプトを書き出します。  
+
 ### AE_ColorPalette.exe
 俗にいうカラーパレットです。  
   
@@ -85,7 +90,7 @@ This software is released under the MIT License, see LICENSE
 
 ## Authors
 
-bry-ful(Hiroshi Furuhashi) http://bryful.yuzu.bz/  
+bry-ful(Hiroshi Furuhashi)  
 twitter:[bryful](https://twitter.com/bryful)  
 bryful@gmail.com  
 
