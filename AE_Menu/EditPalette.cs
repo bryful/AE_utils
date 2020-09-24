@@ -67,6 +67,12 @@ namespace AE_Menu
 			btnEditCaption.Click += BtnEditCaption_Click;
 			btnFont.Click += BtnFont_Click;
 			btnCellColor.Click += BtnCellColor_Click;
+			this.Shown += EditPalette_Shown;
+		}
+
+		private void EditPalette_Shown(object sender, EventArgs e)
+		{
+			EnabledChk();
 		}
 
 		private void BtnCellColor_Click(object sender, EventArgs e)
@@ -74,6 +80,7 @@ namespace AE_Menu
 			if (m_IconButonList != null)
 			{
 				m_IconButonList.CellColorDialog();
+				EnabledChk();
 			}
 		}
 
@@ -82,6 +89,7 @@ namespace AE_Menu
 			if (m_IconButonList != null)
 			{
 				m_IconButonList.ShowFontDialog();
+				EnabledChk();
 			}
 		}
 
@@ -91,6 +99,7 @@ namespace AE_Menu
 			if (m_IconButonList != null)
 			{
 				m_IconButonList.ShowCaptionDialog();
+				EnabledChk();
 			}
 		}
 
@@ -100,6 +109,7 @@ namespace AE_Menu
 			{
 				m_IconButonList.ItemUp();
 				m_IconButonList.Refresh();
+				EnabledChk();
 			}
 		}
 
@@ -109,6 +119,7 @@ namespace AE_Menu
 			{
 				m_IconButonList.ItemDown();
 				m_IconButonList.Refresh();
+				EnabledChk();
 			}
 		}
 

@@ -337,6 +337,7 @@ namespace AE_Menu
 		{
 			bool ret = false;
 			m_TargetDir = "";
+			m_List.Clear();
 			if (Directory.Exists(s) == false) return ret;
 
 			string[] fl = Directory.GetFiles(s, "*.*");
@@ -480,6 +481,47 @@ namespace AE_Menu
 			return ret;
 		}
 		// *****************************************************************
+		public void ChkJsxTemplate()
+		{
+			string p = Path.ChangeExtension(Application.ExecutablePath, ".jsx");
+
+			if (File.Exists(p) == false)
+			{
+				string jsx = Properties.Resources.JSX;
+				try
+				{
+					File.WriteAllText(p, jsx, Encoding.GetEncoding("utf-8"));
+				}
+				catch
+				{
+				}
+			}
+		}
+		// *****************************************************************
+		public string LoadJsxTemplate()
+		{
+			string ret = "";
+			string p = Path.ChangeExtension(Application.ExecutablePath, ".jsx");
+
+			if (File.Exists(p) == true)
+			{
+				try
+				{
+					ret = File.ReadAllText(p, Encoding.GetEncoding("utf-8"));
+				}
+				catch
+				{
+					ret = Properties.Resources.JSX;
+				}
+			}
+			else
+			{
+				ret = Properties.Resources.JSX;
+				ChkJsxTemplate();
+			}
+			return ret;
+		}
+		// *****************************************************************
 		public void ExportJSX()
 		{
 			if (m_List.Count <= 0) return;
@@ -499,9 +541,7 @@ namespace AE_Menu
 				return;
 			}
 
-
-
-			string jsx = Properties.Resources.JSX;
+			string jsx = LoadJsxTemplate();
 
 			jsx = jsx.Replace("$Title", m_MenuName);
 			if (m_RelativePath == true)

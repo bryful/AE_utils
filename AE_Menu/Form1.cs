@@ -89,6 +89,7 @@ namespace AE_Menu
 				}
 			}
 			this.Text = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
+			iconButtonList1.ChkJsxTemplate();
 		}
 		//-------------------------------------------------------------
 		/// <summary>

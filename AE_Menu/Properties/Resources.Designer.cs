@@ -61,28 +61,29 @@ namespace AE_Menu.Properties {
         }
         
         /// <summary>
-        ///   (function(me){
+        ///   /*
+        ///	AE_Menuで書き出されるスクリプトメニューのひな型。
+        ///
+        ///	以下の$で始まるタグが置換される。
+        ///
+        ///	$Title		メニューのタイトル名に置換される。        ///
+        ///	$BaseFolder	jsx/ffxが収納されているフォルダのパスに置換される。        ///				絶対パスの場合 &quot;/c/Bin/Scripts&quot;        ///				相対パスの場合 &quot;./(foo)&quot;        ///				になる        ///
+        ///	$Items		呼び出すjsx/ffxのファイル名を配列として置換
+        ///		&quot;aaa.jsx&quot;,
+        ///		&quot;bbb.jsz&quot;
+        ///		&quot;ccc.ffx&quot;
+        ///		こんな感じな形式に置換        ///
+        ///	$IconWidth	ボタンの横幅ピクセル
+        ///	$IconHeight	ボタンの縦幅ピクセル
+        ///
+        ///*/
+        ///(function(me){
         ///	//----------------------------------
         ///	// メニューに表示されるタイトル
         ///	var scriptName = &quot;$Title&quot;;
         ///	//----------------------------------
         ///	//読み込むフォルダ
-        ///	var cmdItemsPathBase = &quot;$BaseFolder&quot;;
-        ///	//読み込むスクリプト等
-        ///	var cmdItemsPath =[
-        ///$Items
-        ///	];
-        ///	// アイコンサイズ
-        ///	var iconWidth = $IconWidth; 
-        ///	var iconHeight = $IconHeight; 
-        ///
-        ///	//----------------------------------
-        ///	//prototype登録
-        ///	String.prototype.trim = function(){
-        ///		if (this==&quot;&quot; ) return &quot;&quot;
-        ///		else return this.replace(/[\r\n]+$|^\s+|\s+$/g, &quot;&quot;);
-        ///	}
-        ///	Strin [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        ///	var cmdItemsPath [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string JSX {
             get {
