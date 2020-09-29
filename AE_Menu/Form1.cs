@@ -285,5 +285,10 @@ namespace AE_Menu
 		{
 			iconButtonList1.PeasteColor();
 		}
+
+		private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			iconButtonList1.Clear();
+		}
 	}
 }

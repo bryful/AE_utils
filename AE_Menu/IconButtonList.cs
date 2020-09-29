@@ -123,8 +123,7 @@ namespace AE_Menu
 		public IconButtonList()
 		{
 			this.BackColor = Color.DarkKhaki;
-			m_List.Clear();
-			SizeChk();
+			Clear();
 		}
 		// ************************************************************
 		public void SetButtonSize(Size sz)
@@ -140,6 +139,35 @@ namespace AE_Menu
 					}
 				}
 				SizeChk();
+			}
+		}
+		// ************************************************************
+		public void Clear()
+		{
+			if(this.Controls.Count>0)
+			{
+				for (int i = this.Controls.Count - 1; i >= 0; i--)
+				{
+					this.Controls[i].Dispose();
+				}
+				this.Controls.Clear();
+			}
+			if (m_List.Count>0)
+			{
+				for(int i= m_List.Count-1; i>=0 ;i--)
+				{
+					m_List[i].Dispose();
+
+				}
+				m_List.Clear();
+			}
+			m_SelectedIndex = -1;
+			m_MenuName = "";
+			m_TargetDir = "";
+			SizeChk();
+			if(m_Form!=null)
+			{
+				this.Text = "AE_Menu";
 			}
 		}
 		// ************************************************************
@@ -162,9 +190,10 @@ namespace AE_Menu
 			}
 			if (m_Form != null)
 			{
-				m_Form.ClientSize = new Size(this.Width+ 5,this.Height);
+				m_Form.ClientSize = new Size(this.Width,this.Height);
 
 			}
+			this.Invalidate();
 		}
 		// ************************************************************
 		public int FindScript(string filename)
@@ -203,7 +232,7 @@ namespace AE_Menu
 				ib.BackJSXBIN = m_BackJSXBIN;
 				ib.BackFFX = m_BackFFX;
 				ib.TextColor = m_TextColor;
-
+				ib.CreatePict();
 				ib.MouseClick += Ib_MouseClick;
 				m_List.Add(ib);
 				this.Controls.Add(ib);
@@ -282,6 +311,7 @@ namespace AE_Menu
 				}
 			}
 		}
+		// ************************************************************
 		protected override void OnResize(EventArgs e)
 		{
 			base.OnResize(e);
@@ -290,6 +320,7 @@ namespace AE_Menu
 				m_Form.ClientSize = this.Size;
 
 			}
+			this.Invalidate();
 		}
 
 		// ************************************************************
@@ -337,7 +368,8 @@ namespace AE_Menu
 		{
 			bool ret = false;
 			m_TargetDir = "";
-			m_List.Clear();
+			
+			Clear();
 			if (Directory.Exists(s) == false) return ret;
 
 			string[] fl = Directory.GetFiles(s, "*.*");
@@ -367,6 +399,9 @@ namespace AE_Menu
 					m_Form.Text = m_MenuName;
 				}
 			}
+			SizeChk();
+			this.Refresh();
+
 			return ret;
 		}
 		// ************************************************************
@@ -631,6 +666,32 @@ namespace AE_Menu
 			m_List[m_SelectedIndex].BackJSX = CJSX;
 			m_List[m_SelectedIndex].BackJSXBIN = CJSXBIN;
 			m_List[m_SelectedIndex].BackFFX = CFFX;
+		}
+		// *****************************************************************
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			base.OnPaint(e);
+			if (this.Controls.Count <= 0)
+			{
+				Graphics g = e.Graphics;
+				SolidBrush sb = new SolidBrush(this.BackColor);
+				StringFormat sf = new StringFormat();
+				sf.Alignment = StringAlignment.Center;
+				sf.LineAlignment = StringAlignment.Center;
+				Rectangle r = this.ClientRectangle;
+				try
+				{
+					g.FillRectangle(sb, r);
+					sb.Color = this.ForeColor;
+					g.DrawString("ここへD&D", this.Font, sb, r, sf);
+				}
+				finally
+				{
+					sb.Dispose();
+					sf.Dispose();
+				}
+
+			}
 		}
 	}
 }
