@@ -1,17 +1,23 @@
 ﻿/*
 	AE_Menuで書き出されるスクリプトメニューのひな型。
 
-	以下の$で始まるタグが置換される。
+	以下の$で始まるタグが置換される。(下の例は全角二していますが実際は半角です)
 
-	$Title		メニューのタイトルル名に置換される。
-	$BaseFolder	jsx/ffxが収納されているフォルダのパスに置換される。相対パスの場合 ./(foo)になる
-	$Items		呼び出すjsx/ffxのファイル名を配列として置換
+	＄Title		メニューのタイトル名に置換される。
+
+	＄BaseFolder	jsx/ffxが収納されているフォルダのパスに置換される。
+				絶対パスの場合 "/c/Bin/Scripts"
+				相対パスの場合 "./(foo)"
+				になる
+
+	＄Items		呼び出すjsx/ffxのファイル名を配列として置換
 		"aaa.jsx",
 		"bbb.jsz"
 		"ccc.ffx"
-		問う言う形式
-	$IconWidth	ボタンの横幅
-	$IconHeight	ボタンの縦幅
+		こんな感じな形式に置換
+
+	＄IconWidth	ボタンの横幅ピクセル
+	＄IconHeight	ボタンの縦幅ピクセル
 
 */
 (function(me){
@@ -21,7 +27,6 @@
 	//----------------------------------
 	//読み込むフォルダ
 	var cmdItemsPathBase = "$BaseFolder";
-	var workFolder = new Folder(cmdItemsPathBase);
 	//読み込むスクリプト等
 	var cmdItemsPath =[
 $Items
@@ -30,6 +35,7 @@ $Items
 	var iconWidth = $IconWidth; 
 	var iconHeight = $IconHeight; 
 
+	var scrolBarWidth = 30;
 	//----------------------------------
 	//prototype登録
 	//文字列の前後の空白を削除
@@ -94,10 +100,10 @@ $Items
 	setupItems();
 	//-------------------------------------------------------------------------
 	//Windowの作成
-	var winObj = ( me instanceof Panel) ? me : new Window("palette", scriptName, [ 0,  0, iconWidth+20, iconHeight *  cmdItems.length]  ,{resizeable:true});
+	var winObj = ( me instanceof Panel) ? me : new Window("palette", scriptName, [ 0,  0, iconWidth+scrolBarWidth, iconHeight *  cmdItems.length]  ,{resizeable:true});
 	//-------------------------------------------------------------------------
 	//iconButtonが押された時の処理
-	var  exec = function()
+	var exec = function()
 	{
 		// jsx.ffxのファイルがなければエラー
 		if(this.script==null){
@@ -145,7 +151,9 @@ $Items
 
 	}	
 	//-------------------------------------------------------------------------
+	//ボタンの配列
 	var ctrlTbl = [];
+	//スクロールバー
 	var scrolB = null;
 	//ボタンを配置
 	var setupButtons = function()
@@ -158,14 +166,14 @@ $Items
 			var btn = winObj.add("iconbutton", [x,y,x+iconWidth,y+ iconHeight],cmdItems[i].icon);
 			btn.script = cmdItems[i].script;
 			btn.isFX = cmdItems[i].isFX;
-			btn.work = workFolder;
+			btn.work = cmdItems[i].script.parent;
 			btn.onClick = exec;
 
 			ctrlTbl.push(btn);
 			y += iconHeight;
 		}
 
-		scrolB = winObj.add("scrollbar", [iconWidth,0,20,iconHeight*ctrlTbl.length], 0, 0, 100,);
+		scrolB = winObj.add("scrollbar", [iconWidth,0,iconWidth+scrolBarWidth,iconHeight*ctrlTbl.length], 0, 0, 100,);
 	}
 	setupButtons();
 	//-------------------------------------------------------------------------
@@ -178,8 +186,8 @@ $Items
 		var h = b[3] - b[1];
 		
 		var scrolB_b =  scrolB.bounds;
-		scrolB_b[0] = w-20;
-		scrolB_b[2] = scrolB_b[0] + 20;
+		scrolB_b[0] = w-scrolBarWidth;
+		scrolB_b[2] = scrolB_b[0] + scrolBarWidth;
 		scrolB_b[3] = scrolB_b[1] + h;
 		scrolB.bounds = scrolB_b;
 
