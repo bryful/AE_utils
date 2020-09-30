@@ -279,10 +279,37 @@ namespace AE_Menu
 
 			}
 		}
+		// ************************************************************
+		public void SelectDirDialog()
+		{
+			FolderBrowserDialog dlg = new FolderBrowserDialog();
 
+			dlg.Description = "フォルダを指定してください。";
 
+			dlg.RootFolder = Environment.SpecialFolder.MyComputer;
+			if ( m_TargetDir!="")
+			{
+				dlg.SelectedPath = m_TargetDir;
+			}
 
-		
+			//ダイアログを表示する
+			if (m_Form!=null)
+			{
+				if (dlg.ShowDialog(m_Form) == DialogResult.OK)
+				{
+					Listup(dlg.SelectedPath);
+				}
+
+			}
+			else
+			{
+				if (dlg.ShowDialog(this) == DialogResult.OK)
+				{
+					Listup(dlg.SelectedPath);
+				}
+
+			}
+		}
 
 		// ************************************************************
 		public void ReplaceFile(int idx, string filename)
@@ -683,7 +710,7 @@ namespace AE_Menu
 				{
 					g.FillRectangle(sb, r);
 					sb.Color = this.ForeColor;
-					g.DrawString("ここへD&D", this.Font, sb, r, sf);
+					g.DrawString("ここへフォルダをD&D", this.Font, sb, r, sf);
 				}
 				finally
 				{

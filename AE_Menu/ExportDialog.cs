@@ -31,10 +31,13 @@ namespace AE_Menu
 		}
 		public string ExportPath
 		{
-			get { return tbPath.Text; }
+			get { return Path.Combine(tbPath.Text,tbName.Text); }
 			set
 			{
-				tbPath.Text = m_ExportPath_org = value;
+				m_ExportPath_org = value;
+				tbPath.Text = Path.GetDirectoryName(value);
+				tbName.Text = Path.GetFileName(value);
+
 			}
 		}
 
@@ -45,21 +48,28 @@ namespace AE_Menu
 			tbPath.Enabled =  b;
 			if(! b)
 			{
-				tbPath.Text = m_ExportPath_org;
+				tbPath.Text = Path.GetDirectoryName(m_ExportPath_org);
 			}
 		}
 
 		private void btnFolder_Click(object sender, EventArgs e)
 		{
 			SaveFileDialog dlg = new SaveFileDialog();
-			dlg.InitialDirectory = Path.GetDirectoryName(tbPath.Text);
-			dlg.FileName = Path.GetFileName(tbPath.Text);
+			dlg.InitialDirectory = tbPath.Text;
+			dlg.FileName = tbName.Text;
 			dlg.Filter = "*.jsx|*.jsx";
+			dlg.DefaultExt = ".jsx";
 			dlg.Title = "Export JsxFile";
 			if(dlg.ShowDialog()==DialogResult.OK)
 			{
-				tbPath.Text = dlg.FileName;
+				tbPath.Text = Path.GetDirectoryName( dlg.FileName);
+				tbName.Text = Path.GetFileName(dlg.FileName);
 			}
+
+		}
+
+		private void ExportDialog_Load(object sender, EventArgs e)
+		{
 
 		}
 	}

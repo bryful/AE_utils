@@ -29,6 +29,7 @@ namespace AE_Menu
 			InitializeComponent();
 
 			this.Text = iconButtonList1.MenuName;
+			this.ClientSize = iconButtonList1.Size;
 
 		}
 		/// <summary>
@@ -289,6 +290,11 @@ namespace AE_Menu
 		private void clearToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.Clear();
+		}
+
+		private void selectDirToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			iconButtonList1.SelectDirDialog();
 		}
 	}
 }

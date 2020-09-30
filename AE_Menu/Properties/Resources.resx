@@ -121,17 +121,23 @@
     <value>/*
 	AE_Menuで書き出されるスクリプトメニューのひな型。
 
-	以下の$で始まるタグが置換される。
+	以下の$で始まるタグが置換される。(下の例は全角二していますが実際は半角です)
 
-	$Title		メニューのタイトル名に置換される。
-	$BaseFolder	jsx/ffxが収納されているフォルダのパスに置換される。				絶対パスの場合 "/c/Bin/Scripts"				相対パスの場合 "./(foo)"				になる
-	$Items		呼び出すjsx/ffxのファイル名を配列として置換
+	＄Title		メニューのタイトル名に置換される。
+
+	＄BaseFolder	jsx/ffxが収納されているフォルダのパスに置換される。
+				絶対パスの場合 "/c/Bin/Scripts"
+				相対パスの場合 "./(foo)"
+				になる
+
+	＄Items		呼び出すjsx/ffxのファイル名を配列として置換
 		"aaa.jsx",
 		"bbb.jsz"
 		"ccc.ffx"
-		こんな感じな形式に置換
-	$IconWidth	ボタンの横幅ピクセル
-	$IconHeight	ボタンの縦幅ピクセル
+		こんな感じな形式に置換
+
+	＄IconWidth	ボタンの横幅ピクセル
+	＄IconHeight	ボタンの縦幅ピクセル
 
 */
 (function(me){
@@ -148,7 +154,8 @@ $Items
 	// アイコンサイズ
 	var iconWidth = $IconWidth; 
 	var iconHeight = $IconHeight; 
-	var scrolBarWidth = 30;
+
+	var scrolBarWidth = 30;
 	//----------------------------------
 	//prototype登録
 	//文字列の前後の空白を削除
@@ -264,7 +271,9 @@ $Items
 
 	}	
 	//-------------------------------------------------------------------------
-	//ボタンの配列	var ctrlTbl = [];	//スクロールバー
+	//ボタンの配列
+	var ctrlTbl = [];
+	//スクロールバー
 	var scrolB = null;
 	//ボタンを配置
 	var setupButtons = function()

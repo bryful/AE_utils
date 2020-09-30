@@ -64,17 +64,23 @@ namespace AE_Menu.Properties {
         ///   /*
         ///	AE_Menuで書き出されるスクリプトメニューのひな型。
         ///
-        ///	以下の$で始まるタグが置換される。
+        ///	以下の$で始まるタグが置換される。(下の例は全角二していますが実際は半角です)
         ///
-        ///	$Title		メニューのタイトル名に置換される。        ///
-        ///	$BaseFolder	jsx/ffxが収納されているフォルダのパスに置換される。        ///				絶対パスの場合 &quot;/c/Bin/Scripts&quot;        ///				相対パスの場合 &quot;./(foo)&quot;        ///				になる        ///
-        ///	$Items		呼び出すjsx/ffxのファイル名を配列として置換
+        ///	＄Title		メニューのタイトル名に置換される。
+        ///
+        ///	＄BaseFolder	jsx/ffxが収納されているフォルダのパスに置換される。
+        ///				絶対パスの場合 &quot;/c/Bin/Scripts&quot;
+        ///				相対パスの場合 &quot;./(foo)&quot;
+        ///				になる
+        ///
+        ///	＄Items		呼び出すjsx/ffxのファイル名を配列として置換
         ///		&quot;aaa.jsx&quot;,
         ///		&quot;bbb.jsz&quot;
         ///		&quot;ccc.ffx&quot;
-        ///		こんな感じな形式に置換        ///
-        ///	$IconWidth	ボタンの横幅ピクセル
-        ///	$IconHeight	ボタンの縦幅ピクセル
+        ///		こんな感じな形式に置換
+        ///
+        ///	＄IconWidth	ボタンの横幅ピクセル
+        ///	＄IconHeight	ボタンの縦幅ピクセル
         ///
         ///*/
         ///(function(me){
@@ -82,8 +88,7 @@ namespace AE_Menu.Properties {
         ///	// メニューに表示されるタイトル
         ///	var scriptName = &quot;$Title&quot;;
         ///	//----------------------------------
-        ///	//読み込むフォルダ
-        ///	var cmdItemsPath [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        ///	/ [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string JSX {
             get {
