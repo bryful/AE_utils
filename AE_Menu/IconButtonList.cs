@@ -82,37 +82,16 @@ namespace AE_Menu
 				}
 			}
 		}
-		private Color m_BackJSX = Color.FromArgb(64, 64, 64);
-		private Color m_BackJSXBIN = Color.FromArgb(32, 32, 32);
-		private Color m_BackFFX = Color.FromArgb(90, 90, 90);
-		private Color m_TextColor = Color.FromArgb(255, 255, 255);
+	
 
 
-		private bool IsCopy = false; 
-		private Color CJSX  = Color.FromArgb(64, 64, 64);
-		private Color CJSXBIN = Color.FromArgb(32, 32, 32);
-		private Color CFFX = Color.FromArgb(32, 32, 32);
+		private bool IsCopy = false;
 
-		public Color BackJSX
-		{
-			get { return m_BackJSX; }
-			set { m_BackJSX = value;  this.Invalidate(); }
-		}
-		public Color BackJSXBIN
-		{
-			get { return m_BackJSXBIN; }
-			set { m_BackJSXBIN = value;  this.Invalidate(); }
-		}
-		public Color BackFFX
-		{
-			get { return m_BackFFX; }
-			set { m_BackFFX = value;  this.Invalidate(); }
-		}
-		public Color TextColor
-		{
-			get { return m_TextColor; }
-			set { m_TextColor = value; this.Invalidate(); }
-		}
+		Color CFore = Color.White;
+		Color CBack = Color.DarkGray;
+		Font CFont = null;
+
+
 		private bool m_RelativePath = false;
 		public bool RelativePath
 		{
@@ -122,7 +101,12 @@ namespace AE_Menu
 		// ************************************************************
 		public IconButtonList()
 		{
-			this.BackColor = Color.DarkKhaki;
+			this.BackColor = Color.FromArgb(64, 64, 64);
+			this.ForeColor = Color.White;
+			CFont = this.Font;
+			CFore = this.ForeColor;
+			CBack = this.BackColor;
+
 			Clear();
 		}
 		// ************************************************************
@@ -228,10 +212,6 @@ namespace AE_Menu
 				ib.Index = cnt;
 				ib.ForeColor = this.ForeColor;
 				ib.BackColor = this.BackColor;
-				ib.BackJSX = m_BackJSX;
-				ib.BackJSXBIN = m_BackJSXBIN;
-				ib.BackFFX = m_BackFFX;
-				ib.TextColor = m_TextColor;
 				ib.CreatePict();
 				ib.MouseClick += Ib_MouseClick;
 				m_List.Add(ib);
@@ -502,6 +482,18 @@ namespace AE_Menu
 			}
 		}
 		// *****************************************************************
+		protected override void OnBackColorChanged(EventArgs e)
+		{
+			base.OnBackColorChanged(e);
+			if (m_List.Count > 0)
+			{
+				for (int i = 0; i < m_List.Count; i++)
+				{
+					m_List[i].BackColor = this.BackColor;
+				}
+			}
+		}
+		// *****************************************************************
 		public void ExportPict()
 		{
 			if(m_List.Count>0)
@@ -658,24 +650,22 @@ namespace AE_Menu
 		{
 			ColorEditDialog dlg = new ColorEditDialog();
 
-			dlg.BackJsx = m_BackJSX;
-			dlg.BackJsxbin = m_BackJSXBIN;
-			dlg.BackFfx = m_BackFFX;
-
+			dlg.Fore = this.ForeColor;
+			dlg.Back = this.BackColor;
 
 			if (dlg.ShowDialog()==DialogResult.OK)
 			{
-				m_BackJSX = dlg.BackJsx;
-				m_BackJSXBIN = dlg.BackJsxbin;
-				m_BackFFX = dlg.BackFfx;
-
-				if(m_List.Count>0)
+				this.ForeColor = dlg.Fore;
+				this.BackColor = dlg.Back;
+				/*
+				if (m_List.Count>0)
 				{
 					for(int i=0; i<m_List.Count;i++)
 					{
 						m_List[i].SetColors(m_BackJSX, m_BackJSXBIN, m_BackFFX);
 					}
 				}
+				*/
 
 			}
 		}
@@ -685,23 +675,22 @@ namespace AE_Menu
 			if (m_SelectedIndex < 0) return;
 			ColorEditDialog dlg = new ColorEditDialog();
 
-			dlg.BackJsx =  m_List[m_SelectedIndex].BackJSX;
-			dlg.BackJsxbin = m_List[m_SelectedIndex].BackJSXBIN;
-			dlg.BackFfx = m_List[m_SelectedIndex].BackFFX;
+			dlg.Back =  m_List[m_SelectedIndex].BackColor;
+			dlg.Fore = m_List[m_SelectedIndex].ForeColor;
 
 
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
-				m_List[m_SelectedIndex].SetColors(dlg.BackJsx, dlg.BackJsxbin, dlg.BackFfx);
+				m_List[m_SelectedIndex].SetColor(dlg.Back, dlg.Fore);
 			}
 		}
 		// *****************************************************************
 		public void CopyColor()
 		{
 			if (m_SelectedIndex < 0) return;
-			CJSX = m_List[m_SelectedIndex].BackJSX;
-			CJSXBIN = m_List[m_SelectedIndex].BackJSXBIN;
-			CFFX = m_List[m_SelectedIndex].BackFFX;
+			CBack = m_List[m_SelectedIndex].BackColor;
+			CFore = m_List[m_SelectedIndex].ForeColor;
+			CFont = m_List[m_SelectedIndex].Font;
 			IsCopy = true;
 		}
 		// *****************************************************************
@@ -709,9 +698,9 @@ namespace AE_Menu
 		{
 			if (m_SelectedIndex < 0) return;
 			if (IsCopy == false) return;
-			m_List[m_SelectedIndex].BackJSX = CJSX;
-			m_List[m_SelectedIndex].BackJSXBIN = CJSXBIN;
-			m_List[m_SelectedIndex].BackFFX = CFFX;
+			m_List[m_SelectedIndex].BackColor = CBack;
+			m_List[m_SelectedIndex].ForeColor = CFore;
+			m_List[m_SelectedIndex].Font = CFont;
 		}
 		// *****************************************************************
 		protected override void OnPaint(PaintEventArgs e)

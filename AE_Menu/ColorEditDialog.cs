@@ -16,20 +16,20 @@ namespace AE_Menu
 		{
 			InitializeComponent();
 		}
-		public Color BackJsx
+		public Color Back
 		{
 			get { return colorBox1.TargetColor; }
 			set { colorBox1.TargetColor = value; }
 		}
-		public Color BackFfx
+		public Color Fore
 		{
-			get { return colorBox2.TargetColor; }
-			set { colorBox2.TargetColor = value; }
+			get { return colorBox1.TextColor; }
+			set { colorBox1.TextColor = value; }
 		}
-		public Color BackJsxbin
+
+		private void btnFore_Click(object sender, EventArgs e)
 		{
-			get { return colorBox3.TargetColor; }
-			set { colorBox3.TargetColor = value; }
+			colorBox1.ShowDialogFore();
 		}
 	}
 }

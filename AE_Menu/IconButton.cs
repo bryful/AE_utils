@@ -63,36 +63,10 @@ namespace AE_Menu
 
 		public bool Active = false;
 
-		private Color m_BackJSX = Color.FromArgb(64, 64, 64);
-		private Color m_BackJSXBIN = Color.FromArgb(32,32,32);
-		private Color m_BackFFX = Color.FromArgb(90,90,90);
-		private Color m_TextColor = Color.FromArgb(255, 255, 255);
-
-		public Color BackJSX
+		public void SetColor(Color b,Color c)
 		{
-			get { return m_BackJSX; }
-			set { m_BackJSX = value; CreatePict();this.Invalidate(); }
-		}
-		public Color BackJSXBIN
-		{
-			get { return m_BackJSXBIN; }
-			set { m_BackJSXBIN = value; CreatePict(); this.Invalidate(); }
-		}
-		public Color BackFFX
-		{
-			get { return m_BackFFX; }
-			set { m_BackFFX = value; CreatePict(); this.Invalidate(); }
-		}
-		public Color TextColor
-		{
-			get { return m_TextColor; }
-			set { m_TextColor = value; CreatePict(); this.Invalidate(); }
-		}
-		public void SetColors(Color jsx,Color jsxbin, Color ffx)
-		{
-			m_BackJSX = jsx;
-			m_BackJSXBIN = jsxbin;
-			m_BackFFX = ffx;
+			this.ForeColor = c;
+			this.BackColor = b;
 			CreatePict();
 			this.Invalidate();
 		}
@@ -101,7 +75,7 @@ namespace AE_Menu
 		{
 			Init("", new Size(240, 20));
 			this.ForeColor = Color.White;
-			this.Font = new Font(this.Font.Name, 12);
+			this.BackColor = Color.DarkGray;
 
 		}
 		public void CopyFrom(IconButton b)
@@ -112,10 +86,9 @@ namespace AE_Menu
 			m_FileName = b.m_FileName;
 			m_Caption = b.m_Caption;
 			m_Jsxtype = b.m_Jsxtype;
-			m_BackJSX = b.m_BackJSXBIN;
-			m_BackJSXBIN = b.m_BackJSXBIN;
-			m_BackFFX= b.m_BackFFX;
-			m_TextColor = b.m_TextColor;
+			this.ForeColor = b.ForeColor;
+			this.BackColor = b.BackColor;
+
 			this.Font = b.Font;
 			this.CreatePict();
 
@@ -189,7 +162,8 @@ namespace AE_Menu
 		// ******************************************************
 		public void CreatePict()
 		{
-			if( (this.Width!=m_bitmap.Width)|| (this.Height != m_bitmap.Height)) 
+			if ((this.Width <= 0) || (this.Height <= 0)) return;
+			if ( (this.Width!=m_bitmap.Width)|| (this.Height != m_bitmap.Height)) 
 			{
 				m_bitmap = new Bitmap(this.Width, this.Height);
 			}
@@ -200,19 +174,7 @@ namespace AE_Menu
 			SolidBrush sb = new SolidBrush(this.BackColor);
 			try
 			{
-				switch (m_Jsxtype)
-				{
-					case JSXTYPE.JSX:
-						sb.Color = m_BackJSX;
-						break;
-					case JSXTYPE.JSXBIN:
-						sb.Color = m_BackJSXBIN;
-						break;
-					case JSXTYPE.FFX:
-						sb.Color = m_BackFFX;
-						break;
-
-				}
+				sb.Color = this.BackColor;
 				g.FillRectangle(sb, new Rectangle(-1, -1, this.Width + 2, this.Height + 2));
 				if (m_Caption != "")
 				{
@@ -226,7 +188,7 @@ namespace AE_Menu
 						this.Font = new Font(this.Font.Name, sz);
 						stringSize = g.MeasureString(m_Caption, this.Font, 2000, m_sf);
 					} while (stringSize.Width > m_bitmap.Width);
-					sb.Color = m_TextColor;
+					sb.Color = this.ForeColor;
 					Rectangle rct = new Rectangle(5, 0, m_bitmap.Width, m_bitmap.Height);
 					g.DrawString(m_Caption, this.Font, sb, rct, m_sf);
 				}
@@ -287,6 +249,19 @@ namespace AE_Menu
 		protected override void OnFontChanged(EventArgs e)
 		{
 			base.OnFontChanged(e);
+			CreatePict();
+			this.Invalidate();
+		}
+		protected override void OnForeColorChanged(EventArgs e)
+		{
+			base.OnForeColorChanged(e);
+			CreatePict();
+			this.Invalidate();
+
+		}
+		protected override void OnBackColorChanged(EventArgs e)
+		{
+			base.OnBackColorChanged(e);
 			CreatePict();
 			this.Invalidate();
 		}

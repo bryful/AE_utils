@@ -44,6 +44,15 @@ namespace AE_Menu
 				this.Invalidate();
 			}
 		}
+		public Color TextColor
+		{
+			get { return this.ForeColor; }
+			set
+			{
+				this.ForeColor = value;
+				this.Invalidate();
+			}
+		}
 		// ***************************************************************
 		private void ColorBox_Click(object sender, EventArgs e)
 		{
@@ -56,7 +65,18 @@ namespace AE_Menu
 				this.Invalidate();
 			}
 		}
+		public void ShowDialogFore()
+		{
+			ColorDialog dlg = new ColorDialog();
+			dlg.Color = this.ForeColor;
+			dlg.FullOpen = true;
+			if (dlg.ShowDialog() == DialogResult.OK)
+			{
+				this.ForeColor = dlg.Color;
+				this.Invalidate();
+			}
 
+		}
 		// ***************************************************************
 		protected override void OnPaint(PaintEventArgs e)
 		{

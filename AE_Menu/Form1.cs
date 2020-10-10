@@ -65,11 +65,10 @@ namespace AE_Menu
 				int[] cols = pref.GetIntArray("Color", out ok);
 				if(ok)
 				{
-					if (cols.Length >= 3)
+					if (cols.Length >= 2)
 					{
-						iconButtonList1.BackJSX = Color.FromArgb(cols[0]);
-						iconButtonList1.BackJSXBIN = Color.FromArgb(cols[1]);
-						iconButtonList1.BackFFX = Color.FromArgb(cols[2]);
+						iconButtonList1.ForeColor = Color.FromArgb(cols[0]);
+						iconButtonList1.BackColor = Color.FromArgb(cols[1]);
 					}
 				}
 				bool b = pref.GetBool("RelativePath", out ok);
@@ -124,9 +123,8 @@ namespace AE_Menu
 			pref.SetSize("ButtonSize", iconButtonList1.ButtonSize);
 
 			int[] cols = new int[3];
-			cols[0] = iconButtonList1.BackJSX.ToArgb();
-			cols[1] = iconButtonList1.BackJSXBIN.ToArgb();
-			cols[2] = iconButtonList1.BackFFX.ToArgb();
+			cols[0] = iconButtonList1.ForeColor.ToArgb();
+			cols[1] = iconButtonList1.BackColor.ToArgb();
 
 			pref.SetIntArray("Color", cols);
 

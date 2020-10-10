@@ -44,12 +44,12 @@
 			this.editMenuTitleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.allColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.editAllFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
 			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportPictToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.iconButtonList1 = new AE_Menu.IconButtonList();
-			this.editAllFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -76,7 +76,7 @@
             this.exportPictToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(181, 380);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(177, 358);
 			this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
 			// 
 			// selectDirToolStripMenuItem
@@ -173,6 +173,13 @@
 			this.allColorToolStripMenuItem.Text = "AllColor";
 			this.allColorToolStripMenuItem.Click += new System.EventHandler(this.allColorToolStripMenuItem_Click);
 			// 
+			// editAllFontToolStripMenuItem
+			// 
+			this.editAllFontToolStripMenuItem.Name = "editAllFontToolStripMenuItem";
+			this.editAllFontToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+			this.editAllFontToolStripMenuItem.Text = "EditAllFont";
+			this.editAllFontToolStripMenuItem.Click += new System.EventHandler(this.editAllFontToolStripMenuItem_Click);
+			// 
 			// toolStripMenuItem3
 			// 
 			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
@@ -201,46 +208,35 @@
 			// 
 			// iconButtonList1
 			// 
-			this.iconButtonList1.BackColor = System.Drawing.SystemColors.Control;
-			this.iconButtonList1.BackFFX = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
-			this.iconButtonList1.BackJSX = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.iconButtonList1.BackJSXBIN = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.iconButtonList1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.iconButtonList1.ButtonSize = new System.Drawing.Size(240, 20);
 			this.iconButtonList1.ContextMenuStrip = this.contextMenuStrip1;
-			this.iconButtonList1.ForeColor = System.Drawing.Color.Black;
+			this.iconButtonList1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
 			this.iconButtonList1.Form = this;
 			this.iconButtonList1.Location = new System.Drawing.Point(0, 0);
-			this.iconButtonList1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-			this.iconButtonList1.MaximumSize = new System.Drawing.Size(400, 32);
+			this.iconButtonList1.Margin = new System.Windows.Forms.Padding(5);
+			this.iconButtonList1.MaximumSize = new System.Drawing.Size(240, 20);
 			this.iconButtonList1.MenuName = "";
-			this.iconButtonList1.MinimumSize = new System.Drawing.Size(400, 32);
+			this.iconButtonList1.MinimumSize = new System.Drawing.Size(240, 20);
 			this.iconButtonList1.Name = "iconButtonList1";
 			this.iconButtonList1.RelativePath = false;
 			this.iconButtonList1.SelectedIndex = -1;
-			this.iconButtonList1.Size = new System.Drawing.Size(400, 32);
+			this.iconButtonList1.Size = new System.Drawing.Size(240, 20);
 			this.iconButtonList1.TabIndex = 2;
 			this.iconButtonList1.TargetDir = "";
 			this.iconButtonList1.Text = "iconButtonList1";
-			this.iconButtonList1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			// 
-			// editAllFontToolStripMenuItem
-			// 
-			this.editAllFontToolStripMenuItem.Name = "editAllFontToolStripMenuItem";
-			this.editAllFontToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.editAllFontToolStripMenuItem.Text = "EditAllFont";
-			this.editAllFontToolStripMenuItem.Click += new System.EventHandler(this.editAllFontToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
 			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(439, 43);
+			this.ClientSize = new System.Drawing.Size(417, 36);
 			this.Controls.Add(this.iconButtonList1);
 			this.Font = new System.Drawing.Font("ＭＳ ゴシック", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.KeyPreview = true;
-			this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.Margin = new System.Windows.Forms.Padding(5);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(266, 45);
