@@ -135,7 +135,7 @@ namespace AE_Menu
 				{
 					for (int i = 0; i < m_List.Count; i++)
 					{
-						m_List[i].SetSize(m_ButtonSize);
+						m_List[i].SetSize(m_ButtonSize,true);
 					}
 				}
 				SizeChk();
@@ -440,6 +440,25 @@ namespace AE_Menu
 			if( dlg.ShowDialog() ==DialogResult.OK)
 			{
 				m_List[m_SelectedIndex].Font = dlg.Font;
+			}
+		}
+		// ************************************************************
+		public void ShowAllFontDialog()
+		{
+			FontDialog dlg = new FontDialog();
+			dlg.Font = m_List[0].Font;
+			if (dlg.ShowDialog() == DialogResult.OK)
+			{
+				this.Font = dlg.Font;
+			}
+		}
+		// ************************************************************
+		protected override void OnFontChanged(EventArgs e)
+		{
+			if (m_List.Count <= 0) return;
+			for(int i=0; i<m_List.Count;i++)
+			{
+				m_List[i].Font = this.Font;
 			}
 		}
 		// ************************************************************

@@ -88,6 +88,22 @@ namespace AE_Menu
 						this.Text = iconButtonList1.MenuName;
 					}
 				}
+				Font f = iconButtonList1.Font;
+				string fn = f.Name;
+				float fsz = f.Size;
+				FontStyle sty = f.Style;
+
+
+				ss = pref.GetString("Font", out ok);
+				if(ok){fn = ss;}
+				double dd = pref.GetDouble("FontSize", out ok);
+				if (ok) { fsz = (float)dd; }
+				int vv = pref.GetInt("FontStyle", out ok);
+				if (ok) { sty = (FontStyle)vv; }
+
+				iconButtonList1.Font = new Font(fn, fsz, sty);
+
+
 			}
 			this.Text = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
 			iconButtonList1.ChkJsxTemplate();
@@ -113,6 +129,11 @@ namespace AE_Menu
 			cols[2] = iconButtonList1.BackFFX.ToArgb();
 
 			pref.SetIntArray("Color", cols);
+
+			pref.SetString("Font", iconButtonList1.Font.Name);
+			pref.SetDouble("FontSize", (double)iconButtonList1.Font.Size);
+			pref.SetInt("FontStyle", (int)iconButtonList1.Font.Style);
+
 
 			pref.SetBool("RelativePath", iconButtonList1.RelativePath);
 
@@ -295,6 +316,11 @@ namespace AE_Menu
 		private void selectDirToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.SelectDirDialog();
+		}
+
+		private void editAllFontToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			iconButtonList1.ShowAllFontDialog();
 		}
 	}
 }

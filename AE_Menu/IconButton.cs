@@ -324,7 +324,7 @@ namespace AE_Menu
 		// ******************************************************
 		public void SavePict()
 		{
-			if (File.Exists( m_FileName)==false) return;
+			if (m_FileName=="") return;
 			string p = Path.ChangeExtension(m_FileName, ".png");
 			m_bitmap.Save(p);
 		}
