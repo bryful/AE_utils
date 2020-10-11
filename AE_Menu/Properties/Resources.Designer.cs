@@ -84,11 +84,12 @@ namespace AE_Menu.Properties {
         ///
         ///*/
         ///(function(me){
-        ///	//----------------------------------
-        ///	// メニューに表示されるタイトル
-        ///	var scriptName = &quot;$Title&quot;;
-        ///	//----------------------------------
-        ///	/ [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        /////----------------------------------
+        ////*
+        /////ライブラリの読み込み　必要に応じて
+        ///#includepath &quot;./;./(lib)&quot;
+        ///#include &quot;prototypeArray.jsx&quot;
+        ///#include [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string JSX {
             get {

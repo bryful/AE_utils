@@ -21,6 +21,52 @@
 
 */
 (function(me){
+//----------------------------------
+/*
+//ライブラリの読み込み　必要に応じて
+#includepath "./;./(lib)"
+#include "prototypeArray.jsx"
+#include "prototypeFile.jsx"
+#include "prototypeItem.jsx"
+#include "prototypeParse.jsx"
+#include "prototypeProject.jsx"
+#include "prototypeProperty.jsx"
+#include "prototypeString.jsx"
+*/
+	// バージョン識別
+	var AEVersion = "";
+	var chkVersion = function()
+	{
+		AEVersion = "";
+		try{
+			var vn = app.version.substring(0,4)*1;
+			if(vn<=11){
+				AEVersion = "CS6";
+			}else if (vn<=12.2){
+				AEVersion = "CC";
+			}else if (vn<=13.2){
+				AEVersion = "CC2014";
+			}else if (vn<=13.8){
+				AEVersion = "CC2015";
+			}else if (vn<=14.2){
+				AEVersion = "CC2017";
+			}else if (vn<=15.1){
+				AEVersion = "CC2018";
+			}else if (vn<=16.2){
+				AEVersion = "CC2019";
+			}else if (vn<=17.2){
+				AEVersion = "CC2020";
+			}else if (vn<=18.2){
+				AEVersion = "CC2021";
+			}
+		}catch(e){
+		}
+		if (AEVersion=="") {
+			var yr = (new Date()).getYear()+1900;
+			AEVersion = "CC" + yr;
+		}
+	}
+	chkVersion();	
 	//----------------------------------
 	// メニューに表示されるタイトル
 	var scriptName = "$Title";
@@ -88,12 +134,19 @@ $Items
 			if((obj.script.exists==true)&&(obj.icon.exists==true))
 			{
 				var e = cmdItemsPath[i].getExt().toLowerCase();
+				var flg = true;
 				if ((e==".jsx")||(e==".jsxbin")) {
 					obj.isFX = false;
+					flg = true;
 				}else{
-					obj.isFX = true;
+					if (File.decode(obj.script.name).indexOf(AEVersion)>=0){
+						obj.isFX = true;
+						flg = true;
+					}else{
+						flg = false;
+					}
 				}
-				cmdItems.push(obj);
+				if (flg ==true) {cmdItems.push(obj);}
 			}
 		}
 	}
