@@ -208,11 +208,11 @@
 			// 
 			// iconButtonList1
 			// 
-			this.iconButtonList1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.iconButtonList1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
 			this.iconButtonList1.ButtonSize = new System.Drawing.Size(240, 20);
 			this.iconButtonList1.ContextMenuStrip = this.contextMenuStrip1;
 			this.iconButtonList1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.iconButtonList1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+			this.iconButtonList1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
 			this.iconButtonList1.Form = this;
 			this.iconButtonList1.Location = new System.Drawing.Point(0, 0);
 			this.iconButtonList1.Margin = new System.Windows.Forms.Padding(5);

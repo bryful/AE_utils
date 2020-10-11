@@ -144,12 +144,12 @@ namespace AE_Menu
 			if (File.Exists(filename))
 			{
 				m_FileName = filename;
-				m_Caption = Path.GetFileName(filename);
+				m_Caption = CaptionStr(Path.GetFileName(filename));
 			}
 			else
 			{
 				m_FileName = "";
-				m_Caption = filename;
+				m_Caption = "";
 
 			}
 			m_sf.Alignment = StringAlignment.Near;
@@ -259,6 +259,46 @@ namespace AE_Menu
 			this.Invalidate();
 		}
 		// ******************************************************
+		// ******************************************************
+		public string CaptionStr(string s)
+		{
+			string[] tag = new string[] { "CS6", "CC2020", "CC2021", "CC2022", "CC2023", "CC", "CC2015", "CC2016", "CC2017", "CC2018", "CC2019" };
+			s = s.Trim();
+			if (s == "") return s;
+
+			int idx = -1;
+			int tagIdx = -1;
+			string s0 = s.ToUpper();
+			for (int i=0; i<tag.Length;i++)
+			{
+				int idx2 = s0.LastIndexOf(tag[i]);
+				if(idx2>=0)
+				{
+					idx = idx2;
+					tagIdx = i;
+					break;
+				}
+			}
+			if (idx < 0)
+			{
+				return s;
+			}
+			s = s.Replace(tag[tagIdx], "");
+			s = s.Replace("__", "_");
+			s = s.Replace("--", "-");
+			s = s.Replace("  ", " ");
+			char c = s[s.Length - 1];
+			if ( (c== '_')||(c=='-')|| (c == '.'))
+			{
+				s = s.Substring(0, s.Length - 1);
+			}
+
+			return s;
+
+
+		}
+
+		// ******************************************************
 		public bool ReplaceFilename(string fn)
 		{
 			bool ret = false;
@@ -267,7 +307,7 @@ namespace AE_Menu
 				if(m_FileName != fn)
 				{
 					m_FileName = fn;
-					m_Caption = Path.GetFileName(fn);
+					m_Caption = CaptionStr(Path.GetFileName(fn));
 					CreatePict();
 					this.Invalidate();
 				}
@@ -318,7 +358,7 @@ namespace AE_Menu
 			if (m_Jsxtype != JSXTYPE.NONE)
 			{
 				m_FileName = s;
-				m_Caption = Path.GetFileNameWithoutExtension(s);
+				m_Caption = CaptionStr(Path.GetFileNameWithoutExtension(s));
 				ret = true;
 			}
 			CreatePict();
