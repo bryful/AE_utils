@@ -30,25 +30,25 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.selectDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.selectDirMI = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-			this.buttonSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ShowEditPatelleMI = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-			this.editCaptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.cellColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.copyColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.peasteColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.editCaptionMI = new System.Windows.Forms.ToolStripMenuItem();
+			this.EditCellColorMI = new System.Windows.Forms.ToolStripMenuItem();
+			this.EditCellFontMI = new System.Windows.Forms.ToolStripMenuItem();
+			this.CopyMI = new System.Windows.Forms.ToolStripMenuItem();
+			this.PeasteMI = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-			this.sizeSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.editMenuTitleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.allColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.editAllFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ShowSizeSettingMI = new System.Windows.Forms.ToolStripMenuItem();
+			this.EditMenuTitleMI = new System.Windows.Forms.ToolStripMenuItem();
+			this.EditAllColorMI = new System.Windows.Forms.ToolStripMenuItem();
+			this.EditAllFontMI = new System.Windows.Forms.ToolStripMenuItem();
+			this.ClearM = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.exportPictToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ExportScriptMI = new System.Windows.Forms.ToolStripMenuItem();
+			this.ExportPictOnlyMI = new System.Windows.Forms.ToolStripMenuItem();
+			this.ExitMI = new System.Windows.Forms.ToolStripMenuItem();
 			this.iconButtonList1 = new AE_Menu.IconButtonList();
 			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -56,155 +56,155 @@
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selectDirToolStripMenuItem,
+            this.selectDirMI,
             this.toolStripMenuItem4,
-            this.buttonSizeToolStripMenuItem,
+            this.ShowEditPatelleMI,
             this.toolStripMenuItem2,
-            this.editCaptionToolStripMenuItem,
-            this.cellColorToolStripMenuItem,
-            this.fontToolStripMenuItem,
-            this.copyColorToolStripMenuItem,
-            this.peasteColorToolStripMenuItem,
+            this.editCaptionMI,
+            this.EditCellColorMI,
+            this.EditCellFontMI,
+            this.CopyMI,
+            this.PeasteMI,
             this.toolStripMenuItem1,
-            this.sizeSettingToolStripMenuItem,
-            this.editMenuTitleToolStripMenuItem,
-            this.clearToolStripMenuItem,
-            this.allColorToolStripMenuItem,
-            this.editAllFontToolStripMenuItem,
+            this.ShowSizeSettingMI,
+            this.EditMenuTitleMI,
+            this.EditAllColorMI,
+            this.EditAllFontMI,
+            this.ClearM,
             this.toolStripMenuItem3,
-            this.exportToolStripMenuItem,
-            this.exportPictToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.ExportScriptMI,
+            this.ExportPictOnlyMI,
+            this.ExitMI});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(177, 358);
-			this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(206, 380);
 			// 
-			// selectDirToolStripMenuItem
+			// selectDirMI
 			// 
-			this.selectDirToolStripMenuItem.Name = "selectDirToolStripMenuItem";
-			this.selectDirToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.selectDirToolStripMenuItem.Text = "SelectDir";
-			this.selectDirToolStripMenuItem.Click += new System.EventHandler(this.selectDirToolStripMenuItem_Click);
+			this.selectDirMI.Name = "selectDirMI";
+			this.selectDirMI.Size = new System.Drawing.Size(180, 22);
+			this.selectDirMI.Text = "SelectScriptDir";
+			this.selectDirMI.Click += new System.EventHandler(this.SelectDirMI_Click);
 			// 
 			// toolStripMenuItem4
 			// 
 			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-			this.toolStripMenuItem4.Size = new System.Drawing.Size(173, 6);
+			this.toolStripMenuItem4.Size = new System.Drawing.Size(177, 6);
 			// 
-			// buttonSizeToolStripMenuItem
+			// ShowEditPatelleMI
 			// 
-			this.buttonSizeToolStripMenuItem.Name = "buttonSizeToolStripMenuItem";
-			this.buttonSizeToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.buttonSizeToolStripMenuItem.Text = "EditPalette";
-			this.buttonSizeToolStripMenuItem.Click += new System.EventHandler(this.buttonSizeToolStripMenuItem_Click);
+			this.ShowEditPatelleMI.Name = "ShowEditPatelleMI";
+			this.ShowEditPatelleMI.Size = new System.Drawing.Size(180, 22);
+			this.ShowEditPatelleMI.Text = "Show_EditPalette";
+			this.ShowEditPatelleMI.Click += new System.EventHandler(this.ShowEditPaletteMI_Click);
 			// 
 			// toolStripMenuItem2
 			// 
 			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-			this.toolStripMenuItem2.Size = new System.Drawing.Size(173, 6);
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
 			// 
-			// editCaptionToolStripMenuItem
+			// editCaptionMI
 			// 
-			this.editCaptionToolStripMenuItem.Name = "editCaptionToolStripMenuItem";
-			this.editCaptionToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.editCaptionToolStripMenuItem.Text = "EditCaption";
-			this.editCaptionToolStripMenuItem.Click += new System.EventHandler(this.editCaptionToolStripMenuItem_Click);
+			this.editCaptionMI.Name = "editCaptionMI";
+			this.editCaptionMI.Size = new System.Drawing.Size(180, 22);
+			this.editCaptionMI.Text = "EditCaption";
+			this.editCaptionMI.Click += new System.EventHandler(this.ShowEditCaptionMI_Click);
 			// 
-			// cellColorToolStripMenuItem
+			// EditCellColorMI
 			// 
-			this.cellColorToolStripMenuItem.Name = "cellColorToolStripMenuItem";
-			this.cellColorToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.cellColorToolStripMenuItem.Text = "EditCellColor";
-			this.cellColorToolStripMenuItem.Click += new System.EventHandler(this.cellColorToolStripMenuItem_Click);
+			this.EditCellColorMI.Name = "EditCellColorMI";
+			this.EditCellColorMI.Size = new System.Drawing.Size(180, 22);
+			this.EditCellColorMI.Text = "EditCellColor";
+			this.EditCellColorMI.Click += new System.EventHandler(this.EditCellColorMI_Click);
 			// 
-			// fontToolStripMenuItem
+			// EditCellFontMI
 			// 
-			this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
-			this.fontToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.fontToolStripMenuItem.Text = "EditFont";
-			this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
+			this.EditCellFontMI.Name = "EditCellFontMI";
+			this.EditCellFontMI.Size = new System.Drawing.Size(180, 22);
+			this.EditCellFontMI.Text = "EditCellFont";
+			this.EditCellFontMI.Click += new System.EventHandler(this.EditCellFontMI_Click);
 			// 
-			// copyColorToolStripMenuItem
+			// CopyMI
 			// 
-			this.copyColorToolStripMenuItem.Name = "copyColorToolStripMenuItem";
-			this.copyColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-			this.copyColorToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.copyColorToolStripMenuItem.Text = "CopyColor";
-			this.copyColorToolStripMenuItem.Click += new System.EventHandler(this.copyColorToolStripMenuItem_Click);
+			this.CopyMI.Name = "CopyMI";
+			this.CopyMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+			this.CopyMI.Size = new System.Drawing.Size(205, 22);
+			this.CopyMI.Text = "CopyColor_Font";
+			this.CopyMI.Click += new System.EventHandler(this.CopyMI_Click);
 			// 
-			// peasteColorToolStripMenuItem
+			// PeasteMI
 			// 
-			this.peasteColorToolStripMenuItem.Name = "peasteColorToolStripMenuItem";
-			this.peasteColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-			this.peasteColorToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.peasteColorToolStripMenuItem.Text = "PeasteColor";
-			this.peasteColorToolStripMenuItem.Click += new System.EventHandler(this.peasteColorToolStripMenuItem_Click);
+			this.PeasteMI.Name = "PeasteMI";
+			this.PeasteMI.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+			this.PeasteMI.Size = new System.Drawing.Size(205, 22);
+			this.PeasteMI.Text = "PeasteColor_Font";
+			this.PeasteMI.Click += new System.EventHandler(this.PasteMI_Click);
 			// 
 			// toolStripMenuItem1
 			// 
 			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-			this.toolStripMenuItem1.Size = new System.Drawing.Size(173, 6);
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
 			// 
-			// sizeSettingToolStripMenuItem
+			// ShowSizeSettingMI
 			// 
-			this.sizeSettingToolStripMenuItem.Name = "sizeSettingToolStripMenuItem";
-			this.sizeSettingToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.sizeSettingToolStripMenuItem.Text = "SizeSetting";
-			this.sizeSettingToolStripMenuItem.Click += new System.EventHandler(this.sizeSettingToolStripMenuItem_Click);
+			this.ShowSizeSettingMI.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+			this.ShowSizeSettingMI.Name = "ShowSizeSettingMI";
+			this.ShowSizeSettingMI.Size = new System.Drawing.Size(180, 22);
+			this.ShowSizeSettingMI.Text = "ShowSizeSetting";
+			this.ShowSizeSettingMI.Click += new System.EventHandler(this.ShowSizeSettingMI_Click);
 			// 
-			// editMenuTitleToolStripMenuItem
+			// EditMenuTitleMI
 			// 
-			this.editMenuTitleToolStripMenuItem.Name = "editMenuTitleToolStripMenuItem";
-			this.editMenuTitleToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.editMenuTitleToolStripMenuItem.Text = "EditMenuTitle";
-			this.editMenuTitleToolStripMenuItem.Click += new System.EventHandler(this.editMenuTitleToolStripMenuItem_Click);
+			this.EditMenuTitleMI.Name = "EditMenuTitleMI";
+			this.EditMenuTitleMI.Size = new System.Drawing.Size(180, 22);
+			this.EditMenuTitleMI.Text = "EditMenuTitle";
+			this.EditMenuTitleMI.Click += new System.EventHandler(this.EditTitleMI_Click);
 			// 
-			// clearToolStripMenuItem
+			// EditAllColorMI
 			// 
-			this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-			this.clearToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.clearToolStripMenuItem.Text = "Clear";
-			this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+			this.EditAllColorMI.Name = "EditAllColorMI";
+			this.EditAllColorMI.Size = new System.Drawing.Size(180, 22);
+			this.EditAllColorMI.Text = "EditAllColor";
+			this.EditAllColorMI.Click += new System.EventHandler(this.EditAllColorMI_Click);
 			// 
-			// allColorToolStripMenuItem
+			// EditAllFontMI
 			// 
-			this.allColorToolStripMenuItem.Name = "allColorToolStripMenuItem";
-			this.allColorToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.allColorToolStripMenuItem.Text = "AllColor";
-			this.allColorToolStripMenuItem.Click += new System.EventHandler(this.allColorToolStripMenuItem_Click);
+			this.EditAllFontMI.Name = "EditAllFontMI";
+			this.EditAllFontMI.Size = new System.Drawing.Size(180, 22);
+			this.EditAllFontMI.Text = "EditAllFont";
+			this.EditAllFontMI.Click += new System.EventHandler(this.EditAllFontMI_Click);
 			// 
-			// editAllFontToolStripMenuItem
+			// ClearM
 			// 
-			this.editAllFontToolStripMenuItem.Name = "editAllFontToolStripMenuItem";
-			this.editAllFontToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.editAllFontToolStripMenuItem.Text = "EditAllFont";
-			this.editAllFontToolStripMenuItem.Click += new System.EventHandler(this.editAllFontToolStripMenuItem_Click);
+			this.ClearM.Name = "ClearM";
+			this.ClearM.Size = new System.Drawing.Size(180, 22);
+			this.ClearM.Text = "Clear";
+			this.ClearM.Click += new System.EventHandler(this.ClearMI_Click);
 			// 
 			// toolStripMenuItem3
 			// 
 			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-			this.toolStripMenuItem3.Size = new System.Drawing.Size(173, 6);
+			this.toolStripMenuItem3.Size = new System.Drawing.Size(177, 6);
 			// 
-			// exportToolStripMenuItem
+			// ExportScriptMI
 			// 
-			this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-			this.exportToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.exportToolStripMenuItem.Text = "ExportScript";
-			this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click_1);
+			this.ExportScriptMI.Name = "ExportScriptMI";
+			this.ExportScriptMI.Size = new System.Drawing.Size(180, 22);
+			this.ExportScriptMI.Text = "ExportScript";
+			this.ExportScriptMI.Click += new System.EventHandler(this.ExportScriptMI_Click);
 			// 
-			// exportPictToolStripMenuItem
+			// ExportPictOnlyMI
 			// 
-			this.exportPictToolStripMenuItem.Name = "exportPictToolStripMenuItem";
-			this.exportPictToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.exportPictToolStripMenuItem.Text = "ExportPict";
-			this.exportPictToolStripMenuItem.Click += new System.EventHandler(this.exportIconToolStripMenuItem_Click);
+			this.ExportPictOnlyMI.Name = "ExportPictOnlyMI";
+			this.ExportPictOnlyMI.Size = new System.Drawing.Size(180, 22);
+			this.ExportPictOnlyMI.Text = "ExportPictOnly";
+			this.ExportPictOnlyMI.Click += new System.EventHandler(this.ExportPictOnlyMI_Click);
 			// 
-			// exitToolStripMenuItem
+			// ExitMI
 			// 
-			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-			this.exitToolStripMenuItem.Text = "Exit";
-			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+			this.ExitMI.Name = "ExitMI";
+			this.ExitMI.Size = new System.Drawing.Size(180, 22);
+			this.ExitMI.Text = "Exit";
+			this.ExitMI.Click += new System.EventHandler(this.ExitMI_Click);
 			// 
 			// iconButtonList1
 			// 
@@ -232,7 +232,7 @@
 			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(417, 36);
+			this.ClientSize = new System.Drawing.Size(250, 20);
 			this.Controls.Add(this.iconButtonList1);
 			this.Font = new System.Drawing.Font("ＭＳ ゴシック", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -256,25 +256,25 @@
 		#endregion
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem ExitMI;
 		private IconButtonList iconButtonList1;
-		private System.Windows.Forms.ToolStripMenuItem buttonSizeToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem sizeSettingToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem ShowEditPatelleMI;
+		private System.Windows.Forms.ToolStripMenuItem ExportScriptMI;
+		private System.Windows.Forms.ToolStripMenuItem ShowSizeSettingMI;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-		private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem editCaptionToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem editMenuTitleToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem allColorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem EditCellFontMI;
+		private System.Windows.Forms.ToolStripMenuItem editCaptionMI;
+		private System.Windows.Forms.ToolStripMenuItem EditMenuTitleMI;
+		private System.Windows.Forms.ToolStripMenuItem EditAllColorMI;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-		private System.Windows.Forms.ToolStripMenuItem cellColorToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem copyColorToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem peasteColorToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem exportPictToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem selectDirToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem EditCellColorMI;
+		private System.Windows.Forms.ToolStripMenuItem CopyMI;
+		private System.Windows.Forms.ToolStripMenuItem PeasteMI;
+		private System.Windows.Forms.ToolStripMenuItem ExportPictOnlyMI;
+		private System.Windows.Forms.ToolStripMenuItem ClearM;
+		private System.Windows.Forms.ToolStripMenuItem selectDirMI;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
-		private System.Windows.Forms.ToolStripMenuItem editAllFontToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem EditAllFontMI;
 	}
 }
 

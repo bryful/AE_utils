@@ -1,25 +1,0 @@
-﻿(function (me){	if ( app.preferences.getPrefAsLong("Main Pref Section", "Pref_SCRIPTING_FILE_NETWORK_SECURITY") != 1){		var s = "すみません。以下の設定がオフになっています。\r\n\r\n";		s +=  "「環境設定：一般設定：スクリプトによるファイルへの書き込みとネットワークへのアクセスを許可」\r\n";		s += "\r\n";		s += "このスクリプトを使う為にはオンにする必要が有ります。\r\n";		alert(s);		return;	}	function getFileNameWithoutExt(s)	{		var ret = s;		var idx = ret.lastIndexOf(".");		if ( idx>=0){			ret = ret.substring(0,idx);		}		return ret;	}	function getScriptName()	{		var ary = $.fileName.split("/");		return File.decode( getFileNameWithoutExt(ary[ary.length-1]));	}	function getScriptPath()	{		var s = $.fileName;		return s.substring(0,s.lastIndexOf("/"));	}	var scriptName = getScriptName();	var targetComp = null;//*************************//MainWindowvar winObj = ( me instanceof Panel) ? me : new Window("palette", scriptName, [0,0,0+220,0+260]  ,{resizeable:true, maximizeButton:true, minimizeButton:true});
-//*************************//controlsvar yp = 10;var lbCaption = winObj.add("statictext",[10, yp, 10+420, yp+20],"3Dカメラのスケールを調整");yp+=25;var lbCaption2 = winObj.add("statictext",[10, yp, 10+420, yp+20],"選択したコンポを複製して実行します");yp+=30;var btnGetComp = winObj.add("button",[10, yp, 10+200, yp+25],"コンポを指定");yp+=30;var edComp = winObj.add("edittext",[10, yp, 10+200, yp+20],"未指定",{readonly:true});yp+=30;var lbScale = winObj.add("statictext",[10, yp, 10+400, yp+20],"スケール(1で100%)");yp+=25;var edScale = winObj.add("edittext",[10, yp, 10+200, yp+20],"0.1");yp+=30;var lbAddName = winObj.add("statictext",[10, yp, 10+400, yp+20],"実行後コンポレイヤ名につける文字");yp+=25;var edAddName = winObj.add("edittext",[10, yp, 10+200, yp+20],"_s0x0.1_");yp+=35;var btnExec = winObj.add("button",[10, yp, 10+200, yp+25],"実行");//*************************var getComp = function(){	targetComp = null;	edComp.text = "未指定";		var sel = app.project.selection;	if ( app.project.selection.length !== 1) {		alert("1個だけ選択してください");		return targetComp;	}	var ac = app.project.selection[0];	if ( (ac instanceof CompItem)===false)	{		alert("コンポを選択してください");		return targetComp;	}	targetComp = ac;	edComp.text = targetComp.name;	return targetComp;}btnGetComp.onClick = getComp;//*************************var scaleSetProp = function(prop,scale){	if ( (prop instanceof Property) === false)	{		return false ;	}	var v = prop.value;	if (v.length !=3) return false	//スケールが1なら何もしない	if (scale==1) return true;	if (prop.numKeys<=0)	{		var v = prop.value;		v[0] = v[0]*scale;		v[1] = v[1]*scale;		v[2] = v[2]*scale;		prop.setValue(v);			}else {		var values = [];		var times = [];		for ( var i=1; i<=prop.numKeys; i++)		{			times.push(prop.keyTime(i));			var v = prop.keyValue(i);			v[0] = v[0]*scale;			v[1] = v[1]*scale;			v[2] = v[2]*scale;			values.push(v);		}		prop.setValuesAtTimes(times,values);	}	return true;}//*************************var scaleSetLayer = function(lyr,scale,addName){	var ret = false;	var b1 = false;	var b2 = false;	if ( (lyr instanceof CameraLayer) || (lyr instanceof LightLayer) )	{		var p1 = lyr.property("ADBE Transform Group").property("ADBE Anchor Point");
-		var p2 = lyr.property("ADBE Transform Group").property("ADBE Position");
-		b1 = scaleSetProp(p1,scale);		b2 = scaleSetProp(p2,scale);	}else if (lyr.threeDLayer === true){		var p1 = lyr.property("ADBE Transform Group").property("ADBE Position");
-		var p2 = lyr.property("ADBE Transform Group").property("ADBE Scale");
-		b1 = scaleSetProp(p1,scale);		b2 = scaleSetProp(p2,scale);	}		if ((b1==true)&&(b2==true))	{		lyr.name = lyr.name + addName;		ret = true;	}	return ret;}//*************************var exec = function(){	if (( targetComp ===null)||((targetComp instanceof CompItem)===false))	{		alert("コンポが選択されていません");		return;	}			var s = edScale.text;
-	if ((s =="")||(s == " ")||(s == "  ")||(s == "　"))
-	{
-		alert("スケールが入力されていません");
-		return;
-	}
-	var scaleV = Number(s);
-	if (isNaN(scaleV)===true)
-	{
-		alert("スケールが不正です");
-		return;
-	}else{
-		if (scaleV==0) {
-			alert("0です");
-			return;
-		}
-	}	var addName = edAddName.text;	app.beginUndoGroup(scriptName);	var newComp = targetComp.duplicate();	newComp.name = targetComp.name + addName;		var lc = newComp.numLayers;	var lyrs = [];	if (lc>0)	{		for ( var i=1; i<=lc; i++)		{			var lyr = newComp.layer(i);			if ( ( lyr instanceof CameraLayer)||(lyr.threeDLayer===true))			{				lyrs.push(lyr);			}		}	}	if (lyrs.length<=0)	{		alert("3Dレイヤーがありません");		return;	}	var cnt = 0;	for ( var i=0; i<lyrs.length; i++)	{		if (scaleSetLayer(lyrs[i],scaleV,addName)==true)		{			cnt++;		}	}	if (cnt<=0)	{		newComp.remove();		alert("原因不明で失敗しました");	}else{				if (cnt ==lyrs.length)		{			alert("正常にレイヤを" + cnt + "枚修正しました");		}	}	app.endUndoGroup();}btnExec.onClick = exec;//*************************//window show	if ( ( me instanceof Panel) == false){
-		winObj.center(); 
-		winObj.show();
-	}})(this);

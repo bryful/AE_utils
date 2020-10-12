@@ -49,6 +49,8 @@ namespace AE_Menu
 		/// <param name="e"></param>
 		private void Form1_Load(object sender, EventArgs e)
 		{
+			string pp = "";
+
 			//設定ファイルの読み込み
 			JsonPref pref = new JsonPref();
 			if (pref.Load())
@@ -83,8 +85,7 @@ namespace AE_Menu
 				{
 					if(Directory.Exists(ss)==true)
 					{
-						iconButtonList1.TargetDir = ss;
-						this.Text = iconButtonList1.MenuName;
+						pp = ss;
 					}
 				}
 				Font f = iconButtonList1.Font;
@@ -104,8 +105,27 @@ namespace AE_Menu
 
 
 			}
-			this.Text = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
 			iconButtonList1.ChkJsxTemplate();
+
+
+			string[] cmds = System.Environment.GetCommandLineArgs();
+			if (cmds.Length > 1)
+			{
+				AnalysisCommand(cmds);
+				pp = "";
+			}
+
+			if (pp != "")
+			{
+				iconButtonList1.TargetDir = pp;
+				this.Text = iconButtonList1.MenuName;
+			}
+			else
+			{
+				this.Text = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
+
+			}
+
 		}
 		//-------------------------------------------------------------
 		/// <summary>
@@ -165,8 +185,108 @@ namespace AE_Menu
 		private void Form1_DragDrop(object sender, DragEventArgs e)
 		{
 			string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-			//ここでは単純にファイルをリストアップするだけ
 			GetCommand(files);
+		}
+		//-------------------------------------------------------------
+		public void AnalysisCommand(string[] cmd)
+		{
+			int cnt = cmd.Length;
+			if (cnt <= 1) return;
+
+			string fld = "";
+			int width = iconButtonList1.ButtonSize.Width;
+			int height = iconButtonList1.ButtonSize.Height;
+			bool scriptFlag = false;
+			bool pictOnlyFlag = false;
+
+			int idx = 1;
+			do
+			{
+				string c = cmd[idx];
+				// opttion
+				if ((c[0] == '/') || (c[0] == '-'))
+				{
+					string p = c.Substring(1).ToLower();
+					if (p == "e")
+					{
+						pictOnlyFlag = true;
+						scriptFlag = true;
+					}
+					else if (p == "p")
+					{
+						pictOnlyFlag = true;
+					}
+					else if (p == "w")
+					{
+						if (idx + 1 < cnt)
+						{
+							int v = 0;
+							if (int.TryParse(cmd[idx + 1], out v))
+							{
+								if (v > 100)
+								{
+									width = v;
+									idx++;
+								}
+							}
+						}
+					}
+					else if (p == "h")
+					{
+						if (idx + 1 < cnt)
+						{
+							int v = 0;
+							if (int.TryParse(cmd[idx + 1], out v))
+							{
+								if (v > 10)
+								{
+									height = v;
+									idx++;
+								}
+							}
+						}
+					}
+				}
+				else
+				{
+					if (fld == "")
+					{
+						if (Directory.Exists(cmd[idx]) == true)
+						{
+							fld = cmd[idx];
+
+						}
+					}
+				}
+				idx++;
+
+			} while (idx < cnt);
+
+
+			if ((width != iconButtonList1.ButtonSize.Width)||(height != iconButtonList1.ButtonSize.Height))
+			{
+				iconButtonList1.SetButtonSize(new Size(width, height));
+			}
+
+			if (fld !="")
+			{
+				if (iconButtonList1.Listup(fld))
+				{
+					this.Text = iconButtonList1.MenuName;
+					bool b = true;
+					if (scriptFlag)
+					{
+						b = iconButtonList1.ExportJSXDialog();
+					}
+					if (pictOnlyFlag && b) iconButtonList1.ExportPict();
+
+					if (pictOnlyFlag || scriptFlag)
+					{
+						Application.Exit();
+					}
+				}
+			}
+
 		}
 		//-------------------------------------------------------------
 		/// <summary>
@@ -195,32 +315,11 @@ namespace AE_Menu
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		//-------------------------------------------------------------
-		private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+		private void ExitMI_Click(object sender, EventArgs e)
 		{
 			Application.Exit();
 		}
-
-		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			AppInfoDialog.ShowAppInfoDialog();
-		}
-		
-
-		private void addToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void iNportToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void exportToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-
-		}
-
+		//-------------------------------------------------------------
 		public void ShowEditPalette()
 		{
 			if(m_EditPalette==null)
@@ -233,90 +332,78 @@ namespace AE_Menu
 			m_EditPalette.Show();
 		}
 
-		private void buttonSizeToolStripMenuItem_Click(object sender, EventArgs e)
+		//-------------------------------------------------------------
+		private void ShowEditPaletteMI_Click(object sender, EventArgs e)
 		{
 			ShowEditPalette();
 		}
 
-		private void sizeSettingToolStripMenuItem_Click(object sender, EventArgs e)
+		private void ShowSizeSettingMI_Click(object sender, EventArgs e)
 		{
 			SizeDialog dlg = new SizeDialog();
 			dlg.Exec(iconButtonList1);
 		}
 
-		private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+		private void EditCellFontMI_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.ShowFontDialog();
 		}
 
-		private void exportIconToolStripMenuItem_Click(object sender, EventArgs e)
+		private void  ExportPictOnlyMI_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.ExportPict();
 		}
 
-		private void editCaptionToolStripMenuItem_Click(object sender, EventArgs e)
+		private void ShowEditCaptionMI_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.ShowCaptionDialog();
 
 		}
 
-		private void exportToolStripMenuItem_Click_1(object sender, EventArgs e)
+		private void ExportScriptMI_Click(object sender, EventArgs e)
 		{
-			iconButtonList1.ExportPict();
-			iconButtonList1.ExportJSX();
+			if (iconButtonList1.ExportJSXDialog())
+			{
+				iconButtonList1.ExportPict();
+			}
 		}
 
-		private void editMenuTitleToolStripMenuItem_Click(object sender, EventArgs e)
+		private void EditTitleMI_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.ShowTitleDialog();
 		}
 
-		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			Application.Exit();
-		}
-
-		private void allColorToolStripMenuItem_Click(object sender, EventArgs e)
+		private void EditAllColorMI_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.AllColorDialog();
 		}
 
-		private void RelativePathToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
-		{
-
-		}
-
-		private void cellColorToolStripMenuItem_Click(object sender, EventArgs e)
+		private void EditCellColorMI_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.CellColorDialog();
 		}
 
-		private void copyColorToolStripMenuItem_Click(object sender, EventArgs e)
+		private void CopyMI_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.CopyColor();
 		}
 
-		private void peasteColorToolStripMenuItem_Click(object sender, EventArgs e)
+		private void PasteMI_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.PeasteColor();
 		}
 
-		private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+		private void ClearMI_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.Clear();
 		}
 
-		private void selectDirToolStripMenuItem_Click(object sender, EventArgs e)
+		private void SelectDirMI_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.SelectDirDialog();
 		}
 
-		private void editAllFontToolStripMenuItem_Click(object sender, EventArgs e)
+		private void EditAllFontMI_Click(object sender, EventArgs e)
 		{
 			iconButtonList1.ShowAllFontDialog();
 		}

@@ -1,3 +1,0 @@
-Scripts in the Shutdown folder are executed as the application quits. These scripts are executed after the project is closed but before any other application shutdown occurs.
-
-You can add your own scripts to the Shutdown folder.

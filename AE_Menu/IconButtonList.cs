@@ -479,6 +479,7 @@ namespace AE_Menu
 				{
 					m_List[i].ForeColor = this.ForeColor;
 				}
+				this.Invalidate();
 			}
 		}
 		// *****************************************************************
@@ -491,6 +492,7 @@ namespace AE_Menu
 				{
 					m_List[i].BackColor = this.BackColor;
 				}
+				this.Invalidate();
 			}
 		}
 		// *****************************************************************
@@ -595,9 +597,9 @@ namespace AE_Menu
 			return ret;
 		}
 		// *****************************************************************
-		public void ExportJSX()
+		public bool ExportJSXDialog()
 		{
-			if (m_List.Count <= 0) return;
+			if (m_List.Count <= 0) return false;
 
 			string p = Path.Combine(Path.GetDirectoryName(m_TargetDir), m_MenuName + ".jsx");
 
@@ -611,7 +613,7 @@ namespace AE_Menu
 			}
 			else
 			{
-				return;
+				return false;
 			}
 
 			string jsx = LoadJsxTemplate();
@@ -642,9 +644,12 @@ namespace AE_Menu
 			}
 			catch
 			{
+				return false;
 			}
+			return true;
 			
 		}
+	
 		// *****************************************************************
 		public void AllColorDialog()
 		{
@@ -657,15 +662,16 @@ namespace AE_Menu
 			{
 				this.ForeColor = dlg.Fore;
 				this.BackColor = dlg.Back;
-				/*
 				if (m_List.Count>0)
 				{
 					for(int i=0; i<m_List.Count;i++)
 					{
-						m_List[i].SetColors(m_BackJSX, m_BackJSXBIN, m_BackFFX);
+						m_List[i].ForeColor = this.ForeColor;
+						m_List[i].BackColor = this.BackColor;
 					}
 				}
-				*/
+				this.Invalidate();
+
 
 			}
 		}

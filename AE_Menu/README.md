@@ -1,95 +1,109 @@
-# AE_Menu
-�ŋ߂�AE��script�ŊȒP�Ƀ��j���[�����`���[���ƃt�H���g�̎w�肪�ł��Ȃ��̂ŕ��������������Đh���ł��B  
-���ƌ�����CEP�Ńp�b�P�[�W���̂����낢��ʓ|�Ȃ̂ō�������j���[�쐬�A�v���ł��B 
-  
-�t�H���_���ɂ���X�N���v�g�ƃv���Z�b�g��ǂݎ���ĕ��������̃T���l�C���摜���쐬���āAiconbutton�Ń��X�g�\�������܂��B
-�摜�Ȃ̂ŕ����T�C�Y�����R�ɐݒ�ł��܂��B  
-  
-�Ђ�����ȒP�Ƀ��j���[�����`���[������悤�ɍH�v���Ă���܂��B  
-��{�ƂȂ�X�N���v�g�̓��[�U�[������ɕҏW�\�ł��B  
-  
-## �g����
-* �K���ɃX�N���v�g���܂Ƃ߂��t�H���_�����܂��B<br>scripts�t�H���_���ɍ��ꍇ��()�ł������ēǂݍ��܂Ȃ��悤�ɂ��Ă����Ɗy�ł��B
-* ���̃t�H���_�����̃A�v���Ƀh���b�O&�h���b�v����ƃX�N���v�g�t�@�C�������j���[�Ƃ��ĕ\������܂��B
-* �E�N���b�N����ExportScript�����s����ƁA�����̃X�N���v�g���Ăяo�����j���[�X�N���v�g�������o����܂��B  
-  
-��{�I�Ɉȏ�̑���Ń��j���[���ł��܂��B
+﻿# AE_Menu
+## 作ったわけ
+最近のAEのscriptで簡単にメニューランチャー作るとフォントの指定ができないので文字が小さすぎて辛いです。  
+かと言ってCEPでパッケージ作るのもいろいろ面倒なので作ったメニュー作成アプリです。 
+<div style="text-align: center;"><img src="./img/001.png"  width=50%></div>
 
-## ������ƃJ�X�^�}�C�Y
-�E�N���b�N���j���[�ňȉ��̎����o���܂��B
-* SelectDir  �X�N���v�g�t�H���_��I�ԃ_�C�A���O�̕\���B�h���b�O&�h���b�v�̕����y�ł��B
-* EditPalette EditPalette��\�����܂��B���Ő������܂��B
-* EditCaption �\������Ă���e�L�X�g��ύX���܂��B
-* EditCellColor �I���������ڂ̂ݔw�i�F��ς��܂��B
-* EditFont �t�H���g�̕ύX���s���܂��B
-* CopyColor �I���������ڂ̔w�i�F���R�s�[���܂��B
-* PasteColor �I���������ڂ֔w�i�F���y�[�X�g���܂��B
-* SizeSetteing �I���������ڂ̃T�C�Y��ύX���܂��B
-* EditMenuTitle �E�B���h�E�ɕ\�������e�L�X�g��ύX���܂��B
-* Clear ���������܂��B
-* AllColor ���ׂĂ̍��ڂ̔w�i�F�𓯂��F�ɕύX���܂��B
-* ExportScript ���j���[�X�N���v�g�������o���܂��B
-* ExportPict �T���l�C���摜�̂ݏ����o���܂��B
-* Exit ���̃A�v�����I�����܂��B
+フォルダ内にあるスクリプトとプリセットを読み取って文字だけのサムネイル画像を作成して、**iconbutton**でリスト表示させます。
+画像なので文字サイズ等自由に設定できます。  
 
-�w�i�F�́A���ڂ�jsx/jsxbin/ffx�ŐF��ς���悤�ɂ��Ă��܂��B
+ひたすら簡単にメニューランチャーが作れるように工夫してあります。  
+基本となるスクリプトはユーザーが勝手に編集可能です。  
 
-�E�N���b�N����EditPalette��I�ԂƊȒP�ȑ���p���b�g���J���܂��B
-* UP �I�������������ڂ���Ɉړ�
-* DOWN �I�������������ڂ����Ɉړ�
-�c��͉E�N���b�N�̂��̂Ɠ����ł��B  
+## 使い方
+* 適当にスクリプトをまとめたフォルダを作ります。<br>scriptsフォルダ内に作る場合は()でくくって読み込まないようにしておくと楽です。
+* そのフォルダをこのアプリにドラッグ&ドロップするとスクリプトファイルがメニューとして表示されます。
+* 右クリックしてExportScriptを実行すると、それらのスクリプトを呼び出すメニュースクリプトが書き出されます。  
+
+基本的に以上の操作でメニューができます。
+
+## 変更点
+* 背景色をJSX/FFXで分けるのやめました。めんどくさいので
+* コピーする時フォントの情報も含めるようにした。
+* FFXの読み込み時CS6とかCC2020のようにバージョン文字がないとメニューに表示しないようにスクリプトを修正。**アプリでは普通に表示されます。**
+* ffxの名前にCS6/CC2020とかのバージョンがあったら削除するようにしました。
+
+
+## 注意点
+* プリセットファイルの登録の仕方が変わりました。対象のAEのバージョンの文字を入れないと認識しません。
+* **CS6**の場合は **CS6** 、**CC2020**は **CC2020**の文字列がないとAEのスクリプトメニュー上では表示されないように仕様を変えました。
+* AE_Menuアプリ自体では両方表示されますので注意です。
+* AE_Menuで作られた
+
+
+## ちょっとカスタマイズ
+右クリックメニューで以下の事が出来ます。
+* SelectDir  スクリプトフォルダを選ぶダイアログの表示。ドラッグ&ドロップの方が楽です。
+* EditPalette EditPaletteを表示します。下で説明します。
+* EditCaption 表示されているテキストを変更します。
+* EditCellColor 選択した項目のみ背景色を変えます。
+* EditFont フォントの変更を行います。
+* CopyColor 選択した項目の背景色をコピーします。
+* PasteColor 選択した項目へ背景色をペーストします。
+* SizeSetteing 選択した項目のサイズを変更します。
+* EditMenuTitle ウィンドウに表示されるテキストを変更します。
+* Clear 初期化します。
+* AllColor すべての項目の背景色を同じ色に変更します。
+* ExportScript メニュースクリプトを書き出します。
+* ExportPict サムネイル画像のみ書き出します。
+* Exit このアプリを終了します。
+
+右クリックしてEditPaletteを選ぶと簡単な操作パレットが開きます。
+* UP 選択したした項目を上に移動
+* DOWN 選択したした項目を下に移動
+残りは右クリックのものと同じです。  
   
-���̃��j���[�̃X�^�C���̐ݒ�͕ۑ�����܂���B  
-���ۂ̂Ƃ��낱���ōׂ��Ȓ������s�����A�����o�������X�N���v�g���C�����������y�ő����̂ł�����𐄏��ł��B  
+このメニューのスタイルの設定は保存されません。  
+実際のところここで細かな調整を行うより、書き出ししたスクリプトを修正した方が楽で速いのでそちらを推奨です。  
 
-## ���x�Ȏg����
-���̃��j���[�A�v�������s�����exe�t�@�C���Ɠ����ꏊ�ɓ�����jsx�t�@�C���������o���܂��B  
-ExportScript�����s���鎞�͂���jsx�t�@�C�����e���v���[�g�Ƃ��ď����o�����s���܂��̂ŁA�Ȃ񂩂������炱����C���ł��B  
-�C�����ړ���jsx��ǂ�ł��������B
+## 高度な使い方
+このメニューアプリを実行するとexeファイルと同じ場所に同名のjsxファイルを書き出します。  
+ExportScriptを実行する時はこのjsxファイルをテンプレートとして書き出しを行いますので、なんかあったらこれを修正です。  
+修正項目等はjsxを読んでください。
 
-## �����o���ꂽ�X�N���v�g��ҏW
-�����o���ꂽ�X�N���v�g�͈ȉ��̂悤�ɂȂ�܂��B
+## 書き出されたスクリプトを編集
+書き出されたスクリプトは以下のようになります。
 ```
 (function(me){
 	//----------------------------------
-	// ���j���[�ɕ\�������^�C�g��
-	var scriptName = "�ȒP���j���[";
+	// メニューに表示されるタイトル
+	var scriptName = "簡単メニュー";
 	//----------------------------------
-	//�ǂݍ��ރt�H���_
-	var cmdItemsPathBase = "./(�ȒP���j���[)";
-	//�ǂݍ��ރX�N���v�g��
+	//読み込むフォルダ
+	var cmdItemsPathBase = "./(簡単メニュー)";
+	//読み込むスクリプト等
 	var cmdItemsPath =[
-"�V���v�����ߌ�3_CS6.ffx",
-"�V���v�����ߌ�3_�ӂ��u���V_CS6.ffx",
-"�V���v�����ߌ�3_�e���T��_CS6.ffx",
-"�V���v�����ߌ�3_���~��_CS6.ffx",
-"�V���v�����ߌ�3_������_CS6.ffx"
+"シンプル透過光3_CS6.ffx",
+"シンプル透過光3_ふちブラシ_CS6.ffx",
+"シンプル透過光3_テレサ光_CS6.ffx",
+"シンプル透過光3_下敷き_CS6.ffx",
+"シンプル透過光3_中央光_CS6.ffx"
 	];
-	// �A�C�R���T�C�Y
+	// アイコンサイズ
 	var iconWidth = 240; 
 	var iconHeight = 20; 
 
 	var scrolBarWidth = 30;
-// �ȉ��ȗ�
+// 以下省略
 })(this);
 ```
 
-cmdItemsPathBase�ϐ��̓��e�����������邱�ƂŐ�΃p�X�E���΃p�X��ǂݍ��ރt�H���_����ύX�ł��܂��B
-cmdItemsPath�z�񂪎��ۂ̃X�N���v�g�EFFX�̃t�@�C�����ł��B�����ŏ����Ƃ������ł��܂��B
+cmdItemsPathBase変数の内容を書き換えることで絶対パス・相対パスや読み込むフォルダ名を変更できます。
+cmdItemsPath配列が実際のスクリプト・FFXのファイル名です。ここで順庵とか調整できます。
 
 ## Dependency
 Visual studio 2019 C#
 
 
-## Setup
+
+## References
 
 ## License
+
 This software is released under the MIT License, see LICENSE
 
 ## Authors
 
-bry-ful(Hiroshi Furuhashi)  
-twitter:[bryful](https://twitter.com/bryful)  
+bry-ful Hiroshi Furuhashi
 bryful@gmail.com  
-
-## References
+twitter:bryful

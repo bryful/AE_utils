@@ -317,20 +317,17 @@ namespace AE_Menu
 		// ******************************************************
 		protected override void OnFontChanged(EventArgs e)
 		{
-			base.OnFontChanged(e);
 			CreatePict();
 			this.Invalidate();
 		}
 		protected override void OnForeColorChanged(EventArgs e)
 		{
-			base.OnForeColorChanged(e);
 			CreatePict();
 			this.Invalidate();
 
 		}
 		protected override void OnBackColorChanged(EventArgs e)
 		{
-			base.OnBackColorChanged(e);
 			CreatePict();
 			this.Invalidate();
 		}
