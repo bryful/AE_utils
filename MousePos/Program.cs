@@ -24,8 +24,8 @@ namespace MousePos
 	{
 		static void Usage()
 		{
-			string u = 
-				"MousePos.exe - Disp Mouse Cursor Position.\r\n"+
+			string u =
+				"MousePos.exe - Show mouse cursor position.\r\n" +
 				"    usage: MousePos [options]\r\n" +
 				"  options:\r\n"+
 				"           -a disp AE toSource() style (default)\r\n"+
