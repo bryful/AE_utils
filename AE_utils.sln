@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_ImageViewer", "AE_ImageV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_Menu", "AE_Menu\AE_Menu.csproj", "{7C50A9E5-657A-49C0-ADEF-0596CA2DAC1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MousePos", "MousePos\MousePos.csproj", "{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{7C50A9E5-657A-49C0-ADEF-0596CA2DAC1B}.Release|x64.Build.0 = Release|x64
 		{7C50A9E5-657A-49C0-ADEF-0596CA2DAC1B}.Release|x86.ActiveCfg = Release|x86
 		{7C50A9E5-657A-49C0-ADEF-0596CA2DAC1B}.Release|x86.Build.0 = Release|x86
+		{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}.Debug|x64.Build.0 = Debug|Any CPU
+		{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}.Debug|x86.Build.0 = Debug|Any CPU
+		{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}.Release|x64.ActiveCfg = Release|Any CPU
+		{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}.Release|x64.Build.0 = Release|Any CPU
+		{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}.Release|x86.ActiveCfg = Release|Any CPU
+		{48FDEC66-F431-4BAF-9ED1-5F4D8B05F113}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
