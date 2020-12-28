@@ -25,6 +25,21 @@ namespace AE_Menu
 
 	public class IconButton : Control
 	{
+		private int m_SideWidth = 5;
+		public int SideWidth
+		{
+			get { return m_SideWidth; }
+			set
+			{
+				if(m_SideWidth != value)
+				{
+					m_SideWidth = value;
+					CreatePict();
+					this.Invalidate();
+				}
+			}
+		}
+
 		public int Index = -1;
 		private string m_FileName = "";
 		public string FileName 
@@ -129,12 +144,12 @@ namespace AE_Menu
 			if (File.Exists(filename))
 			{
 				m_FileName = filename;
-				m_Caption = Path.GetFileName(filename);
+				m_Caption = CaptionStr(Path.GetFileName(filename));
 			}
 			else
 			{
 				m_FileName = "";
-				m_Caption = filename;
+				m_Caption = "";
 
 			}
 			m_sf.Alignment = StringAlignment.Near;
@@ -162,10 +177,12 @@ namespace AE_Menu
 		// ******************************************************
 		public void CreatePict()
 		{
-			if ((this.Width <= 0) || (this.Height <= 0)) return;
-			if ( (this.Width!=m_bitmap.Width)|| (this.Height != m_bitmap.Height)) 
+			if ((this.Width <= m_SideWidth * 2) || (this.Height <= 0)) return;
+			int w = this.Width - m_SideWidth * 2;
+			int h = this.Height;
+			if ( (w!=m_bitmap.Width)|| (w != m_bitmap.Height)) 
 			{
-				m_bitmap = new Bitmap(this.Width, this.Height);
+				m_bitmap = new Bitmap(w, h);
 			}
 			Graphics g = Graphics.FromImage(m_bitmap);
 			g.TextRenderingHint = TextRenderingHint.AntiAlias;
@@ -175,7 +192,8 @@ namespace AE_Menu
 			try
 			{
 				sb.Color = this.BackColor;
-				g.FillRectangle(sb, new Rectangle(-1, -1, this.Width + 2, this.Height + 2));
+				g.FillRectangle(sb, new Rectangle(-1, -1, w + 2, h + 2));
+
 				if (m_Caption != "")
 				{
 					SizeF stringSize = g.MeasureString(m_Caption, this.Font, 2000, m_sf);
@@ -189,7 +207,7 @@ namespace AE_Menu
 						stringSize = g.MeasureString(m_Caption, this.Font, 2000, m_sf);
 					} while (stringSize.Width > m_bitmap.Width);
 					sb.Color = this.ForeColor;
-					Rectangle rct = new Rectangle(5, 0, m_bitmap.Width, m_bitmap.Height);
+					Rectangle rct = new Rectangle(0, 0, w, h);
 					g.DrawString(m_Caption, this.Font, sb, rct, m_sf);
 				}
 
@@ -203,22 +221,33 @@ namespace AE_Menu
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			Graphics g = e.Graphics;
-			g.DrawImage(m_bitmap, 0, 0);
-			if (Active == true)
+			SolidBrush sb = new SolidBrush(this.BackColor);
+			try
 			{
-				Pen p = new Pen(this.ForeColor);
-				try
+				g.FillRectangle(sb, this.ClientRectangle);
+				g.DrawImage(m_bitmap, m_SideWidth, 0);
+				if (Active == true)
 				{
-					Rectangle rct = new Rectangle(0, 0, this.ClientSize.Width - 1, this.ClientSize.Height - 1);
-					p.Width = 1;
-					g.DrawRectangle(p, rct);
+					Pen p = new Pen(this.ForeColor);
+					try
+					{
+						Rectangle rct = new Rectangle(0, 0, this.ClientSize.Width - 1, this.ClientSize.Height - 1);
+						p.Width = 1;
+						g.DrawRectangle(p, rct);
 
-				}
-				finally
-				{
-					p.Dispose();
+					}
+					finally
+					{
+						p.Dispose();
+					}
 				}
 			}
+			finally
+			{
+				sb.Dispose();
+			}
+
+
 
 
 		}
@@ -230,6 +259,46 @@ namespace AE_Menu
 			this.Invalidate();
 		}
 		// ******************************************************
+		// ******************************************************
+		public string CaptionStr(string s)
+		{
+			string[] tag = new string[] { "CS6", "CC2020", "CC2021", "CC2022", "CC2023", "CC", "CC2015", "CC2016", "CC2017", "CC2018", "CC2019" };
+			s = s.Trim();
+			if (s == "") return s;
+
+			int idx = -1;
+			int tagIdx = -1;
+			string s0 = s.ToUpper();
+			for (int i=0; i<tag.Length;i++)
+			{
+				int idx2 = s0.LastIndexOf(tag[i]);
+				if(idx2>=0)
+				{
+					idx = idx2;
+					tagIdx = i;
+					break;
+				}
+			}
+			if (idx < 0)
+			{
+				return s;
+			}
+			s = s.Replace(tag[tagIdx], "");
+			s = s.Replace("__", "_");
+			s = s.Replace("--", "-");
+			s = s.Replace("  ", " ");
+			char c = s[s.Length - 1];
+			if ( (c== '_')||(c=='-')|| (c == '.'))
+			{
+				s = s.Substring(0, s.Length - 1);
+			}
+
+			return s;
+
+
+		}
+
+		// ******************************************************
 		public bool ReplaceFilename(string fn)
 		{
 			bool ret = false;
@@ -238,7 +307,7 @@ namespace AE_Menu
 				if(m_FileName != fn)
 				{
 					m_FileName = fn;
-					m_Caption = Path.GetFileName(fn);
+					m_Caption = CaptionStr(Path.GetFileName(fn));
 					CreatePict();
 					this.Invalidate();
 				}
@@ -248,20 +317,17 @@ namespace AE_Menu
 		// ******************************************************
 		protected override void OnFontChanged(EventArgs e)
 		{
-			base.OnFontChanged(e);
 			CreatePict();
 			this.Invalidate();
 		}
 		protected override void OnForeColorChanged(EventArgs e)
 		{
-			base.OnForeColorChanged(e);
 			CreatePict();
 			this.Invalidate();
 
 		}
 		protected override void OnBackColorChanged(EventArgs e)
 		{
-			base.OnBackColorChanged(e);
 			CreatePict();
 			this.Invalidate();
 		}
@@ -289,7 +355,7 @@ namespace AE_Menu
 			if (m_Jsxtype != JSXTYPE.NONE)
 			{
 				m_FileName = s;
-				m_Caption = Path.GetFileNameWithoutExtension(s);
+				m_Caption = CaptionStr(Path.GetFileNameWithoutExtension(s));
 				ret = true;
 			}
 			CreatePict();

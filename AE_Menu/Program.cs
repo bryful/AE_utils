@@ -8,6 +8,7 @@ using Microsoft.VisualBasic.ApplicationServices;
 
 namespace AE_Menu
 {
+	/*
 	public class MyApp : WindowsFormsApplicationBase
 	{
 		public MyApp()
@@ -26,6 +27,7 @@ namespace AE_Menu
 			f.GetCommand(e.CommandLine.ToArray<string>());
 		}
 	}
+	*/
 	static class Program
 	{
 		/// <summary>
@@ -35,12 +37,12 @@ namespace AE_Menu
 		static void Main(string[] args)
 		{
 			//下の3行を復活させれば多重起動ができる
-			//Application.EnableVisualStyles();
-			//Application.SetCompatibleTextRenderingDefault(false);
-			//Application.Run(new Form1());
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
+			Application.Run(new Form1());
 
-			MyApp winAppBase = new MyApp();
-			winAppBase.Run(args);
+			//MyApp winAppBase = new MyApp();
+			//winAppBase.Run(args);
 		}
 	}
 

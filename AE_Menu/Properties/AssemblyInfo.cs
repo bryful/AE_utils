@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
 [assembly: AssemblyTitle("AE_Menu")]
-[assembly: AssemblyDescription("アプリのスケルトン")]
+[assembly: AssemblyDescription("After Efefcts用スクリプトランチャー作成アプリ")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("bry-ful")]
 [assembly: AssemblyProduct("AE_Menu")]
-[assembly: AssemblyCopyright("Copyright © bry-ful 2019")]
+[assembly: AssemblyCopyright("Copyright © bry-ful 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
