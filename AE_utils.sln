@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
+# Blend for Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_Util_skelton", "AE_Util_skelton\AE_Util_skelton.csproj", "{831CCEAB-566A-4C07-B29C-8195AD08BFCF}"
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_ColorPalette", "AE_ColorPalette\AE_ColorPalette.csproj", "{79D3754E-9534-4F40-8516-30CD9215289D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_Calc", "AE_Calc\AE_Calc.csproj", "{79B6551D-46F6-4779-89F3-1474484F7B76}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AE_Triangle", "AE_Triangle\AE_Triangle.csproj", "{B870AD23-506F-4D90-BAB1-78A6CB015A89}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aeclip", "aeclip\aeclip.csproj", "{7DC50DB8-0AD4-4DD2-8190-607CA6C98FC1}"
 EndProject
@@ -79,18 +77,6 @@ Global
 		{79B6551D-46F6-4779-89F3-1474484F7B76}.Release|x64.Build.0 = Release|x64
 		{79B6551D-46F6-4779-89F3-1474484F7B76}.Release|x86.ActiveCfg = Release|x86
 		{79B6551D-46F6-4779-89F3-1474484F7B76}.Release|x86.Build.0 = Release|x86
-		{B870AD23-506F-4D90-BAB1-78A6CB015A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B870AD23-506F-4D90-BAB1-78A6CB015A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B870AD23-506F-4D90-BAB1-78A6CB015A89}.Debug|x64.ActiveCfg = Debug|x64
-		{B870AD23-506F-4D90-BAB1-78A6CB015A89}.Debug|x64.Build.0 = Debug|x64
-		{B870AD23-506F-4D90-BAB1-78A6CB015A89}.Debug|x86.ActiveCfg = Debug|x86
-		{B870AD23-506F-4D90-BAB1-78A6CB015A89}.Debug|x86.Build.0 = Debug|x86
-		{B870AD23-506F-4D90-BAB1-78A6CB015A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B870AD23-506F-4D90-BAB1-78A6CB015A89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B870AD23-506F-4D90-BAB1-78A6CB015A89}.Release|x64.ActiveCfg = Release|x64
-		{B870AD23-506F-4D90-BAB1-78A6CB015A89}.Release|x64.Build.0 = Release|x64
-		{B870AD23-506F-4D90-BAB1-78A6CB015A89}.Release|x86.ActiveCfg = Release|x86
-		{B870AD23-506F-4D90-BAB1-78A6CB015A89}.Release|x86.Build.0 = Release|x86
 		{7DC50DB8-0AD4-4DD2-8190-607CA6C98FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7DC50DB8-0AD4-4DD2-8190-607CA6C98FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DC50DB8-0AD4-4DD2-8190-607CA6C98FC1}.Debug|x64.ActiveCfg = Debug|Any CPU
