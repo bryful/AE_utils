@@ -121,7 +121,7 @@ namespace AE_Util_skelton
             {
                 foreach (string s in cmd)
                 {
-                    listBox1.Items.Add(s);
+                    lbInstalled.Items.Add(s);
                 }
             }
         }
@@ -140,44 +140,37 @@ namespace AE_Util_skelton
         {
             AppInfoDialog.ShowAppInfoDialog();
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void btnInstalled_Click(object sender, EventArgs e)
         {
-
-            JsonPref j = new JsonPref();
-
-            int[] aaa = new int[] { 78, 9, 12 };
-            double[] bbb = new double[] { 0.7, 0.01, 0.12 };
-            string[] ccc = new string[] { "eee", "sfskjbF", "13" };
-            j.SetIntArray("aa", aaa);
-            j.SetDoubleArray("bb", bbb);
-            j.SetStringArray("cc", ccc);
-
-            MessageBox.Show(j.ToJson());
-
+            string[] a = NFsAE.FindAfterFX();
+            lbInstalled.Items.Clear();
+            lbInstalled.Items.AddRange( NFsAE.CombineAE( a));
         }
 
 
-        /*
-private void button1_Click(object sender, EventArgs e)
-{
-	dynamic a = new DynamicJson();
-	a.fff = new string[] { "a", "B" };
-	a.fff = "12";
-	//a.fff = new { aaa=12, ccc="www" };
+		private void btnProcess_Click(object sender, EventArgs e)
+		{
+            string[] a = NFsAE.ProcessList();
+            lbProcess.Items.Clear();
+            lbProcess.Items.AddRange(a);
+        }
 
-	MessageBox.Show(a.fff.GetType().ToString());
+		private void btnRun_Click(object sender, EventArgs e)
+		{
+            AEStutas aes = nFsAE1.Run();
+            string mes = "";
+            switch (aes)
+			{
+                case AEStutas.None: mes = "失敗？";break;
+                case AEStutas.IsRunStart: mes = "起動成功！"; break;
+                case AEStutas.IsRunning: mes = "すでに起動中"; break;
+            }
+            MessageBox.Show(mes);
+        }
 
-	JsonPref s = new JsonPref();
-	s.AddInt("aaa", 99);
-	string ss = s.ToJson();
-	MessageBox.Show(ss);
-	s.Parse(ss);
-	string sss = s.ToJson();
-	MessageBox.Show(sss);
-
-	int i = s.GetInt("aaa");
-	MessageBox.Show(String.Format("{0}", i));
-}
-*/
-    }
+		private void btnScriptCode_Click(object sender, EventArgs e)
+		{
+            nFsAE1.ExecScriptCode(ttbScriptCode.Text);
+		}
+	}
 }
