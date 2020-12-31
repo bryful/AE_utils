@@ -9,62 +9,19 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
+
+using BRY;
 namespace aeWin
 {
 	class Program
 	{
 		#region DllImport
-		// トップレベルウィンドウを列挙する
-		[DllImport("user32.dll")]
-		private static extern bool EnumWindows(EnumWindowsDelegate lpEnumFunc, IntPtr lParam);
-
-		// ウィンドウの表示状態を調べる(WS_VISIBLEスタイルを持つかを調べる)
-		[DllImport("user32.dll")]
-		private static extern bool IsWindowVisible(IntPtr hWnd);
-
-		//ウィンドウのタイトルの長さを取得する
-		[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-		private static extern int GetWindowTextLength(IntPtr hWnd);
-
-		// ウィンドウのタイトルバーのテキストを取得
-		[DllImport("user32.dll", CharSet = CharSet.Auto)]
-		private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
-
-		// ウィンドウを作成したプロセスIDを取得
-		//[DllImport("user32")]// 「.dll」なくても動いてた
-		[DllImport("user32.dll")]
-		private static extern int GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
-
-		// EnumWindowsから呼び出されるコールバック関数のデリゲート
-		private delegate bool EnumWindowsDelegate(IntPtr hWnd, IntPtr lParam);
-
-		[DllImport("user32.dll", SetLastError = true)]
-		static extern int GetWindowLong(IntPtr hWnd, int nIndex);
 		[DllImport("user32.dll", SetLastError = true)]
 		static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 		[DllImport("User32.dll")]
 		private static extern int SetForegroundWindow(IntPtr hWnd);
 		#endregion
-		private static List<Process> ProcessList = new List<Process>();
-
-		private static bool EnumerateWindows(IntPtr hWnd, IntPtr lParam)
-		{
-			if (IsWindowVisible(hWnd) == false) return true;
-
-			int textLen = GetWindowTextLength(hWnd);
-			if (textLen == 0) return true;
-
-			// ウィンドウハンドルからプロセスIDを取得
-			int processId;
-			GetWindowThreadProcessId(hWnd, out processId);
-			// プロセスIDからProcessクラスのインスタンスを取得
-			Process p = Process.GetProcessById(processId);
-			if (p.ProcessName == "AfterFX")
-			{
-				ProcessList.Add(p);
-			}
-			return true;
-		}
+	
 		public enum EXEC_MODE{
 			NONE = 0,
 			NORMAL,
@@ -82,7 +39,7 @@ namespace aeWin
 			mes += "   option : /max    ウィンドウを最大化(デフォルト)\r\n";
 			mes += "            /min    ウィンドウを最小化\r\n";
 			mes += "            /normal ウィンドウを通常化\r\n";
-			mes += "            /id[xxxx] 指定したプロセスIDのみに実行\r\n";
+			mes += "            /i[xxxx] 指定したプロセスIDのみに実行\r\n";
 			mes += "            /help   この表示\r\n";
 
 			Console.WriteLine(mes);
@@ -149,19 +106,18 @@ namespace aeWin
 				return;
 			}
 
-			ProcessList.Clear();
-			EnumWindows(EnumerateWindows, IntPtr.Zero);
+			ProcessAE[] lst = NFsAE.ProcessAEList();
 
-			if(ProcessList.Count>0)
+			if(lst.Length>0)
 			{
 				if (pid > 0)
 				{
 					Process pp = null;
-					foreach (Process p in ProcessList)
+					foreach (ProcessAE p in lst)
 					{
-						if(p.Id == pid)
+						if(p.ProcessID == pid)
 						{
-							pp = p;
+							pp = p.Proc;
 							break;
 						}
 					}
@@ -173,11 +129,11 @@ namespace aeWin
 						return;
 					}
 				}
-				foreach (Process p in ProcessList)
+				foreach (ProcessAE p in lst)
 				{
-					p.WaitForInputIdle();
-					ShowWindow(p.MainWindowHandle, (int)md);
-					SetForegroundWindow(p.MainWindowHandle);
+					p.Proc.WaitForInputIdle();
+					ShowWindow(p.Proc.MainWindowHandle, (int)md);
+					SetForegroundWindow(p.Proc.MainWindowHandle);
 				}
 			}
 			else

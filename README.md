@@ -15,14 +15,26 @@ Adobe After Effectsで作業を少し楽にするための小物ツール類で�
 これらのアプリのテンプレートとして作ったものです。
 
 <b>NFsAEクラス</b>
-同じコードをなるべく使いまわすために作ったクラスです。
-インストールされているAEをリストアップしたり、実行中のAEの状態を確認できます。
+同じコードをなるべく使いまわすために作ったクラスです。<br>
+インストールされているAEをリストアップしたり、実行中のAEの状態を確認できます。<br>
 スクリプト実行の機能もあります。
-AfterFX.exe -r でスクリプトを呼び出すとウィンドウの最大化が解除されてしまうので、無理やり最大化状態に復帰させるように呼び出します。
+<br>
+AfterFX.exe -r でスクリプトを呼び出すとウィンドウの最大化が解除されてしまうので、無理やり最大化状態に復帰させるように呼び出します。内部で<b>aeWin.exe</b>を呼び出して実装しています。
 
 ビルドする際は、プラットフォームをx64にするか、anycpuで「32ビットを選ぶ」をOFFにしてください。エラーが出ます。
 
+
+<b>ProcessAEクラス</b>
+Processクラスから、いろいろな情報を引き出すクラス。<br>
 win32apiを使いまくっているので、Macへの移植はかなり難しくなりました。
+
+* ProcessID プロセスID
+* WindowTitle タイトルバー文字列
+* FileName 実行ファイルAfterFX.exeのフルパス
+* VersionStr バージョン識別の文字列
+* IsWS_MAXIMIZE ウィンドウが最大化ならtrue
+* ProjectName aepファイルのフルパス
+* IsNoSaved aepが保存されていない場合true
 
 <hr>
 
@@ -32,31 +44,29 @@ After Effectsの状態を調べるコンソールアプリです。
 
 ```
 ([
-	{
-	ProcessID:16320,
+	{ProcessID:16320,
 	WindowTitle:"Adobe After Effects 2020 - 名称未設定プロジェクト.aep *",
 	FileName:"C:\Program Files\Adobe\Adobe After Effects 2020\Support Files\AfterFX.exe",
 	VersionStr:"2020",
-	IsWindowMax:True,
+	IsWS_MAXIMIZE:True,
 	ProjectName:"名称未設定プロジェクト.aep",
 	IsNoSaved:True
-    },
-	{
-	ProcessID:23172,
+	},
+	{ProcessID:23172,
 	WindowTitle:"Adobe After Effects - 名称未設定プロジェクト.aep *",
 	FileName:"C:\Program Files\Adobe\Adobe After Effects CC 2019\Support Files\AfterFX.exe",
 	VersionStr:"CC 2019",
-	IsWindowMax:False,
+	IsWS_MAXIMIZE:False,
 	ProjectName:"名称未設定プロジェクト.aep",
-	IsNoSaved:True
-	}
+	IsNoSaved:True}
 ])
+
 ```
 * ProcessID プロセスID
 * WindowTitle タイトルバー文字列
 * FileName 実行ファイルAfterFX.exeのフルパス
 * VersionStr バージョン識別の文字列
-* IsWindowMax ウィンドウが最大化ならtrue
+* IsWS_MAXIMIZE ウィンドウが最大化ならtrue
 * ProjectName aepファイルのフルパス
 * IsNoSaved aepが保存されていない場合true
 
@@ -74,9 +84,15 @@ After Efefctsのウィンドウの最大化・最小化を制御するコンソ�
    option : /max    ウィンドウを最大化(デフォルト)
             /min    ウィンドウを最小化
             /normal ウィンドウを通常化
-            /id[xxxx] 指定したプロセスIDのみに実行
+            /i[xxxx] 指定したプロセスIDのみに実行
             /help   この表示
 ```
+
+NFsAEクラスでウィンドウの最大化を実装するために作ったものですが、単独でも使えます。
+前に作った奴はAEを複数起動させているとどれか１個だけしか処理していなかったので、複数起動させていても使えるようにしてあります。
+
+何もオプションを付けていない場合は、すべてのAfterFXを最大化させます。
+
 
 <hr>
 

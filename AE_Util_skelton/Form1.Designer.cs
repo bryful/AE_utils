@@ -46,7 +46,7 @@
 			this.btnRun = new System.Windows.Forms.Button();
 			this.ttbScriptCode = new System.Windows.Forms.TextBox();
 			this.btnScriptCode = new System.Windows.Forms.Button();
-			this.nFsAE1 = new BRY.NFsAE();
+			this.nFsAE1 = new BRY.NFsAECmp();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -216,9 +216,10 @@
 			// 
 			// nFsAE1
 			// 
-			this.nFsAE1.CombTargetAE = this.cmbAE;
-			this.nFsAE1.TargetAE = "";
-			this.nFsAE1.TargetAEIndex = -1;
+			this.nFsAE1.AeWin = "./aeWin.exe";
+			this.nFsAE1.CombTargetVersion = this.cmbAE;
+			this.nFsAE1.TargetVersionIndex = 0;
+			this.nFsAE1.TargetVersionStr = "2020";
 			// 
 			// Form1
 			// 
@@ -270,7 +271,7 @@
 		private System.Windows.Forms.Button btnRun;
 		private System.Windows.Forms.TextBox ttbScriptCode;
 		private System.Windows.Forms.Button btnScriptCode;
-		private BRY.NFsAE nFsAE1;
+		private BRY.NFsAECmp nFsAE1;
 	}
 }
 

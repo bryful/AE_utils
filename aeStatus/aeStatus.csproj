@@ -60,6 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AE_Util_skelton\NFsAE.cs">
+      <Link>NFsAE.cs</Link>
+    </Compile>
+    <Compile Include="..\AE_Util_skelton\ProcessAE.cs">
+      <Link>ProcessAE.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

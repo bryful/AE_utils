@@ -143,7 +143,7 @@ namespace AE_Util_skelton
         private void btnInstalled_Click(object sender, EventArgs e)
         {
             
-            string[] a = NFsAE.FindAfterFX();
+            string[] a = NFsAE.FindInstalledAfterFX();
             lbInstalled.Items.Clear();
             lbInstalled.Items.AddRange( NFsAE.CombineAE( a));
             

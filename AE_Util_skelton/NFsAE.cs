@@ -9,69 +9,22 @@ using System.Windows.Forms;
 
 namespace BRY
 {
-	public class ProcessAE
-	{
-		public string VersionStr;
-		public string ProjectName;
-		public string FileName;
-
-		public Process Proc = null;
-		public int ProcID = 0;
-		public bool IsWS_MAXIMIZE;
-		public bool IsNoSaved;
-		public ProcessAE()
-		{
-			VersionStr = "";
-			ProjectName = "";
-			FileName = "";
-			IsWS_MAXIMIZE = false;
-			Proc = null;
-			IsNoSaved = false;
-
-		}
-		public ProcessAE(string vid, string pn, string fn)
-		{
-			VersionStr = vid;
-			ProjectName = pn;
-			FileName = "";
-			Proc = null;
-			IsNoSaved = false;
-		}
-		public override string ToString()
-		{
-			string id = "";
-			if (Proc != null)
-			{
-				id = String.Format("handle:{0} id:{1}", Proc.Handle, Proc.Id);
-
-			}
-			return String.Format("Version:\"{0}\" Priject:\"{1}\" FileName:\"{2}\" MAX:{3} IsNoSaved:{4} {5}",
-				VersionStr,
-				ProjectName,
-				FileName,
-				IsWS_MAXIMIZE,
-				IsNoSaved,
-				id
-				);
-		}
-		public string aerender
-		{
-			get
-			{
-				string n = Path.GetDirectoryName(FileName);
-				return Path.Combine(n, "aerender.exe");
-			}
-		}
-
-	}
 	public enum AEStutas
 	{
+		/// <summary>
+		/// AEの状態 不明
+		/// </summary>
 		None,
+		/// <summary>
+		/// すでに起動中
+		/// </summary>
 		IsRunning,
+		/// <summary>
+		/// 起動スタート
+		/// </summary>
 		IsRunStart
 	}
-
-	public class NFsAE : Component
+	public class NFsAE
 	{
 		#region DllImport
 		// トップレベルウィンドウを列挙する
@@ -106,7 +59,14 @@ namespace BRY
 		private static extern int SetForegroundWindow(IntPtr hWnd);
 		#endregion
 
+		#region Const
+		static public readonly string TARGET_DIR = @"C:\Program Files\Adobe";
+		static public readonly string TARGET_HEAD = @"Adobe After Effects";
+		static public readonly string TARGET_EXE = @"\Support Files\AfterFX.exe";
+		static public readonly string TARGET_RENDER = @"\Support Files\aerender.exe";
+		#endregion
 
+		#region Event
 		public event EventHandler TargetAEIndexChanged;
 
 		protected virtual void OnTargetAEIndexChanged(EventArgs e)
@@ -116,33 +76,30 @@ namespace BRY
 				TargetAEIndexChanged(this, e);
 			}
 		}
-
-		static private readonly string TARGET_DIR = @"C:\Program Files\Adobe";
-		static private readonly string TARGET_HEAD = @"Adobe After Effects";
-		static private readonly string TARGET_EXE = @"\Support Files\AfterFX.exe";
-		static private readonly string TARGET_RENDER = @"\Support Files\aerender.exe";
-
+		#endregion
 		#region installed
 		private string[] m_InstalledAFX = new string[0];
 		public int InstallCount
 		{
 			get { return m_InstalledAFX.Length; }
 		}
-		public string[] InstalledAFX()
+		public string[] InstalledAFX
 		{
-			return m_InstalledAFX;
+			get
+			{
+				return m_InstalledAFX;
+			}
 		}
 		#endregion
 
-
-		public string TargetAE
+		public string TargetVersionStr
 		{
 			get
 			{
 				string ret = "";
-				if (m_TargetAEIndex >= 0)
+				if (m_TargetVersionIndex >= 0)
 				{
-					ret = m_InstalledAFX[m_TargetAEIndex];
+					ret = m_InstalledAFX[m_TargetVersionIndex].ToUpper();
 				}
 				return ret;
 			}
@@ -156,7 +113,7 @@ namespace BRY
 					{
 						if (tag == m_InstalledAFX[i])
 						{
-							TargetAEIndex = i;
+							TargetVersionIndex = i;
 							break;
 						}
 					}
@@ -164,36 +121,27 @@ namespace BRY
 			}
 		}
 
-		private int m_TargetAEIndex = -1;
-		public int TargetAEIndex
+		private int m_TargetVersionIndex = -1;
+		public int TargetVersionIndex
 		{
-			get { return m_TargetAEIndex; }
+			get { return m_TargetVersionIndex; }
 			set
 			{
-				if (m_TargetAEIndex != value)
+				if (m_TargetVersionIndex != value)
 				{
-					m_TargetAEIndex = value;
-					if (m_CombTargetAE != null)
-					{
-						if (m_CombTargetAE.SelectedIndex != m_TargetAEIndex)
-						{
-							m_CombTargetAE.SelectedIndex = m_TargetAEIndex;
-						}
-
-					}
+					m_TargetVersionIndex = value;
 					OnTargetAEIndexChanged(new EventArgs());
 				}
 			}
 		}
-
-		public string AEPath
+		public string AfterFXPath
 		{
 			get
 			{
 				string ret = "";
-				if (m_TargetAEIndex >= 0)
+				if (m_TargetVersionIndex >= 0)
 				{
-					ret = CombineAE(m_InstalledAFX[m_TargetAEIndex]);
+					ret = CombineAE(m_InstalledAFX[m_TargetVersionIndex]);
 				}
 				return ret;
 			}
@@ -203,65 +151,37 @@ namespace BRY
 			get
 			{
 				string ret = "";
-				if (m_TargetAEIndex >= 0)
+				if (m_TargetVersionIndex >= 0)
 				{
-					ret = CombineAERENDER(m_InstalledAFX[m_TargetAEIndex]);
+					ret = CombineAERENDER(m_InstalledAFX[m_TargetVersionIndex]);
 				}
 				return ret;
 			}
 		}
-
-
-
-		#region CombTargeAE
-		private ComboBox m_CombTargetAE = null;
-		public ComboBox CombTargetAE
+		private string m_AeWin = "aeWin.exe";
+		public string AeWin
 		{
-			get { return m_CombTargetAE; }
+			get { return m_AeWin; }
 			set
 			{
-				m_CombTargetAE = value;
-				if (m_CombTargetAE != null)
+				m_AeWin = value;
+
+				if(m_AeWin=="")
 				{
-					m_CombTargetAE.DropDownStyle = ComboBoxStyle.DropDownList;
-					m_CombTargetAE.Items.Clear();
-					if (m_InstalledAFX.Length > 0)
-					{
-						m_CombTargetAE.Items.Clear();
-						m_CombTargetAE.Items.AddRange(m_InstalledAFX);
-						if ((m_TargetAEIndex >= 0) && (m_TargetAEIndex < m_CombTargetAE.Items.Count))
-						{
-							m_CombTargetAE.SelectedIndex = m_TargetAEIndex;
-						}
-						m_CombTargetAE.SelectedIndexChanged += M_CombTargetAE_SelectedIndexChanged;
-					}
+					m_AeWin = "aeWin.exe";
 				}
 			}
 		}
-
-		private void M_CombTargetAE_SelectedIndexChanged(object sender, EventArgs e)
+		// *****************************************************************
+		public NFsAE ()
 		{
-			ComboBox cmb = (ComboBox)sender;
-			int idx = cmb.SelectedIndex;
-			if ((idx >= 0) && (idx < m_InstalledAFX.Length))
-			{
-				if (TargetAEIndex != idx)
-				{
-					TargetAEIndex = idx;
-				}
-			}
 		}
-		#endregion
-
-		public NFsAE()
-		{
-			FindAE();
-		}
+		// *****************************************************************
 		/// <summary>
 		/// インストールされているAfter Effects
 		/// </summary>
 		/// <returns>インストールされているフォルダの文字列配列</returns>
-		static public string[] FindAfterFX()
+		static public string[] FindInstalledAfterFX()
 		{
 			List<string> ret = new List<string>();
 
@@ -282,27 +202,26 @@ namespace BRY
 			}
 			return ret.ToArray();
 		}
-		public void FindAE()
+		// *****************************************************************
+		
+		public void FindInstalledAE()
 		{
-			m_InstalledAFX = FindAfterFX();
-			if (m_InstalledAFX.Length > 0)
+			string verStr = "";
+			if ((m_TargetVersionIndex>=0)&&(m_TargetVersionIndex < m_InstalledAFX.Length))
 			{
-				if ((m_TargetAEIndex >= 0) && (m_TargetAEIndex >= m_InstalledAFX.Length))
-				{
-					m_TargetAEIndex = -1;
-				}
-
+				verStr = m_InstalledAFX[m_TargetVersionIndex];
 			}
 
-			if (m_CombTargetAE != null)
+
+			m_InstalledAFX = FindInstalledAfterFX();
+			if (m_InstalledAFX.Length > 0)
 			{
-				m_CombTargetAE.Items.Clear();
-				m_CombTargetAE.Items.AddRange(m_InstalledAFX);
-				m_CombTargetAE.SelectedIndex = m_TargetAEIndex;
+				TargetVersionStr = verStr;
+
 			}
 
 		}
-
+		// *****************************************************************
 		#region Combine
 		static public string CombineAE(string p)
 		{
@@ -327,6 +246,7 @@ namespace BRY
 			}
 			return ret;
 		}
+		// *****************************************************************
 		static public string[] CombineAERENDER(string[] p)
 		{
 			string[] ret = new string[p.Length];
@@ -341,16 +261,15 @@ namespace BRY
 			return ret;
 		}
 		#endregion
-
 		// ******************************************************************************
 		public AEStutas Run()
 		{
 			AEStutas ret = AEStutas.None;
-			if (m_TargetAEIndex < 0) return ret;
+			if (m_TargetVersionIndex < 0) return ret;
 
 			try
 			{
-				string ss = m_InstalledAFX[m_TargetAEIndex];
+				string ss = m_InstalledAFX[m_TargetVersionIndex];
 
 				ProcessAE pae;
 				AEStutas aes = CheckRun(ss, out pae);
@@ -365,7 +284,6 @@ namespace BRY
 				{
 					var app = new ProcessStartInfo();
 					app.FileName = exePath;
-					//app.Arguments = "memo.txt";
 					app.UseShellExecute = true;
 					Process ps = Process.Start(app);
 					if (ps != null) ret = AEStutas.IsRunStart;
@@ -381,9 +299,9 @@ namespace BRY
 		public bool ExecScriptFile(string p)
 		{
 			bool ret = false;
-			if (m_TargetAEIndex < 0) return ret;
+			if (m_TargetVersionIndex < 0) return ret;
 
-			string tag = m_InstalledAFX[m_TargetAEIndex];
+			string tag = m_InstalledAFX[m_TargetVersionIndex];
 
 			ProcessAE pae = new ProcessAE();
 			if (CheckRun(tag, out pae) != AEStutas.IsRunning) return ret;
@@ -406,13 +324,13 @@ namespace BRY
 				{
 					if (pae.IsWS_MAXIMIZE == true)
 					{
-						string n = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "aeWin.exe");
+						FileInfo fi = new FileInfo(m_AeWin);
 
-						if (File.Exists(n))
+						if (fi.Exists == true)
 						{
 							ProcessStartInfo aeWin = new ProcessStartInfo();
-							aeWin.FileName = n;
-							aeWin.Arguments = String.Format("/max /i{0}", pae.ProcID);
+							aeWin.FileName = fi.FullName;
+							aeWin.Arguments = String.Format("/max /i{0}", pae.ProcessID);
 							aeWin.UseShellExecute = true;
 							aeWin.WindowStyle = ProcessWindowStyle.Hidden;
 							Process ps2 = Process.Start(aeWin);
@@ -430,9 +348,9 @@ namespace BRY
 		public bool ExecScriptCode(string p)
 		{
 			bool ret = false;
-			if (m_TargetAEIndex < 0) return ret;
+			if (m_TargetVersionIndex < 0) return ret;
 
-			string tag = m_InstalledAFX[m_TargetAEIndex];
+			string tag = m_InstalledAFX[m_TargetVersionIndex];
 			ProcessAE pae = new ProcessAE();
 			if (CheckRun(tag, out pae) != AEStutas.IsRunning) return ret;
 
@@ -447,7 +365,7 @@ namespace BRY
 				app.FileName = exePath;
 				app.Arguments = "-s \"" + p + "\"";
 				app.UseShellExecute = true;
-				if(pae.IsWS_MAXIMIZE)
+				if (pae.IsWS_MAXIMIZE)
 				{
 					app.WindowStyle = ProcessWindowStyle.Maximized;
 				}
@@ -458,12 +376,13 @@ namespace BRY
 				{
 					if (pae.IsWS_MAXIMIZE == true)
 					{
-						string n = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "aeWin.exe");
-						if (File.Exists(n))
+
+						FileInfo fi = new FileInfo(m_AeWin);
+						if (fi.Exists==true)
 						{
 							ProcessStartInfo aeWin = new ProcessStartInfo();
-							aeWin.FileName = n;
-							aeWin.Arguments = String.Format("/max /i{0}", pae.ProcID);
+							aeWin.FileName = fi.FullName;
+							aeWin.Arguments = String.Format("/max /i{0}", pae.ProcessID);
 							aeWin.UseShellExecute = true;
 							aeWin.WindowStyle = ProcessWindowStyle.Hidden;
 							Process ps2 = Process.Start(aeWin);
@@ -496,62 +415,8 @@ namespace BRY
 			}
 			return ret;
 		}
+		
 		// *********************************************************************************
-		/// <summary>
-		/// 実行ファイルのフルパスから、バージョンを調べる
-		/// </summary>
-		/// <param name="p"></param>
-		/// <returns>"CS6" or "CC" or "CC 2019" or "2020"</returns>
-		static private string VersionFromFileName(string p)
-		{
-			string ret = "";
-			try
-			{
-				string n = Path.GetFileName(p).ToLower();
-				if ((n == "afterfx.exe") || (n == "aerender.exe"))
-				{
-					ret = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(p)));
-					ret = ret.Substring(TARGET_HEAD.Length).Trim();
-				}
-			}
-			catch
-			{
-				ret = "";
-			}
-
-			return ret;
-		}
-		// *********************************************************************************
-		static private ProcessAE ProjectNameFromTitle(string p)
-		{
-			ProcessAE ret = new ProcessAE();
-
-			string header = "Adobe After Effects";
-
-			if (p.IndexOf(header) != 0) return ret;
-			if (p.ToLower().IndexOf(".aep") < 0) return ret;
-			p = p.Substring(header.Length);
-
-			int idx = p.IndexOf("-");
-			if (idx >= 0)
-			{
-				ret.VersionStr = p.Substring(0, idx - 1).Trim();
-				ret.ProjectName = p.Substring(idx + 1).Trim();
-				ret.IsNoSaved = false;
-				if(ret.ProjectName.Length>2)
-				{
-					if (ret.ProjectName[ret.ProjectName.Length-1]=='*')
-					{
-						ret.IsNoSaved = true;
-						ret.ProjectName = ret.ProjectName.Substring(ret.ProjectName.Length - 1).Trim();
-					}
-				}
-			}
-
-			return ret;
-		}
-		// *********************************************************************************
-
 		static public ProcessAE[] ProcessAEList()
 		{
 			List<ProcessAE> ret = new List<ProcessAE>();
@@ -559,31 +424,14 @@ namespace BRY
 			{
 				if (p.ProcessName == "AfterFX")
 				{
-					ProcessAE pae = new ProcessAE();
-					try
-					{
-						ProcessAE nm = ProjectNameFromTitle(p.MainWindowTitle);
-						pae.ProjectName = nm.ProjectName;
-						pae.FileName = p.MainModule.FileName;
-						pae.VersionStr = VersionFromFileName(pae.FileName);
-						pae.Proc = p;
-						pae.ProcID = p.Id;
-
-						int style = GetWindowLong(p.MainWindowHandle, -16);
-						pae.IsWS_MAXIMIZE = ((style & 0x01000000) == 0x01000000);
-						pae.IsNoSaved = nm.IsNoSaved;
-					}
-					catch
-					{
-					}
-
-
+					ProcessAE pae = new ProcessAE(p);
 					ret.Add(pae);
 
 				}
 			}
 			return ret.ToArray();
 		}
+		// *********************************************************************************
 		static public string[] ProcessList()
 		{
 			ProcessAE[] a = ProcessAEList();
@@ -597,9 +445,6 @@ namespace BRY
 			}
 			return ret;
 		}
-		
-		// *************************************************************************************
-
-
+		// *********************************************************************************
 	}
 }

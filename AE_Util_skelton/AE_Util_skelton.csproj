@@ -115,6 +115,10 @@
       <DependentUpon>NavBar.cs</DependentUpon>
     </Compile>
     <Compile Include="NFsAE.cs" />
+    <Compile Include="NFsAECmp.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProcessAE.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindowsShellAPI.cs" />
