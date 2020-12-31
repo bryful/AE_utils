@@ -1,56 +1,143 @@
-# AE_utils
-Adobe After Effects�ō�Ƃ������y�ɂ��邽�߂̏����c�[���ނł��B  
-��{�I�ɒP�ƃA�v���ł����A������ƂŊy�ɂȂ�悤�Ƀt���[�e�B���O�o�[���t���Ă��܂��B
-  
-�\�[�X����΂킩��悤�ɏ����Â��₵�Ă����܂��B  
+﻿# AE_utils
+Adobe After Effectsで作業を少し楽にするための小物ツール類です。
+基本的に単独アプリですが、同時作業で楽になるようにフローティングバーが付いています。
 
- 
-## ���ʂ̎g����
-���ʂ̃A�v���ł��̂ŁA�K���ȂƂ���ɃC���X�g�[�����Ď��s���Ă��������B
+ソース見ればわかるように少しづつ増やしていきます。
 
-## �ʂ̉��
+
+## 共通の使い方
+普通のアプリですので、適当なところにインストールして実行してください。
+
+## 個別の解説
+<hr>
+
+### <b>AE_Util_skelton</b>
+これらのアプリのテンプレートとして作ったものです。
+
+<b>NFsAEクラス</b>
+同じコードをなるべく使いまわすために作ったクラスです。
+インストールされているAEをリストアップしたり、実行中のAEの状態を確認できます。
+スクリプト実行の機能もあります。
+AfterFX.exe -r でスクリプトを呼び出すとウィンドウの最大化が解除されてしまうので、無理やり最大化状態に復帰させるように呼び出します。
+
+ビルドする際は、プラットフォームをx64にするか、anycpuで「32ビットを選ぶ」をOFFにしてください。エラーが出ます。
+
+win32apiを使いまくっているので、Macへの移植はかなり難しくなりました。
+
+<hr>
+
+### <b>aeStatus</b>
+After Effectsの状態を調べるコンソールアプリです。
+実行すると
+
+```
+([
+	{
+	ProcessID:16320,
+	WindowTitle:"Adobe After Effects 2020 - 名称未設定プロジェクト.aep *",
+	FileName:"C:\Program Files\Adobe\Adobe After Effects 2020\Support Files\AfterFX.exe",
+	VersionStr:"2020",
+	IsWindowMax:True,
+	ProjectName:"名称未設定プロジェクト.aep",
+	IsNoSaved:True
+    },
+	{
+	ProcessID:23172,
+	WindowTitle:"Adobe After Effects - 名称未設定プロジェクト.aep *",
+	FileName:"C:\Program Files\Adobe\Adobe After Effects CC 2019\Support Files\AfterFX.exe",
+	VersionStr:"CC 2019",
+	IsWindowMax:False,
+	ProjectName:"名称未設定プロジェクト.aep",
+	IsNoSaved:True
+	}
+])
+```
+* ProcessID プロセスID
+* WindowTitle タイトルバー文字列
+* FileName 実行ファイルAfterFX.exeのフルパス
+* VersionStr バージョン識別の文字列
+* IsWindowMax ウィンドウが最大化ならtrue
+* ProjectName aepファイルのフルパス
+* IsNoSaved aepが保存されていない場合true
+
+以上の情報が配列として標準出力に出力されます。
+callSystemの返り値をevalで処理できます。
+
+<hr>
+
+### <b>aeWin</b>
+After Efefctsのウィンドウの最大化・最小化を制御するコンソールアプリです。
+
+```
+[aeWin.exe] After Effectsのウィンドウの状態を設定する
+   aeWin <option>
+   option : /max    ウィンドウを最大化(デフォルト)
+            /min    ウィンドウを最小化
+            /normal ウィンドウを通常化
+            /id[xxxx] 指定したプロセスIDのみに実行
+            /help   この表示
+```
+
+<hr>
+
+### <b>MousePos</b>
+
+実行した時点でのマウスカーソルの位置を返すコンソールアプリです。
+
+>({x:692, y:265})
+
+これもcallSystemの返り値をevalで処理できます。
+
+
+<hr>
 
 ### AE_Menu
-�X�N���v�g���j���[���ȒP�ɍ��A�v���B  
-�X�N���v�g�𕡐����ꂽ�t�H���_��D&D����ƃ��j���[�����܂��B�E�N���b�N�ł��낢��ҏW���܂��B  
-ExportScript�Ń��j���[�X�N���v�g�������o���܂��B  
+スクリプトメニューを簡単に作るアプリ。
+スクリプトを複数入れたフォルダをD&Dするとメニューを作ります。右クリックでいろいろ編集します。
+ExportScriptでメニュースクリプトを書き出します。
+
+<hr>
 
 ### AE_ColorPalette.exe
-���ɂ����J���[�p���b�g�ł��B  
-  
-![AE_ColorPalette](https://user-images.githubusercontent.com/50650451/77540762-047ca600-6ee7-11ea-8511-bfb290b8dcec.png)  
-�J���[�v���p�e�B��I�����āA�R�s�[���y�[�X�g�ł��܂��B  
-���肻���łȂ������̂ō��܂����B�ʏ�̃R���|�W�b�g���ł͂��܂�g��Ȃ��Ǝv���܂����A�V�F�C�v�Ńf�U�C�����Ă鎞�ɏd�󂵂܂��B  
-  
-���܂ŐV�K�r���[�ŉ摜���J���Ă���Ă܂������A����ł����ł���������ʂ������͗L���Ɏg����悤�ɂȂ�܂��B  
-  
+俗にいうカラーパレットです。
+
+![AE_ColorPalette](https://user-images.githubusercontent.com/50650451/77540762-047ca600-6ee7-11ea-8511-bfb290b8dcec.png)
+カラープロパティを選択して、コピー＆ペーストできます。
+ありそうでなかったので作りました。通常のコンポジット時ではあまり使わないと思いますが、シェイプでデザインしてる時に重宝します。
+
+今まで新規ビューで画像を開いてやってましたが、これでただでさえ狭い画面を少しは有効に使えるようになります。
+
+<hr>
+
 ### AE_Expression_CopyPaste
-�P���ɃR�s�[�����e�L�X�g�𒙂߂邱�Ƃ��ł���A�v���ł��B  
-AE��ŃR�s�[�������̂͂قڑS�ăe�L�X�g�f�[�^�ɂȂ��Ă���̂ŁAAE�̃p�����[�^�𒙂߂Ă������Ƃ��ł��܂��B  
-  
-![AE_Expression_CopyPaste](https://user-images.githubusercontent.com/50650451/77541340-e499b200-6ee7-11ea-8b97-3b56ab59546f.png)  
-  
-�l�΃G�N�X�v���b�V�����ł悭�g���R�[�h���𒙂߂Ă��܂��B
+単純にコピーしたテキストを貯めることができるアプリです。
+AE上でコピーしたものはほぼ全てテキストデータになっているので、AEのパラメータを貯めておくことができます。
+
+![AE_Expression_CopyPaste](https://user-images.githubusercontent.com/50650451/77541340-e499b200-6ee7-11ea-8b97-3b56ab59546f.png)
+
+僕ばエクスプレッションでよく使うコード等を貯めています。
+
+<hr>
 
 ### aeclip.exe
-![aeclip exe](https://user-images.githubusercontent.com/50650451/77542192-25de9180-6ee9-11ea-97a0-ccb8ef3a6fee.png)  
-����̓R���\�[���A�v���ł��B  
-aeclip.exe  
-         aeclip [/c] filename (copy to clipboard.)  
-         aeclip [/p] (from clipboard to STD default)  
-         aeclip [/o] filename (from clipboard to file)  
-         aeclip  /h or /? (help)  
-  
-�w�肵���e�L�X�g�t�@�C�����N���b�v�{�[�h�ɑ�������A�N���b�v�{�[�h�̒��g���o�͂ł��܂��B
-AE�X�N���v�g���ŃN���b�v�{�[�h���g�������Ƃ��Ɏg���܂��B  
-�K���ȃe�L�X�g�t�@�C���������o����  
- 
- system.callSystem("aeclip foo.txt");  
-  
-�Ƃ����Ďg���܂��B���ۂ̃T���v���R�[�h�͈ȉ��̂悤�ɂȂ�܂��B
+![aeclip exe](https://user-images.githubusercontent.com/50650451/77542192-25de9180-6ee9-11ea-97a0-ccb8ef3a6fee.png)
+これはコンソールアプリです。
+aeclip.exe
+         aeclip [/c] filename (copy to clipboard.)
+         aeclip [/p] (from clipboard to STD default)
+         aeclip [/o] filename (from clipboard to file)
+         aeclip  /h or /? (help)
+
+指定したテキストファイルをクリップボードに送ったり、クリップボードの中身を出力できます。
+AEスクリプト中でクリップボードを使いたいときに使います。
+適当なテキストファイルを書き出して
+
+ system.callSystem("aeclip foo.txt");
+
+とかして使います。実際のサンプルコードは以下のようになります。
 ```
-	var aeclipPath = File.decode($.fileName.getParent()+"/aeclip.exe");//getParent()�͎���v���g�^�C�v
-	//���s�X�N���v�g�t�@�C���Ɠ����ꏊ��aeclip��u�����Ƃ���
+	var aeclipPath = File.decode($.fileName.getParent()+"/aeclip.exe");//getParent()は自作プロトタイプ
+	//実行スクリプトファイルと同じ場所にaeclipを置いたとして
 	var toClipbord = function(str)
 	{
 		var ob = Folder.temp.fullName;
@@ -76,6 +163,9 @@ AE�X�N���v�g���ŃN���b�v�{�[�h���g�������Ƃ��Ɏg���܂��B
 
 	}
 ```
+
+<hr>
+
 ## Dependency
 Visual studio 2017 C#
 
@@ -87,8 +177,8 @@ This software is released under the MIT License, see LICENSE
 
 ## Authors
 
-bry-ful(Hiroshi Furuhashi)  
-twitter:[bryful](https://twitter.com/bryful)  
-bryful@gmail.com  
+bry-ful(Hiroshi Furuhashi)
+twitter:[bryful](https://twitter.com/bryful)
+bryful@gmail.com
 
 ## References

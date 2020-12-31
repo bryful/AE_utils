@@ -58,7 +58,7 @@
             this.helpToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(621, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(640, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -121,9 +121,9 @@
 			// 
 			// statusStrip1
 			// 
-			this.statusStrip1.Location = new System.Drawing.Point(0, 412);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 396);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(621, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(640, 22);
 			this.statusStrip1.TabIndex = 1;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
@@ -135,7 +135,7 @@
 			this.lbInstalled.ItemHeight = 12;
 			this.lbInstalled.Location = new System.Drawing.Point(12, 37);
 			this.lbInstalled.Name = "lbInstalled";
-			this.lbInstalled.Size = new System.Drawing.Size(601, 52);
+			this.lbInstalled.Size = new System.Drawing.Size(620, 52);
 			this.lbInstalled.TabIndex = 2;
 			// 
 			// btnInstalled
@@ -144,7 +144,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnInstalled.Location = new System.Drawing.Point(12, 95);
 			this.btnInstalled.Name = "btnInstalled";
-			this.btnInstalled.Size = new System.Drawing.Size(601, 44);
+			this.btnInstalled.Size = new System.Drawing.Size(620, 44);
 			this.btnInstalled.TabIndex = 3;
 			this.btnInstalled.Text = "インストールされているAEをリストアップ";
 			this.btnInstalled.UseVisualStyleBackColor = true;
@@ -154,7 +154,10 @@
 			// 
 			this.cmbAE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbAE.FormattingEnabled = true;
-			this.cmbAE.Location = new System.Drawing.Point(12, 278);
+			this.cmbAE.Items.AddRange(new object[] {
+            "2020",
+            "CC 2019"});
+			this.cmbAE.Location = new System.Drawing.Point(33, 289);
 			this.cmbAE.Name = "cmbAE";
 			this.cmbAE.Size = new System.Drawing.Size(244, 20);
 			this.cmbAE.TabIndex = 4;
@@ -167,7 +170,7 @@
 			this.lbProcess.ItemHeight = 12;
 			this.lbProcess.Location = new System.Drawing.Point(8, 157);
 			this.lbProcess.Name = "lbProcess";
-			this.lbProcess.Size = new System.Drawing.Size(601, 52);
+			this.lbProcess.Size = new System.Drawing.Size(620, 52);
 			this.lbProcess.TabIndex = 6;
 			// 
 			// btnProcess
@@ -176,7 +179,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnProcess.Location = new System.Drawing.Point(8, 215);
 			this.btnProcess.Name = "btnProcess";
-			this.btnProcess.Size = new System.Drawing.Size(601, 44);
+			this.btnProcess.Size = new System.Drawing.Size(620, 44);
 			this.btnProcess.TabIndex = 7;
 			this.btnProcess.Text = "実行中のAEをリストアップ";
 			this.btnProcess.UseVisualStyleBackColor = true;
@@ -184,7 +187,7 @@
 			// 
 			// btnRun
 			// 
-			this.btnRun.Location = new System.Drawing.Point(273, 266);
+			this.btnRun.Location = new System.Drawing.Point(294, 277);
 			this.btnRun.Name = "btnRun";
 			this.btnRun.Size = new System.Drawing.Size(287, 43);
 			this.btnRun.TabIndex = 8;
@@ -195,15 +198,15 @@
 			// ttbScriptCode
 			// 
 			this.ttbScriptCode.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.ttbScriptCode.Location = new System.Drawing.Point(12, 336);
+			this.ttbScriptCode.Location = new System.Drawing.Point(33, 347);
 			this.ttbScriptCode.Name = "ttbScriptCode";
 			this.ttbScriptCode.Size = new System.Drawing.Size(244, 23);
 			this.ttbScriptCode.TabIndex = 9;
-			this.ttbScriptCode.Text = "writeLn(\"OK!\");";
+			this.ttbScriptCode.Text = "alert(\"OK!\");";
 			// 
 			// btnScriptCode
 			// 
-			this.btnScriptCode.Location = new System.Drawing.Point(273, 328);
+			this.btnScriptCode.Location = new System.Drawing.Point(294, 339);
 			this.btnScriptCode.Name = "btnScriptCode";
 			this.btnScriptCode.Size = new System.Drawing.Size(287, 43);
 			this.btnScriptCode.TabIndex = 10;
@@ -214,15 +217,15 @@
 			// nFsAE1
 			// 
 			this.nFsAE1.CombTargetAE = this.cmbAE;
-			this.nFsAE1.TargetAE = "CC 2019";
-			this.nFsAE1.TargetAEIndex = 1;
+			this.nFsAE1.TargetAE = "";
+			this.nFsAE1.TargetAEIndex = -1;
 			// 
 			// Form1
 			// 
 			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(621, 434);
+			this.ClientSize = new System.Drawing.Size(640, 418);
 			this.Controls.Add(this.btnScriptCode);
 			this.Controls.Add(this.ttbScriptCode);
 			this.Controls.Add(this.btnRun);
@@ -261,13 +264,13 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ListBox lbInstalled;
         private System.Windows.Forms.Button btnInstalled;
-		private BRY.NFsAE nFsAE1;
 		private System.Windows.Forms.ComboBox cmbAE;
 		private System.Windows.Forms.ListBox lbProcess;
 		private System.Windows.Forms.Button btnProcess;
 		private System.Windows.Forms.Button btnRun;
 		private System.Windows.Forms.TextBox ttbScriptCode;
 		private System.Windows.Forms.Button btnScriptCode;
+		private BRY.NFsAE nFsAE1;
 	}
 }
 

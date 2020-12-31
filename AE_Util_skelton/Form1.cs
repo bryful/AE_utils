@@ -142,21 +142,26 @@ namespace AE_Util_skelton
         }
         private void btnInstalled_Click(object sender, EventArgs e)
         {
+            
             string[] a = NFsAE.FindAfterFX();
             lbInstalled.Items.Clear();
             lbInstalled.Items.AddRange( NFsAE.CombineAE( a));
+            
         }
 
 
 		private void btnProcess_Click(object sender, EventArgs e)
 		{
+            
             string[] a = NFsAE.ProcessList();
             lbProcess.Items.Clear();
             lbProcess.Items.AddRange(a);
+            
         }
 
 		private void btnRun_Click(object sender, EventArgs e)
 		{
+            
             AEStutas aes = nFsAE1.Run();
             string mes = "";
             switch (aes)
@@ -166,11 +171,18 @@ namespace AE_Util_skelton
                 case AEStutas.IsRunning: mes = "すでに起動中"; break;
             }
             MessageBox.Show(mes);
+            
         }
 
 		private void btnScriptCode_Click(object sender, EventArgs e)
 		{
             nFsAE1.ExecScriptCode(ttbScriptCode.Text);
 		}
-	}
+
+		private void btnProcess2_Click(object sender, EventArgs e)
+		{
+            
+            
+        }
+    }
 }
