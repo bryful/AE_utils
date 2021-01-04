@@ -16,22 +16,31 @@ namespace BRY
 		private NFsAE NFsAE = new NFsAE();  
 
 		#region Event
-		public event EventHandler TargetAEIndexChanged;
+		public event EventHandler InstalledAFXIndexChanged;
 
-		protected virtual void OnTargetAEIndexChanged(EventArgs e)
+		protected virtual void OnInstalledAFXIndexChanged(EventArgs e)
 		{
-			if (TargetAEIndexChanged != null)
+			if (InstalledAFXIndexChanged != null)
 			{
-				TargetAEIndexChanged(this, e);
+				InstalledAFXIndexChanged(this, e);
 			}
 		}
 		#endregion
+		public event EventHandler RunningAFXIndexChanged;
+
+		protected virtual void OnRunningAFXIndexChanged(EventArgs e)
+		{
+			if (RunningAFXIndexChanged != null)
+			{
+				RunningAFXIndexChanged(this, e);
+			}
+		}
 
 
 		#region installed
-		public int InstallCount
+		public int InstalledCount
 		{
-			get { return NFsAE.InstallCount; }
+			get { return NFsAE.InstalledCount; }
 		}
 		public string[] InstalledAFX
 		{
@@ -43,39 +52,55 @@ namespace BRY
 		#endregion
 
 
-		public string TargetVersionStr
+		/// <summary>
+		/// インストールされているバージョンで、選ばれている文字
+		/// </summary>
+		public string InstalledAFXStr
 		{
 			get
 			{
-				return NFsAE.TargetVersionStr;
+				return NFsAE.InstalledAFXStr;
 			}
 			set
 			{
-				NFsAE.TargetVersionStr = value;
+				NFsAE.InstalledAFXStr = value;
 			}
 		}
-
-		public int TargetVersionIndex
+		/// <summary>
+		/// インストールされているバージョンで選ばれているインデックス番号
+		/// </summary>
+		public int InstalledAFXIndex
 		{
-			get { return NFsAE.TargetVersionIndex; }
+			get { return NFsAE.InstalledAFXIndex; }
 			set
 			{
-				if (NFsAE.TargetVersionIndex != value)
+				if (NFsAE.InstalledAFXIndex != value)
 				{
-					NFsAE.TargetVersionIndex = value;
-					if (m_CombTargetVertion != null)
+					NFsAE.InstalledAFXIndex = value;
+					if (m_CombInstalled != null)
 					{
-						if (m_CombTargetVertion.SelectedIndex != TargetVersionIndex)
+						if (m_CombInstalled.SelectedIndex != InstalledAFXIndex)
 						{
-							m_CombTargetVertion.SelectedIndex = TargetVersionIndex;
+							m_CombInstalled.SelectedIndex = InstalledAFXIndex;
 						}
 
 					}
-					OnTargetAEIndexChanged(new EventArgs());
+					if (m_ListBoxInstalled != null)
+					{
+						if (m_ListBoxInstalled.SelectedIndex != InstalledAFXIndex)
+						{
+							m_ListBoxInstalled.SelectedIndex = InstalledAFXIndex;
+						}
+
+					}
+					OnInstalledAFXIndexChanged(new EventArgs());
 				}
 			}
 		}
 
+		/// <summary>
+		/// インストールされているバージョンで選ばれているものの実行ファイルのパス
+		/// </summary>
 		public string AfterFXPath
 		{
 			get
@@ -83,6 +108,9 @@ namespace BRY
 				return NFsAE.AfterFXPath;
 			}
 		}
+		/// <summary>
+		/// インストールされているバージョンで選ばれているもののaerender.exeのパス
+		/// </summary>
 		public string AerenderPath
 		{
 			get
@@ -93,45 +121,166 @@ namespace BRY
 
 
 
-		#region CombTargeVersion
-		private ComboBox m_CombTargetVertion = null;
+		#region CombInstalled
+		private ComboBox m_CombInstalled = null;
 		public ComboBox CombTargetVersion
 		{
-			get { return m_CombTargetVertion; }
+			get { return m_CombInstalled; }
 			set
 			{
-				m_CombTargetVertion = value;
-				if (m_CombTargetVertion != null)
+				if( (value==null)&&(m_CombInstalled!=null))
 				{
-					m_CombTargetVertion.DropDownStyle = ComboBoxStyle.DropDownList;
-					m_CombTargetVertion.Items.Clear();
-					if (NFsAE.InstallCount > 0)
+					m_CombInstalled.Items.Clear();
+					m_CombInstalled.SelectedIndexChanged -= M_CombInstalled_SelectedIndexChanged;
+				}
+				m_CombInstalled = value;
+				if (m_CombInstalled != null)
+				{
+					m_CombInstalled.DropDownStyle = ComboBoxStyle.DropDownList;
+					m_CombInstalled.Items.Clear();
+					if (NFsAE.InstalledCount > 0)
 					{
-						m_CombTargetVertion.Items.Clear();
-						m_CombTargetVertion.Items.AddRange(NFsAE.InstalledAFX);
-						if ((NFsAE.TargetVersionIndex >= 0) && (NFsAE.TargetVersionIndex < m_CombTargetVertion.Items.Count))
+						m_CombInstalled.Items.Clear();
+						m_CombInstalled.Items.AddRange(NFsAE.InstalledAFX);
+						if ((NFsAE.InstalledAFXIndex >= 0) && (NFsAE.InstalledAFXIndex < m_CombInstalled.Items.Count))
 						{
-							m_CombTargetVertion.SelectedIndex = NFsAE.TargetVersionIndex;
+							m_CombInstalled.SelectedIndex = NFsAE.InstalledAFXIndex;
 						}
-						m_CombTargetVertion.SelectedIndexChanged += M_CombTargetVersion_SelectedIndexChanged;
+						m_CombInstalled.SelectedIndexChanged += M_CombInstalled_SelectedIndexChanged;
 					}
 				}
 			}
 		}
 
-		private void M_CombTargetVersion_SelectedIndexChanged(object sender, EventArgs e)
+		private void M_CombInstalled_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			ComboBox cmb = (ComboBox)sender;
 			int idx = cmb.SelectedIndex;
-			if ((idx >= 0) && (idx < NFsAE.InstallCount))
+			bool ok = ((idx >= 0) && (idx < NFsAE.InstalledCount));
+			if (ok)
 			{
-				if (TargetVersionIndex != idx)
+				if (InstalledAFXIndex != idx)
 				{
-					TargetVersionIndex = idx;
+					InstalledAFXIndex = idx;
 				}
+			}
+			if (m_BtnRun != null)
+			{
+				m_BtnRun.Enabled = ok;
 			}
 		}
 		#endregion
+		#region ListBox
+		private ListBox m_ListBoxInstalled = null;
+		public ListBox ListBoxInstalled
+		{
+			get { return m_ListBoxInstalled; }
+			set
+			{
+				if ((value == null) && (m_ListBoxInstalled != null))
+				{
+					m_ListBoxInstalled.Items.Clear();
+					m_ListBoxInstalled.SelectedIndexChanged -= M_ListBoxInstalled_SelectedIndexChanged;
+				}
+				m_ListBoxInstalled = value;
+				if(m_ListBoxInstalled !=null)
+				{
+					m_ListBoxInstalled.Items.Clear();
+					m_ListBoxInstalled.Items.AddRange(NFsAE.InstalledAFX);
+					if ((NFsAE.InstalledAFXIndex >= 0) && (NFsAE.InstalledAFXIndex < m_ListBoxInstalled.Items.Count))
+					{
+						m_ListBoxInstalled.SelectedIndex = NFsAE.InstalledAFXIndex;
+					}
+					m_ListBoxInstalled.SelectedIndexChanged += M_ListBoxInstalled_SelectedIndexChanged;
+
+				}
+			}
+		}
+
+		private void M_ListBoxInstalled_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ListBox lst = (ListBox)sender;
+			int idx = lst.SelectedIndex;
+			bool ok = ((idx >= 0) && (idx < NFsAE.InstalledCount));
+			if (ok)
+			{
+				if (InstalledAFXIndex != idx)
+				{
+					InstalledAFXIndex = idx;
+				}
+			}
+			if (m_BtnRun != null) m_BtnRun.Enabled = ok;
+		}
+		#endregion
+		#region btnRun
+		private Button m_BtnRun = null;
+		public Button BtnRun
+		{
+			get { return m_BtnRun; }
+			set
+			{
+				if((value == null)&&(m_BtnRun != null))
+				{
+					m_BtnRun.Enabled = true;
+					m_BtnRun.Click -= M_BtnRun_Click;
+				}
+				m_BtnRun = value;
+				if(m_BtnRun != null)
+				{
+					m_BtnRun.Enabled = (NFsAE.InstalledAFXIndex >= 0);
+					m_BtnRun.Click += M_BtnRun_Click;
+				}
+			}
+		}
+
+		private void M_BtnRun_Click(object sender, EventArgs e)
+		{
+		 	Run(true);
+			NFsAE.FindRunningAFX();
+		}
+		#endregion
+
+		private ComboBox m_CombRunning = null;
+		public ComboBox CombRunning
+		{
+			get { return m_CombRunning; }
+			set
+			{
+				if ((value == null) && (m_CombRunning != null))
+				{
+					m_CombRunning.Items.Clear();
+					m_CombRunning.SelectedIndexChanged -= M_CombRunning_SelectedIndexChanged;
+				}
+				m_CombRunning = value;
+				if (m_CombRunning != null)
+				{
+					m_CombRunning.DropDownStyle = ComboBoxStyle.DropDownList;
+					m_CombRunning.Items.Clear();
+					if (NFsAE.RunningCount > 0)
+					{
+						m_CombRunning.Items.Clear();
+						m_CombRunning.Items.AddRange(NFsAE.RunningAFXStr);
+						if ((NFsAE.RunningAFXIndex >= 0) && (NFsAE.RunningAFXIndex < m_CombRunning.Items.Count))
+						{
+							m_CombRunning.SelectedIndex = NFsAE.RunningAFXIndex;
+						}
+						m_CombRunning.SelectedIndexChanged += M_CombRunning_SelectedIndexChanged;
+					}
+				}
+			}
+		}
+
+		private void M_CombRunning_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ComboBox cmb = (ComboBox)sender;
+			int idx = cmb.SelectedIndex;
+			if(NFsAE.RunningAFXIndex !=idx)
+			{
+				NFsAE.RunningAFXIndex = idx;
+			}
+		}
+
+		// ******************************************************************************
 		public string AeWin
 		{
 			get { return NFsAE.AeWin; }
@@ -140,14 +289,99 @@ namespace BRY
 				NFsAE.AeWin = value;
 			}
 		}
+		// ******************************************************************************
 		public NFsAECmp()
 		{
-			NFsAE.FindInstalledAE();
+			NFsAE.FindInstalledAFX();
+
+			NFsAE.InstalledAFXChanged += NFsAE_InstalledAFXChanged;
+			NFsAE.InstalledAFXIndexChanged += NFsAE_TargetAEIndexChanged;
+
+			NFsAE.RunningAFXChanged += NFsAE_RunningAFXChanged;
+			NFsAE.RunningAFXIndexChanged += NFsAE_RunningAFXIndexChanged;
+
 		}
+
 		// ******************************************************************************
-		public AEStutas Run()
+		private void NFsAE_RunningAFXIndexChanged(object sender, EventArgs e)
 		{
-			return NFsAE.Run();
+			OnRunningAFXIndexChanged(new EventArgs());
+		}
+
+		// ******************************************************************************
+		private void NFsAE_RunningAFXChanged(object sender, EventArgs e)
+		{
+			if(m_CombRunning!=null)
+			{
+				m_CombRunning.Items.Clear();
+				m_CombRunning.Items.AddRange(NFsAE.RunningAFXStr);
+			}
+		}
+
+		// ******************************************************************************
+		private void NFsAE_InstalledAFXChanged(object sender, EventArgs e)
+		{
+			if (m_CombInstalled != null)
+			{
+				m_CombInstalled.Items.Clear();
+				if (NFsAE.InstalledCount > 0)
+				{
+					m_CombInstalled.Items.Clear();
+					m_CombInstalled.Items.AddRange(NFsAE.InstalledAFX);
+				}
+			}
+			if (m_ListBoxInstalled != null)
+			{
+				m_ListBoxInstalled.Items.Clear();
+				if (NFsAE.InstalledCount > 0)
+				{
+					m_ListBoxInstalled.Items.Clear();
+					m_ListBoxInstalled.Items.AddRange(NFsAE.InstalledAFX);
+				}
+			}
+		}
+
+		// ******************************************************************************
+		private void NFsAE_TargetAEIndexChanged(object sender, EventArgs e)
+		{
+			if(m_CombInstalled!=null)
+			{
+				if(m_CombInstalled.SelectedIndex != NFsAE.InstalledAFXIndex)
+				{
+					m_CombInstalled.SelectedIndex = NFsAE.InstalledAFXIndex;
+				}
+			}
+			if (m_ListBoxInstalled != null)
+			{
+				if (m_ListBoxInstalled.SelectedIndex != NFsAE.InstalledAFXIndex)
+				{
+					m_ListBoxInstalled.SelectedIndex = NFsAE.InstalledAFXIndex;
+				}
+			}
+		}
+
+		// ******************************************************************************
+		public AEStutas Run(bool IsShowMes = false)
+		{
+			AEStutas ret = AEStutas.None;
+			 ret = NFsAE.Run();
+			if (IsShowMes) {
+				string mes = "";
+				switch(ret)
+				{
+					case AEStutas.None:
+						mes = "起動失敗失敗？";
+						break;
+					case AEStutas.IsRunning:
+						mes = "既に起動しています。";
+						break;
+					case AEStutas.IsRunStart:
+						mes = "起動します。";
+						break;
+				}
+				MessageBox.Show(mes, "AfterFX起動");
+			}
+			return ret;
 		}
 		// ******************************************************************************
 		public Process CallAerender(string aep, string op = "")
@@ -167,8 +401,30 @@ namespace BRY
 			return NFsAE.ExecScriptCode(p);
 
 		}
-		
-		
+		// *************************************************************************************
+		public void ForegroundWindow()
+		{
+			if (NFsAE.RunningAFXIndex>=0)
+			{
+				NFsAE.RunningAFX[NFsAE.RunningAFXIndex].SetForegroundWindow();
+			}
+		}
+		public void WindowMax()
+		{
+			if (NFsAE.RunningAFXIndex >= 0)
+			{
+				NFsAE.RunningAFX[NFsAE.RunningAFXIndex].WindowMax();
+				NFsAE.RunningAFX[NFsAE.RunningAFXIndex].SetForegroundWindow();
+			}
+		}
+		public void WindowMin()
+		{
+			if (NFsAE.RunningAFXIndex >= 0)
+			{
+				NFsAE.RunningAFX[NFsAE.RunningAFXIndex].WindowMin();
+			}
+		}
+
 		// *************************************************************************************
 
 

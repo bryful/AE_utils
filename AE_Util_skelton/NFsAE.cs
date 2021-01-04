@@ -67,19 +67,49 @@ namespace BRY
 		#endregion
 
 		#region Event
-		public event EventHandler TargetAEIndexChanged;
+		public event EventHandler InstalledAFXIndexChanged;
+		public event EventHandler InstalledAFXChanged;
 
-		protected virtual void OnTargetAEIndexChanged(EventArgs e)
+		public event EventHandler RunningAFXIndexChanged;
+		public event EventHandler RunningAFXChanged;
+
+
+		protected virtual void OnInstalledAFXIndexChanged(EventArgs e)
 		{
-			if (TargetAEIndexChanged != null)
+			if (InstalledAFXIndexChanged != null)
 			{
-				TargetAEIndexChanged(this, e);
+				InstalledAFXIndexChanged(this, e);
+			}
+		}
+
+		protected virtual void OnInstalledAFXChanged(EventArgs e)
+		{
+			if (InstalledAFXChanged != null)
+			{
+				InstalledAFXChanged(this, e);
+			}
+		}
+		protected virtual void OnRunningAFXIndexChanged(EventArgs e)
+		{
+			if (RunningAFXIndexChanged != null)
+			{
+				RunningAFXIndexChanged(this, e);
+			}
+		}
+		protected virtual void OnRunningAFXChanged(EventArgs e)
+		{
+			if (RunningAFXChanged != null)
+			{
+				RunningAFXChanged(this, e);
 			}
 		}
 		#endregion
+
+		private Timer m_Timer = new Timer();
+
 		#region installed
 		private string[] m_InstalledAFX = new string[0];
-		public int InstallCount
+		public int InstalledCount
 		{
 			get { return m_InstalledAFX.Length; }
 		}
@@ -92,14 +122,39 @@ namespace BRY
 		}
 		#endregion
 
-		public string TargetVersionStr
+		private ProcessAE[] m_RunningAFX = new ProcessAE[0];
+		public ProcessAE[] RunningAFX
+		{
+			get { return m_RunningAFX; }
+		}
+		public string [] RunningAFXStr
+		{
+			get
+			{
+				string[] ret = new string[m_RunningAFX.Length];
+				if(m_RunningAFX.Length>0)
+				{
+					for(int i=0; i< m_RunningAFX.Length;i++)
+					{
+						ret[i] = m_RunningAFX[i].VersionStr;
+					}
+				}
+				return ret;
+			}
+		}
+		public int RunningCount
+		{
+			get { return m_RunningAFX.Length; }
+		}
+
+		public string InstalledAFXStr
 		{
 			get
 			{
 				string ret = "";
-				if (m_TargetVersionIndex >= 0)
+				if (m_InstalledAFXIndex >= 0)
 				{
-					ret = m_InstalledAFX[m_TargetVersionIndex].ToUpper();
+					ret = m_InstalledAFX[m_InstalledAFXIndex].ToUpper();
 				}
 				return ret;
 			}
@@ -109,28 +164,51 @@ namespace BRY
 				string tag = value.ToUpper().Trim();
 				if (m_InstalledAFX.Length > 0)
 				{
+					int idx = -1;
 					for (int i = 0; i < m_InstalledAFX.Length; i++)
 					{
 						if (tag == m_InstalledAFX[i])
 						{
-							TargetVersionIndex = i;
+							idx = i;
 							break;
 						}
 					}
+					InstalledAFXIndex = idx;
 				}
 			}
 		}
 
-		private int m_TargetVersionIndex = -1;
-		public int TargetVersionIndex
+		private int m_InstalledAFXIndex = -1;
+		public int InstalledAFXIndex
 		{
-			get { return m_TargetVersionIndex; }
+			get { return m_InstalledAFXIndex; }
 			set
 			{
-				if (m_TargetVersionIndex != value)
+				if (value < 0) value = -1;
+				if (m_InstalledAFXIndex != value)
 				{
-					m_TargetVersionIndex = value;
-					OnTargetAEIndexChanged(new EventArgs());
+					if ((value >= -1) && (value < InstalledCount))
+					{
+						m_InstalledAFXIndex = value;
+						OnInstalledAFXIndexChanged(new EventArgs());
+					}
+				}
+			}
+		}
+		private int m_RunningAFXIndex = -1;
+		public int RunningAFXIndex
+		{
+			get { return m_RunningAFXIndex; }
+			set
+			{
+				if (value < 0) value = -1;
+				if (m_RunningAFXIndex != value)
+				{
+					if ((value >= -1) && (value < RunningCount))
+					{
+						m_RunningAFXIndex = value;
+						OnRunningAFXIndexChanged(new EventArgs());
+					}
 				}
 			}
 		}
@@ -139,9 +217,9 @@ namespace BRY
 			get
 			{
 				string ret = "";
-				if (m_TargetVersionIndex >= 0)
+				if (m_InstalledAFXIndex >= 0)
 				{
-					ret = CombineAE(m_InstalledAFX[m_TargetVersionIndex]);
+					ret = CombineAE(m_InstalledAFX[m_InstalledAFXIndex]);
 				}
 				return ret;
 			}
@@ -151,9 +229,9 @@ namespace BRY
 			get
 			{
 				string ret = "";
-				if (m_TargetVersionIndex >= 0)
+				if (m_InstalledAFXIndex >= 0)
 				{
-					ret = CombineAERENDER(m_InstalledAFX[m_TargetVersionIndex]);
+					ret = CombineAERENDER(m_InstalledAFX[m_InstalledAFXIndex]);
 				}
 				return ret;
 			}
@@ -173,9 +251,21 @@ namespace BRY
 			}
 		}
 		// *****************************************************************
-		public NFsAE ()
+		public NFsAE()
 		{
+			FindRunningAFX();
+
+			m_Timer.Tick += M_Timer_Tick;
+			m_Timer.Interval = 1000 * 15;
+			m_Timer.Enabled = true;
 		}
+
+		// *****************************************************************
+		private void M_Timer_Tick(object sender, EventArgs e)
+		{
+			FindRunningAFX();
+		}
+
 		// *****************************************************************
 		/// <summary>
 		/// インストールされているAfter Effects
@@ -189,6 +279,7 @@ namespace BRY
 
 			if (dl.Length > 0)
 			{
+				List<string> al = new List<string>();
 				string pn = TARGET_DIR + "\\" + TARGET_HEAD + " ";
 				foreach (string p in dl)
 				{
@@ -196,30 +287,106 @@ namespace BRY
 					if (File.Exists(pp) == true)
 					{
 						string p2 = p.Substring(pn.Length);
-						ret.Add(p2);
+						al.Add(p2);
 					}
 				}
+				// 表示のソートを行う
+				if(al.Count>0)
+				{
+					// まずCS関係から
+					for(int i=0; i<al.Count; i++)
+					{
+						if (al[i] == String.Empty) continue;
+						if(al[i].IndexOf("CS")==0)
+						{
+							ret.Add(al[i]);
+							al[i] = "";
+						}
+					}
+					// CCを
+					for (int i = 0; i < al.Count; i++)
+					{
+						if (al[i] == String.Empty) continue;
+						if (al[i].IndexOf("CC") == 0)
+						{
+							ret.Add(al[i]);
+							al[i] = "";
+						}
+					}
+					// 残り 20**
+					for (int i = 0; i < al.Count; i++)
+					{
+						if (al[i] == String.Empty) continue;
+						if (al[i].IndexOf("20") == 0)
+						{
+							ret.Add(al[i]);
+							al[i] = "";
+						}
+					}
+					int cnt = al.Count - 1;
+					for (int i= cnt; i>=0;i--)
+					{
+						if (al[i]==String.Empty)
+						{
+							al.RemoveAt(i);
+						}
+					}
+					if(al.Count>0)
+					{
+						for(int i=0; i<al.Count;i++)
+						{
+							ret.Insert(0, al[i]);
+						}
+					}
+
+				}
+
+
 			}
 			return ret.ToArray();
 		}
 		// *****************************************************************
 		
-		public void FindInstalledAE()
+		public void FindInstalledAFX()
 		{
 			string verStr = "";
-			if ((m_TargetVersionIndex>=0)&&(m_TargetVersionIndex < m_InstalledAFX.Length))
+			if ((m_InstalledAFXIndex>=0)&&(m_InstalledAFXIndex < m_InstalledAFX.Length))
 			{
-				verStr = m_InstalledAFX[m_TargetVersionIndex];
+				verStr = m_InstalledAFX[m_InstalledAFXIndex];
 			}
 
+			string[] sa = FindInstalledAfterFX();
 
-			m_InstalledAFX = FindInstalledAfterFX();
-			if (m_InstalledAFX.Length > 0)
+			bool rf = false;
+			if( sa.Length==m_InstalledAFX.Length)
 			{
-				TargetVersionStr = verStr;
-
+				if (sa.Length > 0)
+				{
+					for (int i = 0; i < sa.Length; i++)
+					{
+						if (sa[i] != m_InstalledAFX[i])
+						{
+							rf = true;
+							break;
+						}
+					}
+				}
+			}
+			else
+			{
+				rf = true;
 			}
 
+			if (rf==true) {
+				m_InstalledAFX = sa;
+				OnInstalledAFXChanged(new EventArgs());
+			}
+
+			if ((m_InstalledAFX.Length > 0)&&(verStr!=""))
+			{
+				InstalledAFXStr = verStr;
+
+			}
 		}
 		// *****************************************************************
 		#region Combine
@@ -265,11 +432,11 @@ namespace BRY
 		public AEStutas Run()
 		{
 			AEStutas ret = AEStutas.None;
-			if (m_TargetVersionIndex < 0) return ret;
+			if (m_InstalledAFXIndex < 0) return ret;
 
 			try
 			{
-				string ss = m_InstalledAFX[m_TargetVersionIndex];
+				string ss = m_InstalledAFX[m_InstalledAFXIndex];
 
 				ProcessAE pae;
 				AEStutas aes = CheckRun(ss, out pae);
@@ -284,9 +451,25 @@ namespace BRY
 				{
 					var app = new ProcessStartInfo();
 					app.FileName = exePath;
+					app.WindowStyle = ProcessWindowStyle.Maximized;
 					app.UseShellExecute = true;
 					Process ps = Process.Start(app);
-					if (ps != null) ret = AEStutas.IsRunStart;
+					if (ps != null)
+					{
+						ret = AEStutas.IsRunStart;
+
+						FileInfo fi = new FileInfo(m_AeWin);
+
+						if (fi.Exists == true)
+						{
+							ProcessStartInfo aeWin = new ProcessStartInfo();
+							aeWin.FileName = fi.FullName;
+							aeWin.Arguments = String.Format("/max /fore /i{0}", ps.Id);
+							aeWin.UseShellExecute = true;
+							aeWin.WindowStyle = ProcessWindowStyle.Hidden;
+							Process ps2 = Process.Start(aeWin);
+						}
+					}
 				}
 			}
 			catch
@@ -299,7 +482,7 @@ namespace BRY
 		public Process CallAerender(string aep,string op = "")
 		{
 			Process ret = null;
-			if (m_TargetVersionIndex < 0) return ret;
+			if (m_InstalledAFXIndex < 0) return ret;
 
 			if (File.Exists(aep) == false) return ret;
 
@@ -325,9 +508,9 @@ namespace BRY
 		public bool ExecScriptFile(string p)
 		{
 			bool ret = false;
-			if (m_TargetVersionIndex < 0) return ret;
+			if (m_InstalledAFXIndex < 0) return ret;
 
-			string tag = m_InstalledAFX[m_TargetVersionIndex];
+			string tag = m_InstalledAFX[m_InstalledAFXIndex];
 
 			ProcessAE pae = new ProcessAE();
 			if (CheckRun(tag, out pae) != AEStutas.IsRunning) return ret;
@@ -337,18 +520,19 @@ namespace BRY
 			string exePath = CombineAE(tag);
 			if (File.Exists(exePath) == true)
 			{
+				bool IsMax = pae.IsWS_MAXIMIZE;
 				var app = new ProcessStartInfo();
 				app.FileName = exePath;
 				app.Arguments = "-r " + p;
 				app.UseShellExecute = true;
-				if (pae.IsWS_MAXIMIZE)
+				if (IsMax)
 				{
 					app.WindowStyle = ProcessWindowStyle.Maximized;
 				}
 				Process ps = Process.Start(app);
 				if (pae.Proc != null)
 				{
-					if (pae.IsWS_MAXIMIZE == true)
+					if (IsMax == true)
 					{
 						FileInfo fi = new FileInfo(m_AeWin);
 
@@ -374,9 +558,9 @@ namespace BRY
 		public bool ExecScriptCode(string p)
 		{
 			bool ret = false;
-			if (m_TargetVersionIndex < 0) return ret;
+			if (m_InstalledAFXIndex < 0) return ret;
 
-			string tag = m_InstalledAFX[m_TargetVersionIndex];
+			string tag = m_InstalledAFX[m_InstalledAFXIndex];
 			ProcessAE pae = new ProcessAE();
 			if (CheckRun(tag, out pae) != AEStutas.IsRunning) return ret;
 
@@ -441,7 +625,61 @@ namespace BRY
 			}
 			return ret;
 		}
-		
+
+		// *********************************************************************************
+		public void FindRunningAFX()
+		{
+			int pcid = 0;
+			if(m_RunningAFXIndex>=0)
+			{
+				pcid = m_RunningAFX[m_RunningAFXIndex].ProcessID;
+			}
+
+			ProcessAE[] lst = ProcessAEList();
+
+			bool rf = false;
+			if ( m_RunningAFX.Length != lst.Length)
+			{
+				rf = true;
+			}
+			else
+			{
+				if (lst.Length > 0)
+				{
+					for (int i = 0; i < lst.Length; i++)
+					{
+						if (lst[i].ProcessID != m_RunningAFX[i].ProcessID)
+						{
+							rf = true;
+							break;
+						}
+					}
+				}
+			}
+			if(rf==true)
+			{
+				m_RunningAFX = lst;
+				OnRunningAFXChanged(new EventArgs());
+				int idx = -1;
+				if((pcid>0)&&(m_RunningAFX.Length>0))
+				{
+					for(int i=0; i< m_RunningAFX.Length; i++)
+					{
+						if (m_RunningAFX[i].ProcessID == pcid)
+						{
+							idx = i;
+							break;
+						}
+					}
+
+				}
+				if ((idx<0)&&(m_RunningAFX.Length>0))
+				{
+					idx = m_RunningAFX.Length - 1;
+				}
+				RunningAFXIndex = idx;
+			}
+		}
 		// *********************************************************************************
 		static public ProcessAE[] ProcessAEList()
 		{

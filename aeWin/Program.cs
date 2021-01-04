@@ -32,16 +32,18 @@ namespace aeWin
 			mes += "   option : /max    ウィンドウを最大化(デフォルト)\r\n";
 			mes += "            /min    ウィンドウを最小化\r\n";
 			mes += "            /normal ウィンドウを通常化\r\n";
+			mes += "            /fore   ウィンドウを最前面に\r\n";
 			mes += "            /i[xxxx] 指定したプロセスIDのみに実行\r\n";
 			mes += "            /help   この表示\r\n";
 
 			Console.WriteLine(mes);
 		}
 
-		static void AnalysisCmd(string[] args, out EXEC_MODE md, out int pid)
+		static void AnalysisCmd(string[] args, out EXEC_MODE md, out int pid ,out bool IsFore)
 		{
 			md = EXEC_MODE.MAX;
 			pid = 0;
+			IsFore = false;
 
 			CmdArgs ca = new CmdArgs(args);
 			if (ca.OptionsCount <= 0) return;
@@ -62,6 +64,11 @@ namespace aeWin
 			if (opts.Length > 0)
 			{
 				md = EXEC_MODE.MIN;
+			}
+			opts = ca.FindOptions("f", true);
+			if (opts.Length > 0)
+			{
+				IsFore = true;
 			}
 			opts = ca.FindOptions("i", true);
 			if (opts.Length > 0)
@@ -88,7 +95,8 @@ namespace aeWin
 			}
 			EXEC_MODE md = EXEC_MODE.HELP;
 			int pid = 0;
-			AnalysisCmd(args, out md, out pid);
+			bool isFore = false;
+			AnalysisCmd(args, out md, out pid, out isFore);
 			if((md==EXEC_MODE.HELP)|| (md == EXEC_MODE.NONE))
 			{
 				Usage();
@@ -113,15 +121,15 @@ namespace aeWin
 					if(pp!=null)
 					{
 						pp.SetWindow((int)md);
-						Console.WriteLine("a");
+						if (isFore) pp.SetForegroundWindow();
 						return;
 					}
 				}
 				foreach (ProcessAE p in lst)
 				{
 					p.SetWindow((int)md);
+					if (isFore) p.SetForegroundWindow();
 				}
-				Console.WriteLine("b");
 			}
 			else
 			{

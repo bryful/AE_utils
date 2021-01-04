@@ -218,8 +218,8 @@
 			// 
 			this.nFsAE1.AeWin = "./aeWin.exe";
 			this.nFsAE1.CombTargetVersion = this.cmbAE;
-			this.nFsAE1.TargetVersionIndex = 0;
-			this.nFsAE1.TargetVersionStr = "2020";
+			this.nFsAE1.InstalledAFXIndex = 0;
+			this.nFsAE1.InstalledAFXStr = "2020";
 			// 
 			// Form1
 			// 

@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aeWin", "aeWin\aeWin.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aeStatus", "aeStatus\aeStatus.csproj", "{453FCF35-F67A-42A2-8BC3-CAE334C52747}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfterFXControl", "AfterFXControl\AfterFXControl.csproj", "{A8F77B81-0C38-4B82-B843-C6A328F7EB55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,18 @@ Global
 		{453FCF35-F67A-42A2-8BC3-CAE334C52747}.Release|x64.Build.0 = Release|Any CPU
 		{453FCF35-F67A-42A2-8BC3-CAE334C52747}.Release|x86.ActiveCfg = Release|Any CPU
 		{453FCF35-F67A-42A2-8BC3-CAE334C52747}.Release|x86.Build.0 = Release|Any CPU
+		{A8F77B81-0C38-4B82-B843-C6A328F7EB55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8F77B81-0C38-4B82-B843-C6A328F7EB55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8F77B81-0C38-4B82-B843-C6A328F7EB55}.Debug|x64.ActiveCfg = Debug|x64
+		{A8F77B81-0C38-4B82-B843-C6A328F7EB55}.Debug|x64.Build.0 = Debug|x64
+		{A8F77B81-0C38-4B82-B843-C6A328F7EB55}.Debug|x86.ActiveCfg = Debug|x86
+		{A8F77B81-0C38-4B82-B843-C6A328F7EB55}.Debug|x86.Build.0 = Debug|x86
+		{A8F77B81-0C38-4B82-B843-C6A328F7EB55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8F77B81-0C38-4B82-B843-C6A328F7EB55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8F77B81-0C38-4B82-B843-C6A328F7EB55}.Release|x64.ActiveCfg = Release|x64
+		{A8F77B81-0C38-4B82-B843-C6A328F7EB55}.Release|x64.Build.0 = Release|x64
+		{A8F77B81-0C38-4B82-B843-C6A328F7EB55}.Release|x86.ActiveCfg = Release|x86
+		{A8F77B81-0C38-4B82-B843-C6A328F7EB55}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
