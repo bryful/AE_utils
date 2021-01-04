@@ -150,6 +150,11 @@ namespace BRY
 			return NFsAE.Run();
 		}
 		// ******************************************************************************
+		public Process CallAerender(string aep, string op = "")
+		{
+			return NFsAE.CallAerender(aep, op);
+		}
+		// ******************************************************************************
 		public bool ExecScriptFile(string p)
 		{
 			

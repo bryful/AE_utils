@@ -59,8 +59,8 @@ namespace AE_Util_skelton
             if (pref.Load())
             {
                 bool ok = false;
-                Size sz = pref.GetSize("Size", out ok);
-                if (ok) this.Size = sz;
+                //Size sz = pref.GetSize("Size", out ok);
+                //if (ok) this.Size = sz;
                 Point p = pref.GetPoint("Point", out ok);
                 if (ok) this.Location = p;
             }
@@ -77,7 +77,7 @@ namespace AE_Util_skelton
         {
             //設定ファイルの保存
             JsonPref pref = new JsonPref();
-            pref.SetSize("Size", this.Size);
+            //pref.SetSize("Size", this.Size);
             pref.SetPoint("Point", this.Location);
             pref.Save();
 

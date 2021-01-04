@@ -58,7 +58,7 @@
             this.helpToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(640, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(610, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -121,9 +121,9 @@
 			// 
 			// statusStrip1
 			// 
-			this.statusStrip1.Location = new System.Drawing.Point(0, 396);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 401);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(640, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(610, 22);
 			this.statusStrip1.TabIndex = 1;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
@@ -135,7 +135,7 @@
 			this.lbInstalled.ItemHeight = 12;
 			this.lbInstalled.Location = new System.Drawing.Point(12, 37);
 			this.lbInstalled.Name = "lbInstalled";
-			this.lbInstalled.Size = new System.Drawing.Size(620, 52);
+			this.lbInstalled.Size = new System.Drawing.Size(590, 52);
 			this.lbInstalled.TabIndex = 2;
 			// 
 			// btnInstalled
@@ -144,7 +144,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnInstalled.Location = new System.Drawing.Point(12, 95);
 			this.btnInstalled.Name = "btnInstalled";
-			this.btnInstalled.Size = new System.Drawing.Size(620, 44);
+			this.btnInstalled.Size = new System.Drawing.Size(590, 44);
 			this.btnInstalled.TabIndex = 3;
 			this.btnInstalled.Text = "インストールされているAEをリストアップ";
 			this.btnInstalled.UseVisualStyleBackColor = true;
@@ -170,7 +170,7 @@
 			this.lbProcess.ItemHeight = 12;
 			this.lbProcess.Location = new System.Drawing.Point(8, 157);
 			this.lbProcess.Name = "lbProcess";
-			this.lbProcess.Size = new System.Drawing.Size(620, 52);
+			this.lbProcess.Size = new System.Drawing.Size(590, 52);
 			this.lbProcess.TabIndex = 6;
 			// 
 			// btnProcess
@@ -179,7 +179,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnProcess.Location = new System.Drawing.Point(8, 215);
 			this.btnProcess.Name = "btnProcess";
-			this.btnProcess.Size = new System.Drawing.Size(620, 44);
+			this.btnProcess.Size = new System.Drawing.Size(590, 44);
 			this.btnProcess.TabIndex = 7;
 			this.btnProcess.Text = "実行中のAEをリストアップ";
 			this.btnProcess.UseVisualStyleBackColor = true;
@@ -226,7 +226,7 @@
 			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(640, 418);
+			this.ClientSize = new System.Drawing.Size(610, 423);
 			this.Controls.Add(this.btnScriptCode);
 			this.Controls.Add(this.ttbScriptCode);
 			this.Controls.Add(this.btnRun);
@@ -237,7 +237,10 @@
 			this.Controls.Add(this.btnInstalled);
 			this.Controls.Add(this.lbInstalled);
 			this.Controls.Add(this.menuStrip1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
 			this.MainMenuStrip = this.menuStrip1;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "Form1";
 			this.Text = "Form1";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);

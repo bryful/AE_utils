@@ -15,13 +15,6 @@ namespace aeWin
 {
 	class Program
 	{
-		#region DllImport
-		[DllImport("user32.dll", SetLastError = true)]
-		static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-		[DllImport("User32.dll")]
-		private static extern int SetForegroundWindow(IntPtr hWnd);
-		#endregion
-	
 		public enum EXEC_MODE{
 			NONE = 0,
 			NORMAL,
@@ -49,47 +42,43 @@ namespace aeWin
 		{
 			md = EXEC_MODE.MAX;
 			pid = 0;
-			foreach (string s in args)
+
+			CmdArgs ca = new CmdArgs(args);
+			if (ca.OptionsCount <= 0) return;
+
+			CmdOptions[] opts = ca.FindOptions("he",true);
+			if(opts.Length>0)
 			{
-				if (s.Length < 3) continue;
-				if( (s[0]=='/')|| (s[0] == '-'))
+				md = EXEC_MODE.HELP;
+				return;
+			}
+			opts = ca.FindOptions("?");
+			if (opts.Length > 0)
+			{
+				md = EXEC_MODE.HELP;
+				return;
+			}
+			opts = ca.FindOptions("mi", true);
+			if (opts.Length > 0)
+			{
+				md = EXEC_MODE.MIN;
+			}
+			opts = ca.FindOptions("i", true);
+			if (opts.Length > 0)
+			{
+				foreach(CmdOptions co in opts)
 				{
-					string sa = s.Substring(1).ToLower();
-					if (sa.IndexOf("ma") == 0)
+					string s = co.Option.Substring(1);
+					int v = 0;
+					if (int.TryParse(s, out v) == false) continue;
+					if (v > 0)
 					{
-						md = EXEC_MODE.MAX;
-					}
-					else if (sa.IndexOf("mi") == 0)
-					{
-						md = EXEC_MODE.MIN;
-					}
-					else if (sa.IndexOf("no") == 0)
-					{
-						md = EXEC_MODE.NORMAL;
-
-					}
-					else if (sa.IndexOf("he") == 0)
-					{
-						md = EXEC_MODE.HELP;
-						return;
-
-					}
-					else if (sa[0] == 'i')
-					{
-						int v = 0;
-						if (int.TryParse(sa.Substring(1),out v)==true)
-						{
-							if(md == EXEC_MODE.NONE) md = EXEC_MODE.MAX;
-							pid = v;
-						}
-						else
-						{
-							md = EXEC_MODE.HELP;
-							pid = 0;
-						}
+						pid = v;
+						break;
 					}
 				}
 			}
+
 		}
 		static void Main(string[] args)
 		{
@@ -112,29 +101,27 @@ namespace aeWin
 			{
 				if (pid > 0)
 				{
-					Process pp = null;
+					ProcessAE pp = null;
 					foreach (ProcessAE p in lst)
 					{
 						if(p.ProcessID == pid)
 						{
-							pp = p.Proc;
+							pp = p;
 							break;
 						}
 					}
 					if(pp!=null)
 					{
-						pp.WaitForInputIdle();
-						ShowWindow(pp.MainWindowHandle, (int)md);
-						SetForegroundWindow(pp.MainWindowHandle);
+						pp.SetWindow((int)md);
+						Console.WriteLine("a");
 						return;
 					}
 				}
 				foreach (ProcessAE p in lst)
 				{
-					p.Proc.WaitForInputIdle();
-					ShowWindow(p.Proc.MainWindowHandle, (int)md);
-					SetForegroundWindow(p.Proc.MainWindowHandle);
+					p.SetWindow((int)md);
 				}
+				Console.WriteLine("b");
 			}
 			else
 			{

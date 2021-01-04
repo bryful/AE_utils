@@ -263,14 +263,14 @@ namespace BRY
 			return ret;
 		}
 		// *********************************************************************************
-		private class PNFT
+		public class PNFT
 		{
 			public string VersionStr = "";
 			public string ProjectName = "";
 			public bool IsNoSaved = false;
 		}
 
-		static public dynamic ProjectNameFromTitle(string p)
+		static public PNFT ProjectNameFromTitle(string p)
 		{
 			PNFT ret = new PNFT();
 
@@ -305,6 +305,52 @@ namespace BRY
 			}
 
 			return ret;
+		}
+		// *********************************************************************************
+		public bool WaitForInputIdle()
+		{
+			bool ret = false;
+			if( Proc!=null)
+			{
+				ret = Proc.WaitForInputIdle();
+			}
+			return ret;
+
+		}
+		public int SetForegroundWindow()
+		{
+			int ret = 0;
+			if (Proc != null)
+			{
+				ret = SetForegroundWindow(Proc.MainWindowHandle);
+			}
+			return ret;
+
+		}
+		public bool SetWindow(int p)
+		{
+			bool ret = false;
+			if (Proc != null)
+			{
+				if (Proc.WaitForInputIdle())
+				{
+					ret = ShowWindow(Proc.MainWindowHandle, p);
+				}
+			}
+			return ret;
+
+		}
+		public bool WindowMax()
+		{
+			return SetWindow(3);
+		}
+		public bool WindowMin()
+		{
+			return SetWindow(2);
+		}
+		public bool WindowNormal()
+		{
+			return SetWindow(1);
 		}
 	}
 }

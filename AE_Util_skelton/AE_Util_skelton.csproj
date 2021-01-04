@@ -100,6 +100,7 @@
     <Compile Include="AppInfoDialog.Designer.cs">
       <DependentUpon>AppInfoDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="CmdArgs.cs" />
     <Compile Include="DynamicJson.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

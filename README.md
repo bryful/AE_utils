@@ -1,4 +1,4 @@
-﻿# AE_utils
+# AE_utils
 Adobe After Effectsで作業を少し楽にするための小物ツール類です。
 基本的に単独アプリですが、同時作業で楽になるようにフローティングバーが付いています。
 
@@ -70,7 +70,7 @@ After Effectsの状態を調べるコンソールアプリです。
 * ProjectName aepファイルのフルパス
 * IsNoSaved aepが保存されていない場合true
 
-以上の情報が配列として標準出力に出力されます。
+以上の情報が配列として標準出力に出力されます。ProcessAEを使った簡単なコンソールアプリです。<br>
 callSystemの返り値をevalで処理できます。
 
 <hr>

@@ -296,6 +296,32 @@ namespace BRY
 			return ret;
 		}
 		// ******************************************************************************
+		public Process CallAerender(string aep,string op = "")
+		{
+			Process ret = null;
+			if (m_TargetVersionIndex < 0) return ret;
+
+			if (File.Exists(aep) == false) return ret;
+
+				string ap = AerenderPath;
+			if (File.Exists(ap) == true)
+			{
+				var app = new ProcessStartInfo();
+				app.FileName = ap;
+
+				string ss = "-project \"" + aep + "\"";
+				if (op != "")
+				{
+					ss += op + " ";
+				}
+				app.Arguments = ss;
+				app.UseShellExecute = true;
+				ret = Process.Start(app);
+			}
+
+			return ret;
+		}
+		// ******************************************************************************
 		public bool ExecScriptFile(string p)
 		{
 			bool ret = false;
@@ -361,11 +387,12 @@ namespace BRY
 			string exePath = CombineAE(tag);
 			if (File.Exists(exePath) == true)
 			{
+				bool IsMax = pae.IsWS_MAXIMIZE;
 				ProcessStartInfo app = new ProcessStartInfo();
 				app.FileName = exePath;
 				app.Arguments = "-s \"" + p + "\"";
 				app.UseShellExecute = true;
-				if (pae.IsWS_MAXIMIZE)
+				if (IsMax)
 				{
 					app.WindowStyle = ProcessWindowStyle.Maximized;
 				}
@@ -374,9 +401,8 @@ namespace BRY
 
 				if (pae.Proc != null)
 				{
-					if (pae.IsWS_MAXIMIZE == true)
+					if (IsMax)
 					{
-
 						FileInfo fi = new FileInfo(m_AeWin);
 						if (fi.Exists==true)
 						{

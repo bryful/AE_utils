@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AE_Util_skelton\CmdArgs.cs">
+      <Link>CmdArgs.cs</Link>
+    </Compile>
     <Compile Include="..\AE_Util_skelton\NFsAE.cs">
       <Link>NFsAE.cs</Link>
     </Compile>
