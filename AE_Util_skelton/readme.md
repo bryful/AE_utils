@@ -61,6 +61,42 @@ NFsAEの動作確認用のアプリです。
 バージョンを選んで実行させたり、起動しているAEの切り替え・最大化最小化ができます。
 本当はウィンドウ整列までしたかったのですが、あまり使わなさそうなのでこれだけにしてます。
 
+
+# MousePos.exe
+
+実行時のマウスの位置を標準出力に出すコンソールアプリです。
+
+```
+({x:378, y:573})
+```
+
+こんな感じです。スクリプトでウィンドウ開くときに使えるかな？  
+僕は下のように呼び出してます。
+
+
+```
+	if ( ( me instanceof Panel) == false){
+		try{
+			var p = eval(system.callSystem(".\\ScriptUI Panels\\(lib)\\MousePos.exe"));
+			if(( p.x != undefined)&&(p.y!=undefined)){
+				var b = winObj.bounds;
+				var w = b[2]-b[0];
+				var h = b[3]-b[1];
+				b[0] = p.x;
+				b[1] = p.y;
+				b[2] = w + p.x;
+				b[3] = h + p.y;
+				winObj.bounds = b;
+			}
+
+		}catch(e){
+			winObj.center();
+		}
+
+
+		winObj.show();
+	}
+```
 bry-ful
 Hiroshi Furuhashi
 
