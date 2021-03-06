@@ -18,7 +18,6 @@ namespace AEMessageBox
 {
 	public partial class Form1 : Form
 	{
-		NavBar m_navBar = new NavBar();
 		//-------------------------------------------------------------
 		/// <summary>
 		/// コンストラクタ
@@ -26,18 +25,7 @@ namespace AEMessageBox
 		public Form1()
 		{
 			InitializeComponent();
-
-			NavBarSetup();
-
-		}
-		//-------------------------------------------------------------
-		private void NavBarSetup()
-		{
-			m_navBar.Form = this;
-			m_navBar.SizeSet();
-			m_navBar.LocSet();
-			m_navBar.Show();
-
+			aeWeb1.Disp();
 		}
 		/// <summary>
 		/// コントロールの初期化はこっちでやる
@@ -64,12 +52,8 @@ namespace AEMessageBox
 				Point p = pref.GetPoint("Point", out ok);
 				if (ok) this.Location = p;
 			}
-			this.Text = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
-			m_navBar.Caption = this.Text;
-			string[] cmds = System.Environment.GetCommandLineArgs();
-			List<string> cc = cmds.ToList<string>();
-			cc.RemoveAt(0);
-			GetCommand(cc.ToArray());
+			GetCommand(System.Environment.GetCommandLineArgs());
+			aeWeb1.Disp();
 		}
 		//-------------------------------------------------------------
 		/// <summary>
@@ -131,22 +115,23 @@ namespace AEMessageBox
 				}
 			}
 		}
-
+		//-------------------------------------------------------------
 		private void btnOK_Click(object sender, EventArgs e)
 		{
 			Application.Exit();
 		}
+		//-------------------------------------------------------------
 		public bool LoadJson(string p)
 		{
 			bool ret = false;
-
+			string ext = Path.GetExtension(p).ToLower();
+			if (ext != ".json") return ret;
 			if (aeWeb1.LoadJson(p) == true)
 			{
 
 				if (aeWeb1.title!="")
 				{
 					this.Text = aeWeb1.title;
-					m_navBar.Caption = aeWeb1.title;
 				}
 
 				if ( (aeWeb1.WinWidth>10)&&(aeWeb1.WinHeight>10))
@@ -163,6 +148,7 @@ namespace AEMessageBox
 			}
 			return ret; 
 		}
+		//-------------------------------------------------------------
 		public void Center()
 		{
 			Rectangle rct = Screen.PrimaryScreen.Bounds;
@@ -176,15 +162,7 @@ namespace AEMessageBox
 		{
 			aeWeb1.Disp();
 		}
+		//-------------------------------------------------------------
 
-		private void button2_Click(object sender, EventArgs e)
-		{
-			aeWeb1.body = tbHtml.Text;
-		}
-
-		private void button3_Click(object sender, EventArgs e)
-		{
-			tbHtml.Text = Markdig.Markdown.ToHtml(tbMD.Text);
-		}
 	}
 }

@@ -11,7 +11,6 @@ using System.IO;
 
 using Codeplex.Data;
 
-using Markdig;
 
 namespace BRY
 {
@@ -48,6 +47,7 @@ namespace BRY
 			{
 				this.DocumentText = Html;
 			}
+			this.Invalidate();
 		}
 		private bool m_isCenter = true;
 		public bool isCenter { get { return m_isCenter; } }
@@ -99,7 +99,7 @@ namespace BRY
 
 		public AEWeb()
 		{
-
+			this.DocumentText = HTML_BASE;
 		}
 		public void Clear()
 		{
@@ -126,13 +126,14 @@ namespace BRY
 					{
 						try
 						{
+							str = AEJson.FromAEJson(str);
 							dynamic json = DynamicJson.Parse(str);
 
 							string key = "body";
 							if (((DynamicJson)json).IsDefined(key) == true)
 							{
 								m_body = (string)json[key];
-								m_body = m_body.Replace("\r\n", "<br>\r\n").Trim();
+								m_body = Markdig.Markdown.ToHtml(m_body.Replace("\r\n", "<br>\r\n").Trim());
 							}
 							key = "headcss";
 							if (((DynamicJson)json).IsDefined(key) == true)
