@@ -42,18 +42,31 @@ namespace Alert
 		/// <param name="e"></param>
 		private void Form1_Load(object sender, EventArgs e)
 		{
+			cbTopMost.Checked = this.TopMost;
 			//設定ファイルの読み込み
 			JsonPref pref = new JsonPref();
 			if (pref.Load())
 			{
 				bool ok = false;
-				//Size sz = pref.GetSize("Size", out ok);
-				//if (ok) this.Size = sz;
+				Size sz = pref.GetSize("Size", out ok);
+				if (ok) this.Size = sz;
 				Point p = pref.GetPoint("Point", out ok);
 				if (ok) this.Location = p;
+				bool b = pref.GetBool("TopMost", out ok);
+				if (ok)
+				{
+					cbTopMost.Checked = b;
+					this.TopMost = b;
+				}
+				b = pref.GetBool("IsClear", out ok);
+				if (ok)
+				{
+					cbIsClear.Checked = b;
+					aeWeb1.IsClear = b;
+				}
+
 			}
 			GetCommand(System.Environment.GetCommandLineArgs());
-			aeWeb1.Disp();
 		}
 		//-------------------------------------------------------------
 		/// <summary>
@@ -66,6 +79,9 @@ namespace Alert
 			//設定ファイルの保存
 			JsonPref pref = new JsonPref();
 			pref.SetPoint("Point", this.Location);
+			pref.SetSize("Size", this.Size);
+			pref.SetBool("TopMost", this.TopMost);
+			pref.SetBool("IsClear", aeWeb1.IsClear);
 			pref.Save();
 
 		}
@@ -160,7 +176,21 @@ namespace Alert
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			aeWeb1.Disp();
+		}
+
+		private void cbTopMost_CheckedChanged(object sender, EventArgs e)
+		{
+			this.TopMost = cbTopMost.Checked;
+		}
+
+		private void btnClear_Click(object sender, EventArgs e)
+		{
+			aeWeb1.Clear();
+		}
+
+		private void cbIsClear_CheckedChanged(object sender, EventArgs e)
+		{
+			aeWeb1.IsClear = cbIsClear.Checked;
 		}
 		//-------------------------------------------------------------
 

@@ -32,8 +32,15 @@ namespace BRY
 			get { return m_body; }
 			set 
 			{
-				string s = value.Replace("\r\n", "<br>\r\n");
-				m_body = s;
+				string s = value;
+				if (m_IsClear)
+				{
+					m_body = s;
+				}
+				else
+				{
+					m_body += s;
+				}
 				Disp();
 			}
 		}
@@ -101,7 +108,7 @@ namespace BRY
 		{
 			this.DocumentText = HTML_BASE;
 		}
-		public void Clear()
+		public void Init()
 		{
 			m_headcss = "";
 			m_body = "";
@@ -112,11 +119,25 @@ namespace BRY
 			m_height = 0;
 			m_title = "";
 		}
+		public void Clear()
+		{
+			m_body = "";
+			Disp();
+		}
+		private bool m_IsClear = true;
+		public bool IsClear
+		{
+			get { return m_IsClear; }
+			set
+			{
+				m_IsClear = value;
+			}
+		}
 		// *****************************************************************************************
 		public bool LoadJson(string p)
 		{
 			bool ret = false;
-			Clear();
+			//Init();
 			try
 			{
 				if (File.Exists(p) == true)
@@ -132,8 +153,16 @@ namespace BRY
 							string key = "body";
 							if (((DynamicJson)json).IsDefined(key) == true)
 							{
-								m_body = (string)json[key];
-								m_body = Markdig.Markdown.ToHtml(m_body.Replace("\r\n", "<br>\r\n").Trim());
+								string s = (string)json[key];
+								s = s.Trim();
+								if (m_IsClear)
+								{
+									m_body = s;
+								}
+								else
+								{
+									m_body += s;
+								}
 							}
 							key = "headcss";
 							if (((DynamicJson)json).IsDefined(key) == true)
@@ -175,7 +204,7 @@ namespace BRY
 						}
 						catch
 						{
-							m_body = str.Replace("\r\n", "<br>\r\n");
+							m_body = "";
 						}
 						Disp();
 						ret = true;
