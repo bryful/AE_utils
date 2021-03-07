@@ -1,5 +1,5 @@
 ﻿
-namespace AEMessageBox
+namespace Alert
 {
 	partial class Form1
 	{
@@ -77,7 +77,8 @@ namespace AEMessageBox
 			this.MinimizeBox = false;
 			this.Name = "Form1";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "AEMessageBox";
+			this.Text = "Alert";
+			this.TopMost = true;
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);

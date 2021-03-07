@@ -14,7 +14,7 @@ using System.Windows.Forms;
 /// <summary>
 /// 基本となるアプリのスケルトン
 /// </summary>
-namespace AEMessageBox
+namespace Alert
 {
 	public partial class Form1 : Form
 	{
