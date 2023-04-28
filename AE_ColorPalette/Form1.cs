@@ -166,6 +166,7 @@ namespace AE_Util_skelton
         private void button1_Click_1(object sender, EventArgs e)
         {
             ColorFromClip();
+  
         }
         // *******************************************************
         public void ColorFromClip()
@@ -197,8 +198,8 @@ namespace AE_Util_skelton
                 }
 
             }
-
-        }
+			this.Invalidate();
+		}
         // *******************************************************
         public void ColorToClip()
         {
@@ -243,8 +244,8 @@ namespace AE_Util_skelton
             }
 
             Clipboard.SetText(m_ColorBoxs.Items[m_ColorBoxs.SelectedIndex].HexColor);
-
-        }
+			this.Invalidate();
+		}
         private void pasteHexToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorFromToClip();

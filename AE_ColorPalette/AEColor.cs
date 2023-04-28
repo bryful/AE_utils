@@ -39,14 +39,18 @@ namespace AE_Util_skelton
             set
             {
                 int v = 0;
-                if (int.TryParse(value,out v))
+                try
                 {
-                    m_A = 0xFF;
-                    m_B = (v & 0xFF);
-                    m_G = ((v >> 8) & 0xFF);
-                    m_R = ((v >> 16) & 0xFF);
+                    v = int.Parse(value, System.Globalization.NumberStyles.HexNumber);
                 }
+                catch
+                {
 
+                }
+				m_A = 0xFF;
+				m_B = (v & 0xFF);
+				m_G = ((v >> 8) & 0xFF);
+				m_R = ((v >> 16) & 0xFF);
 
             }
             
